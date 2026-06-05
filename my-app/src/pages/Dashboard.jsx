@@ -37,7 +37,7 @@ function Dashboard() {
 
       <div className="riwayat-terbaru">
         <h2>Transaksi Terbaru</h2>
-
+        <div className="riwayat-transaksi">
         {transaksiDummy.slice(0, 3).map((item) => (
           <div
             key={item.id}
@@ -56,6 +56,7 @@ function Dashboard() {
             <span>{item.status}</span>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

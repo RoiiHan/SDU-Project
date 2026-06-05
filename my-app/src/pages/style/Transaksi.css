@@ -1,3 +1,7 @@
+:root{
+  --hijau : #305a37;
+}
+
 .transaksi-container {
   max-width: 700px;
   margin: 40px auto;

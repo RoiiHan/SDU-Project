@@ -8,6 +8,8 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import Transaksi from "../pages/Transaksi";
 import Riwayat from "../pages/Riwayat";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminTransaksi from "../pages/admin/AdminTransaksi";
 
 function AppRoutes() {
   return (
@@ -21,6 +23,8 @@ function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/transaksi" element={<Transaksi />} />
       <Route path="/riwayat" element={<Riwayat />} />
+      <Route path="/admin/dashboard" element={<AdminDashboard />}/>
+      <Route path="/admin/transaksi" element={<AdminTransaksi />}/>
     </Routes>
   );
 }

@@ -33,6 +33,13 @@
   margin-top: 40px;
 }
 
+.riwayat-transaksi {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
 .transaksi-item {
   margin-top: 15px;
   padding: 15px;
