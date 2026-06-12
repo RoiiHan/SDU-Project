@@ -5,7 +5,7 @@ function UserLayout() {
   return (
     <>
       <Navbar />
-      <main style={{ padding: "20px" }}>
+      <main>
         <Outlet />
       </main>
     </>

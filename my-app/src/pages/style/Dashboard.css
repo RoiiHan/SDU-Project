@@ -1,9 +1,10 @@
+:root {
+    --lightgreen: #859F3D;
+    --darkgreen: #31511E;
+    --cream: #F6FCDF;
+}
 .dashboard {
   padding: 20px;
-}
-
-:root{
-  --hijau : #305a37;
 }
 
 .cards {

@@ -1,3 +1,9 @@
+:root {
+    --lightgreen: #859F3D;
+    --darkgreen: #31511E;
+    --cream: #F6FCDF;
+}
+
 nav {
     width: 100%;
     height: 60px;    
@@ -5,11 +11,11 @@ nav {
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    background-color: #305a37;
+    background-color: var(--darkgreen);
 }
 
 .logo p{
-    color: white;
+    color: var(--cream);
     font-family: "Londrina Solid" , sans-serif;
     font-weight: bold;
     padding: 0 20px;
@@ -26,7 +32,7 @@ nav ul {
 .nav-link{
     padding: 14px;
     text-decoration: none;
-    color: white;
+    color: var(--cream);
     font-size: 14px;
 }
 
@@ -56,16 +62,16 @@ nav ul {
 
 .profil i {
     margin : 15px 10px 10px 15px;
-    color: white;
+    color: var(--cream);
 }
 
 .menu {
     position: absolute; 
-    top: 60px;          
+    top: 50px;          
     right: 0; 
     z-index: 1000;
-    background-color: #305a37;
-    border: 1px solid #e4e1e1;
+    background-color: var(--darkgreen);
+    border: 1px solid var(--cream);
     border-radius: 8px;
     min-width: 200px;
 }
@@ -79,6 +85,11 @@ nav ul {
 }
 
 .menu ul li {
-    color: white;
+    color: var(--cream);
     cursor: pointer;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--cream);
 }

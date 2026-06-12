@@ -1,0 +1,170 @@
+:root {
+    --lightgreen: #859F3D;
+    --darkgreen: #31511E;
+    --cream: #F6FCDF;
+}
+
+.landing-page{
+    width: 100%;
+}
+
+/* HERO */
+
+.hero{
+    width: 100%;
+}
+
+.hero-image{
+    width: 100%;
+    display: block;
+    border-radius: 0 0 15px 15px;
+}
+
+/* TENTANG */
+
+.tentang{
+    padding: 50px;
+}
+
+.tentang-card{
+    display: flex;
+    gap: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px var(--lightgreen);
+}
+
+.tentang-kiri{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tentang-kiri img{
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.tentang-kanan{
+    flex: 1;
+}
+
+.tentang-kanan h2{
+    color: var(--darkgreen);
+    margin-bottom: 20px;
+}
+
+.tentang-kanan p{
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: var(--darkgreen);
+}
+
+/* CARA KERJA */
+
+.cara-kerja{
+    background-color: var(--lightgreen);
+    padding: 50px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.cara-kerja h2{
+    color: white;
+    margin-bottom: 30px;
+}
+
+.cara-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.cara-card{
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cara-card h3{
+    color: var(--lightgreen);
+    font-size: 32px;
+}
+
+/* JENIS SAMPAH */
+
+.jenis-sampah{
+    padding: 50px;
+    text-align: center;
+}
+
+.jenis-sampah h2{
+    color: var(--darkgreen);
+}
+
+.sampah-container{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+}
+
+.sampah-card{
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    font-size: 40px;
+    box-shadow: 0 2px 10px var(--lightgreen);
+}
+
+.sampah-card p{
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* STATISTIK */
+
+.statistik{
+    padding: 50px;
+    text-align: center;
+}
+
+.statistik-container{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.stat-card{
+    background: var(--lightgreen);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.stat-card h3{
+    font-size: 32px;
+}
+
+/* FOOTER */
+
+.footer{
+    background: var(--darkgreen);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 100px;
+}
+
+.footer h3{
+    margin-bottom: 10px;
+}
+
+.footer p{
+    margin-top: 10px;
+}

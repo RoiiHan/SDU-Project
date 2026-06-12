@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import UserLayout from "../layouts/UserLayout";
 
-import Landing from "../pages/Landing";
+import Landingpage from "../pages/LandingPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
@@ -16,7 +16,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route element={<UserLayout />}>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landingpage />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
 

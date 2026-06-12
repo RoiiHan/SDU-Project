@@ -9,8 +9,6 @@ function Dashboard() {
     0
   );
 
-  console.log("Total Berat:", totalBerat);
-
   const totalSaldo = transaksiDummy.reduce(
     (acc, item) => acc + item.totalHarga,
     0
