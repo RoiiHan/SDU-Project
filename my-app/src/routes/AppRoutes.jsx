@@ -10,6 +10,7 @@ import Transaksi from "../pages/Transaksi";
 import Riwayat from "../pages/Riwayat";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminTransaksi from "../pages/admin/AdminTransaksi";
+import AdminHarga from "../pages/admin/AdminHarga";
 
 function AppRoutes() {
   return (
@@ -25,6 +26,8 @@ function AppRoutes() {
       <Route path="/riwayat" element={<Riwayat />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />}/>
       <Route path="/admin/transaksi" element={<AdminTransaksi />}/>
+      <Route path="/admin/harga" element={<AdminHarga />}/>
+      <Route path="/admin/login" element={<Login />} />
     </Routes>
   );
 }

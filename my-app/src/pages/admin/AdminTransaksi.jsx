@@ -1,8 +1,24 @@
-import AdminSidebar from "../admin/components/AdminSidebars";
+import { useState } from "react";
+import AdminSidebar from "./components/AdminSidebars";
 import { transaksiDummy } from "../../data/transaksiDummy";
-import "./style/AdminTransaksi.css"
+import "./style/AdminTransaksi.css";
 
 function AdminTransaksi() {
+  const [transaksi, setTransaksi] = useState(transaksiDummy);
+
+  const handleStatusChange = (id, statusBaru) => {
+    const updateStatus = transaksi.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            status: statusBaru,
+          }
+        : item
+    );
+
+    setTransaksi(updateStatus);
+  };
+
   return (
     <div className="admin-layout">
       <AdminSidebar />
@@ -10,27 +26,63 @@ function AdminTransaksi() {
       <div className="admin-content">
         <h1>Kelola Transaksi</h1>
 
-        <div className="riwayat-grid">
-          {transaksiDummy.map((item) => (
+        <div className="transaksi-grid">
+          {transaksi.map((item) => (
             <div
               key={item.id}
-              className="transaksi-item"
+              className="transaksi-card"
             >
-              <h3>{item.kategori}</h3>
+              <div className="card-header">
+                <h3>{item.kategori}</h3>
 
-              <p>{item.keterangan}</p>
+                <span
+                  className={`status ${item.status.toLowerCase()}`}
+                >
+                  {item.status}
+                </span>
+              </div>
 
-              <p>Berat: {item.berat} gram</p>
-
-              <p>
-                Rp {item.totalHarga.toLocaleString()}
+              <p className="keterangan">
+                {item.keterangan}
               </p>
 
-              <p>Status: {item.status}</p>
+              <div className="detail">
+                <p>
+                  <strong>Berat:</strong>{" "}
+                  {item.berat} gram
+                </p>
 
-              <button>
-                Ubah Status
-              </button>
+                <p>
+                  <strong>Total:</strong> Rp{" "}
+                  {item.totalHarga.toLocaleString()}
+                </p>
+              </div>
+
+              <select
+                value={item.status}
+                onChange={(e) =>
+                  handleStatusChange(
+                    item.id,
+                    e.target.value
+                  )
+                }
+              >
+                <option value="Menunggu">
+                  Menunggu
+                </option>
+
+                <option value="Diproses">
+                  Diproses
+                </option>
+
+                <option value="Dijemput">
+                  Dijemput
+                </option>
+
+                <option value="Selesai">
+                  Selesai
+                </option>
+              </select>
             </div>
           ))}
         </div>

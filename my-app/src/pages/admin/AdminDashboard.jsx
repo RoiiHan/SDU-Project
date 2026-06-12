@@ -2,12 +2,19 @@ import "./style/AdminDashboard.css";
 import AdminSidebar from "../admin/components/AdminSidebars";
 
 function AdminDashboard() {
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
   return (
     <div className="admin-layout">
       <AdminSidebar />
 
       <div className="admin-content">
         <h1>Dashboard Admin</h1>
+        <p>
+          selamat datang, {user.email}
+        </p>
 
         <div className="admin-cards">
           <div className="admin-card">
