@@ -1,5 +1,11 @@
-:root{
-  --hijau : #305a37;
+:root {
+    --lightgreen: #859F3D;
+    --darkgreen: #31511E;
+    --cream: #F6FCDF;
+}
+
+body {
+  background-color: #fdfdfd;
 }
 
 .riwayat-container {
@@ -17,7 +23,7 @@
 }   
 
 .riwayat-card {
-  background: var(--hijau);
+  background: var(--darkgreen);
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -42,11 +48,10 @@
   color: #fff;
 }
 
-.keterangan {
+.riwayat-card  .keterangan {
   font-size: 14px;
-  color: #b4b1b1;
+  color: #fff;
   margin-bottom: 15px;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
