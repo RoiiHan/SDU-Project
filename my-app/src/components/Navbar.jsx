@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faUser, faStar, faArrowRightFromBracket, faPlusMinus } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import './style/navbar.css'
+import Logo from '../assets/Logo.png'
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = React.useState(false);
@@ -13,9 +14,14 @@ function Navbar() {
   return (
     <nav>
         <div className="logo">
-            <p>SDU</p>
+            <div className='logo-img'>
+                <img src={Logo} alt="logo" />
+            </div>
+            <div className='logo-text'>
+                <p>SDU</p>
+            </div>
         </div>
-        <ul className='nav-link'>
+        <ul className='nav-links'>
             <li>
                 <Link to="/dashboard" className='nav-link'>Dashboard</Link>
             </li>
@@ -42,7 +48,6 @@ function Navbar() {
                 </div>
             )}
         </div>
-
     </nav>
   )
 }
