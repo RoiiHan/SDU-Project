@@ -1,16 +1,32 @@
+import { data } from "react-router-dom";
 import "./style/Dashboard.css";
-import { transaksiDummy } from "../data/transaksiDummy";
 import TestApi from "./TestApi";
+import { useState, useEffect } from "react";
 
 function Dashboard() {
-  const totalTransaksi = transaksiDummy.length;
+  const [dashboardData, setDashboardData] = useState({
+    totalTransaksi: 0,
+    totalBerat: 0,
+    totalPendapatan: 0,
+  });
 
-  const totalBerat = transaksiDummy.reduce((acc, item) => acc + item.berat, 0);
+  const [transaksi, SetTransaksi] = useState([]);
 
-  const totalSaldo = transaksiDummy.reduce(
-    (acc, item) => acc + item.totalHarga,
-    0,
-  );
+  useEffect(() => {
+    fetch("http://localhost:5000/dashboard")
+      .then((res) => res.json())
+      .then((data) => {
+        setDashboardData(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/transaksi")
+      .then((res) => res.json())
+      .then((data) => {
+        SetTransaksi(data);
+      });
+  }, []);
 
   return (
     <div className="dashboard">
@@ -19,24 +35,24 @@ function Dashboard() {
       <div className="cards">
         <div className="card">
           <h3>Total Transaksi</h3>
-          <p>{totalTransaksi}</p>
+          <p>{dashboardData.totalTransaksi}</p>
         </div>
 
         <div className="card">
           <h3>Total Berat</h3>
-          <p>{totalBerat} gr</p>
+          <p>{dashboardData.totalBerat || 0} gr</p>
         </div>
 
         <div className="card">
           <h3>Total Pendapatan</h3>
-          <p>Rp {totalSaldo.toLocaleString()}</p>
+          <p>Rp {(dashboardData.totalPendapatan || 0).toLocaleString()}</p>
         </div>
       </div>
 
       <div className="riwayat-terbaru">
         <h2>Transaksi Terbaru</h2>
         <div className="riwayat-transaksi">
-          {transaksiDummy.slice(0, 3).map((item) => (
+          {transaksi.slice(0, 3).map((item) => (
             <div key={item.id} className="transaksi-item">
               <div className="header-kategori">
                 <h4>{item.kategori}</h4>
@@ -53,7 +69,7 @@ function Dashboard() {
               </div>
               <div className="header-totalharga">
                 <p>
-                  <span>Harga :</span> Rp {item.totalHarga.toLocaleString()}
+                  <span>Harga :</span> Rp {item.totalharga.toLocaleString()}
                 </p>
               </div>
               <span className={`status ${item.status.toLowerCase()}`}>
@@ -63,7 +79,6 @@ function Dashboard() {
           ))}
         </div>
       </div>
-      <TestApi />
     </div>
   );
 }

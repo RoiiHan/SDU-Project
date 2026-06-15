@@ -1,8 +1,21 @@
-import { transaksiDummy } from "../data/transaksiDummy";
+import { useState, useEffect } from "react";
 import "./style/Riwayat.css";
 import Navbar from "../components/Navbar";
 
 function Riwayat() {
+  const [transaksi, setTransaksi] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/transaksi")
+      .then((res) => res.json())
+      .then((data) => {
+        setTransaksi(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="riwayat-page">
       <Navbar />
@@ -10,18 +23,15 @@ function Riwayat() {
         <h1>Riwayat Transaksi</h1>
 
         <div className="riwayat-list">
-          {transaksiDummy.map((item) => (
-            <div
-              key={item.id}
-              className="riwayat-card"
-            >
+          {transaksi.map((item) => (
+            <div key={item.id} className="riwayat-card">
               <div className="card-header">
                 <h3>{item.kategori}</h3>
 
                 <span
-                  className={`status ${item.status.toLowerCase()}`}
+                  className={`status ${(item.status || "menunggu").toLowerCase()}`}
                 >
-                  {item.status}
+                  {item.status || "Menunggu"}
                 </span>
               </div>
 
@@ -32,14 +42,11 @@ function Riwayat() {
 
               <div className="detail">
                 <p>
-                  <strong>Berat :</strong>{" "}
-                  {item.berat} gram
+                  <strong>Berat :</strong> {item.berat} gram
                 </p>
 
                 <p>
-                  <strong>Total :</strong>{" "}
-                  Rp{" "}
-                  {item.totalHarga.toLocaleString()}
+                  <strong>Total :</strong> Rp {item.totalharga.toLocaleString()}
                 </p>
               </div>
             </div>

@@ -14,7 +14,7 @@ function Transaksi() {
 
   const harga100gr = dataKategori ? dataKategori.harga100gr : 0;
 
-  const totalHarga = berat && harga100gr ? (berat / 100) * harga100gr : 0;
+  const totalharga = berat && harga100gr ? (berat / 100) * harga100gr : 0;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ function Transaksi() {
       berat,
       lokasi,
       harga100gr,
-      totalHarga,
+      totalharga,
       tanggal: new Date(),
     };
 
@@ -123,7 +123,7 @@ function Transaksi() {
                   <strong>Rp {harga100gr.toLocaleString()}</strong>
                 </p>
 
-                <h3>Total : Rp {totalHarga.toLocaleString()}</h3>
+                <h3>Total : Rp {totalharga.toLocaleString()}</h3>
               </div>
 
               <button
