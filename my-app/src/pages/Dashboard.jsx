@@ -5,14 +5,11 @@ import TestApi from "./TestApi";
 function Dashboard() {
   const totalTransaksi = transaksiDummy.length;
 
-  const totalBerat = transaksiDummy.reduce(
-    (acc, item) => acc + item.berat,
-    0
-  );
+  const totalBerat = transaksiDummy.reduce((acc, item) => acc + item.berat, 0);
 
   const totalSaldo = transaksiDummy.reduce(
     (acc, item) => acc + item.totalHarga,
-    0
+    0,
   );
 
   return (
@@ -41,11 +38,27 @@ function Dashboard() {
         <div className="riwayat-transaksi">
           {transaksiDummy.slice(0, 3).map((item) => (
             <div key={item.id} className="transaksi-item">
-              <div className="header-kategori"><h4>{item.kategori}</h4></div>
-              <div className="header-keterangan"><p><span>Keterangan :</span> {item.keterangan}</p></div>
-              <div className="header-berat"><p><span>Berat :</span> {item.berat} gr</p></div>
-              <div className="header-totalharga"><p><span>Harga :</span> Rp {item.totalHarga.toLocaleString()}</p></div>
-              <span className={`status ${item.status.toLowerCase()}`}>{item.status}</span>
+              <div className="header-kategori">
+                <h4>{item.kategori}</h4>
+              </div>
+              <div className="header-keterangan">
+                <p>
+                  <span>Keterangan :</span> {item.keterangan}
+                </p>
+              </div>
+              <div className="header-berat">
+                <p>
+                  <span>Berat :</span> {item.berat} gr
+                </p>
+              </div>
+              <div className="header-totalharga">
+                <p>
+                  <span>Harga :</span> Rp {item.totalHarga.toLocaleString()}
+                </p>
+              </div>
+              <span className={`status ${item.status.toLowerCase()}`}>
+                {item.status}
+              </span>
             </div>
           ))}
         </div>
