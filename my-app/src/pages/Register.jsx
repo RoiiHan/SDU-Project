@@ -67,7 +67,7 @@ function Register() {
           Daftar
         </button>
 
-        <p>
+        <p className="btn-reg">
           Sudah punya akun?
           <Link to="/login"> Login</Link>
         </p>

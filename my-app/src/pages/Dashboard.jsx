@@ -1,5 +1,6 @@
 import "./style/Dashboard.css";
 import { transaksiDummy } from "../data/transaksiDummy";
+import TestApi from "./TestApi";
 
 function Dashboard() {
   const totalTransaksi = transaksiDummy.length;
@@ -49,6 +50,7 @@ function Dashboard() {
           ))}
         </div>
       </div>
+      <TestApi />
     </div>
   );
 }

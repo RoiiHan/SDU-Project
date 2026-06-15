@@ -3,6 +3,7 @@ import { hargaSampah } from "../data/hargaSampah";
 import "./style/Transaksi.css";
 import Navbar from "../components/Navbar";
 import transaksiImg from "../assets/transaksi.png";
+import TestApi from "./TestApi";
 
 function Transaksi() {
   const [kategori, setKategori] = useState("");

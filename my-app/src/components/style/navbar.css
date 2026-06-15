@@ -120,4 +120,5 @@ nav {
 .menu a {
     text-decoration: none;
     color: var(--cream);
+    list-style: none;
 }
