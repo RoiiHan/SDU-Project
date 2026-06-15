@@ -18,7 +18,7 @@ function Navbar() {
                 <img src={Logo} alt="logo" />
             </div>
             <div className='logo-text'>
-                <p>SDU</p>
+                <p><Link to="/">SDU</Link></p>
             </div>
         </div>
         <ul className='nav-links'>

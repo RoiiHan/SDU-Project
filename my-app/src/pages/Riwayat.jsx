@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 function Riwayat() {
   return (
-    <div>
+    <div className="riwayat-page">
       <Navbar />
       <div className="riwayat-container">
         <h1>Riwayat Transaksi</h1>
@@ -26,6 +26,7 @@ function Riwayat() {
               </div>
 
               <p className="keterangan">
+                <strong>Keterangan: </strong>
                 {item.keterangan}
               </p>
 
