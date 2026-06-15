@@ -2,6 +2,23 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "sdu_db",
+});
+
+db.connect((err) => {
+  if (err) {
+    console.log("koneksi berhasil");
+    console.log(err);
+    return;
+  }
+  console.log("MySQL berhasil terhubung");
+});
 
 app.use(cors());
 app.use(express.json());
@@ -28,11 +45,27 @@ app.get("/transaksi", (req, res) => {
 });
 
 app.post("/transaksi", (req, res) => {
-  console.log(req.body);
+  const { kategori, keterangan, berat, lokasi, harga100gr, totalharga } =
+    req.body;
 
-  res.json({
-    message: "Transaksi berhasil diterima",
-  });
+  const sql = `INSERT INTO transaksi (kategori,keterangan,berat,lokasi,harga100gr,totalharga) VALUES (?,?,?,?,?,?)`;
+
+  db.query(
+    sql,
+    [kategori, keterangan, berat, lokasi, harga100gr, totalharga],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          message: "Gagal menyimpan transaksi",
+        });
+      }
+
+      res.json({
+        message: "Transaksi berhasil disimpan",
+      });
+    },
+  );
 });
 
 app.listen(5000, () => {

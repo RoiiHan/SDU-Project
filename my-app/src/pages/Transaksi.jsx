@@ -16,7 +16,7 @@ function Transaksi() {
 
   const totalHarga = berat && harga100gr ? (berat / 100) * harga100gr : 0;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!kategori) {
@@ -39,14 +39,26 @@ function Transaksi() {
       tanggal: new Date(),
     };
 
-    console.log(transaksiBaru);
+    try {
+      const response = await fetch("http://localhost:5000/transaksi", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(transaksiBaru),
+      });
+      const data = await response.json();
 
-    alert("Transaksi berhasil dikirim");
-
-    setKategori("");
-    setKeterangan("");
-    setBerat("");
-    setLokasi("");
+      console.log(data);
+      alert("Transaksi berhasil dikirim");
+      setKategori("");
+      setKeterangan("");
+      setBerat("");
+      setLokasi("");
+    } catch (error) {
+      console.error(error);
+      alert("Gagal mengirim transaksi");
+    }
   };
 
   return (
@@ -114,7 +126,11 @@ function Transaksi() {
                 <h3>Total : Rp {totalHarga.toLocaleString()}</h3>
               </div>
 
-              <button className="btn-trans" type="submit">
+              <button
+                className="btn-trans"
+                type="submit"
+                onClick={handleSubmit}
+              >
                 Kirim Transaksi
               </button>
             </form>
