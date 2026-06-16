@@ -96,6 +96,25 @@ app.get("/dashboard", (req, res) => {
   });
 });
 
+app.post("/register", (req, res) => {
+  const { nama, no_hp, password } = req.body;
+
+  const sql = "INSERT INTO user (nama,no_hp, password) VALUES (?,?,?)";
+
+  db.query(sql, [nama, no_hp, password], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: "Gagal membuat akun",
+      });
+    }
+
+    res.json({
+      message: "Registrasi Berhasil ",
+    });
+  });
+});
+
 app.listen(5000, () => {
   console.log("Server Berjalan di port 5000");
 });

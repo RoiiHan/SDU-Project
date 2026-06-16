@@ -1,4 +1,3 @@
-import { data } from "react-router-dom";
 import "./style/Dashboard.css";
 import TestApi from "./TestApi";
 import { useState, useEffect } from "react";
