@@ -98,10 +98,11 @@ app.get("/dashboard", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { nama, no_hp, password } = req.body;
+  const role = "user";
 
-  const sql = "INSERT INTO user (nama,no_hp, password) VALUES (?,?,?)";
+  const sql = "INSERT INTO user (nama,no_hp, password,role) VALUES (?,?,?,?)";
 
-  db.query(sql, [nama, no_hp, password], (err, result) => {
+  db.query(sql, [nama, no_hp, password, role], (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({
@@ -111,6 +112,32 @@ app.post("/register", (req, res) => {
 
     res.json({
       message: "Registrasi Berhasil ",
+    });
+  });
+});
+
+app.post("/login", (req, res) => {
+  const { no_hp, password } = req.body;
+
+  const sql = "SELECT * FROM user WHERE no_hp =? AND password=?";
+
+  db.query(sql, [no_hp, password], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Server Eror",
+      });
+    }
+    if (result.length === 0) {
+      return res.status(401).json({
+        message: "Nomor HP atau password salah",
+      });
+    }
+
+    res.json({
+      message: "Login Berhasil",
+      user: result[0],
     });
   });
 });

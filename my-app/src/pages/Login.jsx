@@ -5,65 +5,57 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [no_hp, setNoHp] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      email === "admin@gmail.com" &&
-      password === "admin123"
-    ){
-      console.log("Login admin");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          role : "admin",
-          email: email  
-        })
-      );
-      navigate("/admin/dashboard");
-      return;
-    }
-    
-    if (
-      email === "user@gmail.com" &&
-      password === "user123"
-    ){
-      console.log("Login user");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ 
-          role : "user",
-          email: email
-        })
-      )
-      navigate("/dashboard");
-      return;
-    }
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          no_hp,
+          password,
+        }),
+      });
 
-    alert("Email atau password salah");
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      alert(data.message);
+
+      if (data.user.role === "adamin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Server Error");
+    }
   };
 
   return (
     <div className="login-container">
-      <form
-        className="login-form"
-        onSubmit={handleSubmit}
-      >
+      <form className="login-form" onSubmit={handleSubmit}>
         <h1>Login SDU</h1>
 
         <div className="input-group">
-          <label>Email</label>
+          <label>NoHP</label>
 
           <input
-            type="email"
-            placeholder="Masukkan email"
-            value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
+            type="text"
+            placeholder="Masukkan NoHP"
+            value={no_hp}
+            onChange={(e) => setNoHp(e.target.value)}
           />
         </div>
 
@@ -74,15 +66,11 @@ function Login() {
             type="password"
             placeholder="Masukkan password"
             value={password}
-            onChange={(e) =>
-              setPassword(e.target.value)
-            }
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button type="submit">
-          Masuk
-        </button>
+        <button type="submit">Masuk</button>
       </form>
     </div>
   );
