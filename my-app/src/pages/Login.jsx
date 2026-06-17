@@ -32,7 +32,7 @@ function Login() {
 
       alert(data.message);
 
-      if (data.user.role === "adamin") {
+      if (data.user.role === "admin") {
         navigate("/admin/dashboard");
       } else {
         navigate("/dashboard");

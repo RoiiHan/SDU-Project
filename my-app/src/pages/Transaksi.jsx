@@ -19,6 +19,8 @@ function Transaksi() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
     if (!kategori) {
       alert("Pilih jenis sampah");
       return;
@@ -30,13 +32,13 @@ function Transaksi() {
     }
 
     const transaksiBaru = {
+      user_id: user.id,
       kategori,
       keterangan,
       berat,
       lokasi,
       harga100gr,
       totalharga,
-      tanggal: new Date(),
     };
 
     try {

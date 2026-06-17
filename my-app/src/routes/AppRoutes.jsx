@@ -11,22 +11,67 @@ import Riwayat from "../pages/Riwayat";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminTransaksi from "../pages/admin/AdminTransaksi";
 import AdminHarga from "../pages/admin/AdminHarga";
+import ProtectedRoute from "../components/ProtectedRoute";
+import AdminRoute from "../components/AdminRoute";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<UserLayout />}>
         <Route path="/" element={<Landingpage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Route>
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/transaksi" element={<Transaksi />} />
-      <Route path="/riwayat" element={<Riwayat />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />}/>
-      <Route path="/admin/transaksi" element={<AdminTransaksi />}/>
-      <Route path="/admin/harga" element={<AdminHarga />}/>
+      <Route
+        path="/transaksi"
+        element={
+          <ProtectedRoute>
+            <Transaksi />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/riwayat"
+        element={
+          <ProtectedRoute>
+            <Riwayat />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/dashboard"
+        element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/transaksi"
+        element={
+          <AdminRoute>
+            <AdminTransaksi />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/harga"
+        element={
+          <AdminRoute>
+            <AdminHarga />
+          </AdminRoute>
+        }
+      />
       <Route path="/admin/login" element={<Login />} />
     </Routes>
   );

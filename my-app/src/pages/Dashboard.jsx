@@ -10,9 +10,10 @@ function Dashboard() {
   });
 
   const [transaksi, SetTransaksi] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    fetch("http://localhost:5000/dashboard")
+    fetch(`http://localhost:5000/dashboard/user/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setDashboardData(data);
@@ -20,7 +21,7 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/transaksi")
+    fetch(`http://localhost:5000/transaksi/user/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         SetTransaksi(data);

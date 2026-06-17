@@ -43,16 +43,53 @@ app.get("/transaksi", (req, res) => {
   });
 });
 
+app.get("/transaksi/user/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  const sql = "SELECT * FROM transaksi WHERE user_id = ? ORDER BY id DESC";
+
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return (
+        res.status(500),
+        json({
+          message: "Gagal mengambil data",
+        })
+      );
+    }
+
+    res.json(result);
+  });
+});
+
 app.post("/transaksi", (req, res) => {
   const status = "Menunggu";
-  const { kategori, keterangan, berat, lokasi, harga100gr, totalharga } =
-    req.body;
+  const {
+    user_id,
+    kategori,
+    keterangan,
+    berat,
+    lokasi,
+    harga100gr,
+    totalharga,
+  } = req.body;
 
-  const sql = `INSERT INTO transaksi (kategori,keterangan,berat,lokasi,harga100gr,totalharga,status) VALUES (?,?,?,?,?,?,?)`;
+  const sql = `INSERT INTO transaksi (user_id,kategori,keterangan,berat,lokasi,harga100gr,totalharga,status) VALUES (?,?,?,?,?,?,?,?)`;
 
   db.query(
     sql,
-    [kategori, keterangan, berat, lokasi, harga100gr, totalharga, status],
+    [
+      user_id,
+      kategori,
+      keterangan,
+      berat,
+      lokasi,
+      harga100gr,
+      totalharga,
+      status,
+    ],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -69,20 +106,6 @@ app.post("/transaksi", (req, res) => {
 });
 
 app.get("/dashboard", (req, res) => {
-  const sql = `SELECT COUNT(*) AS totalTransaksi,SUM(berat) AS totalBerat,SUM(totalharga) AS totalPendapatan FROM transaksi `;
-
-  db.query(sql, (err, result) => {
-    if (err) {
-      return res.status(500).json({
-        message: "Gagal mengambil data dashboard",
-      });
-    }
-
-    res.json(result[0]);
-  });
-});
-
-app.get("/dashboard", (req, res) => {
   const sql = `SELECT COUNT (*) AS totalTransaksi, SUM(berat) AS totalBerat, SUM(totalharga) AS totalPendapatan FROM transaksi`;
 
   db.query(sql, (err, result) => {
@@ -92,6 +115,24 @@ app.get("/dashboard", (req, res) => {
         message: "Gagal mengambil data dashboard",
       });
     }
+    res.json(result[0]);
+  });
+});
+
+app.get("/dashboard/user/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  const sql = `SELECT COUNT(*) AS totalTransaksi, SUM(berat) AS totalBerat,SUM(totalharga) AS totalPendapatan FROM transaksi WHERE user_id = ? `;
+
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data dashboard",
+      });
+    }
+
     res.json(result[0]);
   });
 });
