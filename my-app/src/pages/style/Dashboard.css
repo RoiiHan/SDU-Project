@@ -1,16 +1,17 @@
 /* ===== GLOBAL VARIABLES ===== */
 :root {
-  --lightgreen: #859F3D;
-  --darkgreen: #31511E;
-  --cream: #F6FCDF;
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
   --putih: #efefef;
-  --putihcard : #f5f5f5;
+  --putihcard: #f5f5f5;
 }
 
 /* ===== LAYOUT ===== */
 .dashboard {
   padding: 20px;
   background: var(--putih);
+  min-height: 100vh;
 }
 
 /* ===== SUMMARY CARDS ===== */
