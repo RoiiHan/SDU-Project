@@ -183,6 +183,22 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.get("/admin/transaksi/", (req, res) => {
+  const sql = `SELECT transaksi.*,user.nama,user.no_hp FROM transaksi JOIN user ON transaksi.user_id = user.id ORDER BY transaksi.id DESC`;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data transaksi",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
 app.listen(5000, () => {
   console.log("Server Berjalan di port 5000");
 });

@@ -1,88 +1,126 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminSidebar from "./components/AdminSidebars";
-import { transaksiDummy } from "../../data/transaksiDummy";
 import "./style/AdminTransaksi.css";
 
 function AdminTransaksi() {
-  const [transaksi, setTransaksi] = useState(transaksiDummy);
+  const [transaksi, setTransaksi] = useState([]);
 
-  const handleStatusChange = (id, statusBaru) => {
-    const updateStatus = transaksi.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            status: statusBaru,
-          }
-        : item
-    );
+  useEffect(() => {
+    fetch("http://localhost:5000/admin/transaksi")
+      .then((res) => res.json())
+      .then((data) => {
+        setTransaksi(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-    setTransaksi(updateStatus);
-  };
+  const groupedTransaksi = transaksi.reduce((acc, item) => {
+    const userId = item.user_id;
+
+    if (!acc[userId]) {
+      acc[userId] = {
+        nama: item.nama,
+        no_hp: item.no_hp,
+        transaksi: [],
+      };
+    }
+
+    acc[userId].transaksi.push(item);
+
+    return acc;
+  }, {});
 
   return (
     <div className="admin-layout">
       <AdminSidebar />
 
       <div className="admin-content">
-        <h1>Kelola Transaksi</h1>
+        <h1 className="admin-transaksi-title">Kelola Transaksi</h1>
 
-        <div className="transaksi-grid">
-          {transaksi.map((item) => (
-            <div
-              key={item.id}
-              className="transaksi-card"
-            >
-              <div className="card-header">
-                <h3>{item.kategori}</h3>
+        <div className="admin-transaksi-grid">
+          {Object.values(groupedTransaksi).map((user, index) => (
+            <div key={index} className="admin-transaksi-user-card">
+              <div className="admin-transaksi-user-header">
+                <h2>{user.nama}</h2>
 
-                <span
-                  className={`status ${item.status.toLowerCase()}`}
-                >
-                  {item.status}
-                </span>
+                <p>{user.no_hp}</p>
               </div>
 
-              <p className="keterangan">
-                {item.keterangan}
-              </p>
+              <div className="admin-transaksi-summary">
+                <div className="summary-box">
+                  <span>Total Transaksi</span>
 
-              <div className="detail">
-                <p>
-                  <strong>Berat:</strong>{" "}
-                  {item.berat} gram
-                </p>
+                  <strong>{user.transaksi.length}</strong>
+                </div>
 
-                <p>
-                  <strong>Total:</strong> Rp{" "}
-                  {item.totalHarga.toLocaleString()}
-                </p>
+                <div className="summary-box">
+                  <span>Total Berat</span>
+
+                  <strong>
+                    {user.transaksi.reduce(
+                      (total, item) => total + Number(item.berat),
+                      0,
+                    )}{" "}
+                    gr
+                  </strong>
+                </div>
+
+                <div className="summary-box">
+                  <span>Total Pendapatan</span>
+
+                  <strong>
+                    Rp{" "}
+                    {user.transaksi
+                      .reduce(
+                        (total, item) => total + Number(item.totalharga),
+                        0,
+                      )
+                      .toLocaleString()}
+                  </strong>
+                </div>
               </div>
 
-              <select
-                value={item.status}
-                onChange={(e) =>
-                  handleStatusChange(
-                    item.id,
-                    e.target.value
-                  )
-                }
-              >
-                <option value="Menunggu">
-                  Menunggu
-                </option>
+              <div className="admin-transaksi-list">
+                {user.transaksi.map((item) => (
+                  <div key={item.id} className="admin-transaksi-item">
+                    <div className="admin-transaksi-item-header">
+                      <h4>{item.kategori}</h4>
 
-                <option value="Diproses">
-                  Diproses
-                </option>
+                      <span className={`status ${item.status.toLowerCase()}`}>
+                        {item.status}
+                      </span>
+                    </div>
 
-                <option value="Dijemput">
-                  Dijemput
-                </option>
+                    <p>
+                      <strong>Keterangan:</strong> {item.keterangan}
+                    </p>
 
-                <option value="Selesai">
-                  Selesai
-                </option>
-              </select>
+                    <p>
+                      <strong>Berat:</strong> {item.berat} gr
+                    </p>
+
+                    <p>
+                      <strong>Harga:</strong> Rp{" "}
+                      {item.totalharga.toLocaleString()}
+                    </p>
+
+                    <p>
+                      <strong>Lokasi:</strong> {item.lokasi}
+                    </p>
+
+                    <p>
+                      <strong>Tanggal:</strong>{" "}
+                      {new Date(item.created_at).toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

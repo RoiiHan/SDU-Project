@@ -12,13 +12,17 @@ function Dashboard() {
   const [transaksi, SetTransaksi] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
+  if (!user) {
+    return <h2> Silahkan Login Terlebih dahulu</h2>;
+  }
+
   useEffect(() => {
     fetch(`http://localhost:5000/dashboard/user/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setDashboardData(data);
       });
-  }, []);
+  }, [user.id]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/transaksi/user/${user.id}`)
@@ -26,7 +30,7 @@ function Dashboard() {
       .then((data) => {
         SetTransaksi(data);
       });
-  }, []);
+  }, [user.id]);
 
   return (
     <div className="dashboard">
@@ -73,7 +77,7 @@ function Dashboard() {
                 </p>
               </div>
               <span className={`status ${item.status.toLowerCase()}`}>
-                {item.status}
+                {item.status || "Menunggu"}
               </span>
             </div>
           ))}
