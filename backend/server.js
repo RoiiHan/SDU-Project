@@ -52,12 +52,9 @@ app.get("/transaksi/user/:userId", (req, res) => {
     if (err) {
       console.log(err);
 
-      return (
-        res.status(500),
-        json({
-          message: "Gagal mengambil data",
-        })
-      );
+      return res.status(500).json({
+        message: "Gagal mengambil data",
+      });
     }
 
     res.json(result);
@@ -106,7 +103,7 @@ app.post("/transaksi", (req, res) => {
 });
 
 app.get("/dashboard", (req, res) => {
-  const sql = `SELECT COUNT (*) AS totalTransaksi, SUM(berat) AS totalBerat, SUM(totalharga) AS totalPendapatan FROM transaksi`;
+  const sql = `SELECT COUNT(*) AS totalTransaksi,SUM(berat) AS totalBerat,SUM(totalharga) AS totalPendapatan FROM transaksi`;
 
   db.query(sql, (err, result) => {
     if (err) {
@@ -192,6 +189,72 @@ app.get("/admin/transaksi/", (req, res) => {
 
       return res.status(500).json({
         message: "Gagal mengambil data transaksi",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.put("/admin/transaksi/:id", (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  const sql = "UPDATE transaksi SET status = ? WHERE id=?";
+
+  db.query(sql, [status, id], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengupdate status ",
+      });
+    }
+
+    res.json({
+      message: "Status berhasil di perbarui",
+    });
+  });
+});
+
+app.get("/admin/dashboard", (req, res) => {
+  const sql = `
+    SELECT
+      (SELECT COUNT(*) FROM user) AS totalUser,
+      COUNT(*) AS totalTransaksi,
+      SUM(berat) AS totalBerat,
+      SUM(totalharga) AS totalPendapatan
+    FROM transaksi
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data dashboard",
+      });
+    }
+
+    res.json(result[0]);
+  });
+});
+
+app.get("/admin/status-transaksi", (req, res) => {
+  const sql = `
+    SELECT
+      status,
+      COUNT(*) AS total
+    FROM transaksi
+    GROUP BY status
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil statistik status",
       });
     }
 

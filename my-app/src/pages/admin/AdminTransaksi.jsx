@@ -4,7 +4,25 @@ import "./style/AdminTransaksi.css";
 
 function AdminTransaksi() {
   const [transaksi, setTransaksi] = useState([]);
+  const updateStatus = async (id, status) => {
+    try {
+      await fetch(`http://localhost:5000/admin/transaksi/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
 
+        body: JSON.stringify({
+          status,
+        }),
+      });
+      setTransaksi((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, status: status } : item,
+        ),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     fetch("http://localhost:5000/admin/transaksi")
       .then((res) => res.json())
@@ -88,9 +106,16 @@ function AdminTransaksi() {
                     <div className="admin-transaksi-item-header">
                       <h4>{item.kategori}</h4>
 
-                      <span className={`status ${item.status.toLowerCase()}`}>
-                        {item.status}
-                      </span>
+                      <select
+                        className={`status ${item.status.toLowerCase()}`}
+                        value={item.status}
+                        onChange={(e) => updateStatus(item.id, e.target.value)}
+                      >
+                        <option value="Menunggu">Menunggu</option>
+                        <option value="Diproses">Diproses</option>
+                        <option value="Dijemput">Dijemput</option>
+                        <option value="Selesai">Selesai</option>
+                      </select>
                     </div>
 
                     <p>

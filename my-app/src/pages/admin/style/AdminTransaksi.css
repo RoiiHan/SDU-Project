@@ -154,6 +154,16 @@
   color: #1e7e34;
 }
 
+.status {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+select.status {
+  padding: 5px 10px;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 992px) {
