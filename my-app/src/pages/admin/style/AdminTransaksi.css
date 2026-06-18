@@ -25,6 +25,45 @@
   font-weight: 600;
 }
 
+/* FILTER */
+
+/* SEARCH + FILTER */
+
+.filter-search-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-search-container input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 14px;
+}
+
+.filter-search-container input:focus {
+  outline: none;
+  border-color: var(--lightgreen);
+}
+
+.filter-search-container select {
+  width: 180px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  color: var(--darkgreen);
+  font-weight: 500;
+}
+
+.filter-search-container select:focus {
+  outline: none;
+  border-color: var(--lightgreen);
+}
+
 /* GRID → 2 CARD PER BARIS */
 
 .admin-transaksi-grid {

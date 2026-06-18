@@ -4,6 +4,7 @@ import "./style/AdminTransaksi.css";
 
 function AdminTransaksi() {
   const [transaksi, setTransaksi] = useState([]);
+
   const updateStatus = async (id, status) => {
     try {
       await fetch(`http://localhost:5000/admin/transaksi/${id}`, {
@@ -34,7 +35,24 @@ function AdminTransaksi() {
       });
   }, []);
 
-  const groupedTransaksi = transaksi.reduce((acc, item) => {
+  const [search, setSearch] = useState("");
+  const [filterStatus, setFilterStatus] = useState("Semua");
+
+  const filteredTransaksi = transaksi.filter((item) => {
+    const cocokStatus =
+      filterStatus === "Semua" ? true : item.status === filterStatus;
+
+    const keyword = search.toLowerCase();
+
+    const cocokSearch =
+      item.nama.toLowerCase().includes(keyword) ||
+      item.no_hp.includes(keyword) ||
+      item.kategori.toLowerCase().includes(keyword);
+
+    return cocokStatus && cocokSearch;
+  });
+
+  const groupedTransaksi = filteredTransaksi.reduce((acc, item) => {
     const userId = item.user_id;
 
     if (!acc[userId]) {
@@ -56,6 +74,26 @@ function AdminTransaksi() {
 
       <div className="admin-content">
         <h1 className="admin-transaksi-title">Kelola Transaksi</h1>
+
+        <div className="filter-search-container">
+          <input
+            type="text"
+            placeholder="Cari nama, no HP, atau kategori..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="Semua">Semua</option>
+            <option value="Menunggu">Menunggu</option>
+            <option value="Diproses">Diproses</option>
+            <option value="Dijemput">Dijemput</option>
+            <option value="Selesai">Selesai</option>
+          </select>
+        </div>
 
         <div className="admin-transaksi-grid">
           {Object.values(groupedTransaksi).map((user, index) => (

@@ -262,6 +262,89 @@ app.get("/admin/status-transaksi", (req, res) => {
   });
 });
 
+app.get("/admin/transaksi-terbaru", (req, res) => {
+  const sql = `SELECT transaksi.*, user.nama FROM transaksi JOIN user ON transaksi.user_id = user.id ORDER BY transaksi.created_at DESC LIMIT 5`;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: "Gagal mengambil transaksi terbaru",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.get("/admin/user-terbaru", (req, res) => {
+  const sql = `
+    SELECT id, nama, no_hp, created_at
+    FROM user
+    WHERE role = 'user'
+    ORDER BY created_at DESC
+    LIMIT 5
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil user terbaru",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.get("/admin/grafik-transaksi", (req, res) => {
+  const sql = `
+    SELECT
+      MONTH(created_at) AS bulan,
+      COUNT(*) AS total
+    FROM transaksi
+    GROUP BY MONTH(created_at)
+    ORDER BY MONTH(created_at)
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data grafik",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.get("/admin/grafik-kategori", (req, res) => {
+  const sql = `
+    SELECT
+      kategori,
+      COUNT(*) AS total
+    FROM transaksi
+    GROUP BY kategori
+    ORDER BY total DESC
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data kategori",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
 app.listen(5000, () => {
   console.log("Server Berjalan di port 5000");
 });
