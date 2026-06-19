@@ -1,7 +1,9 @@
 :root {
-    --lightgreen: #859F3D;
-    --darkgreen: #31511E;
-    --cream: #F6FCDF;
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+  --putihcard: #f5f5f5;
 }
 
 .harga-grid {
@@ -34,4 +36,23 @@
   margin-top: 15px;
   font-weight: bold;
   color: var(--darkgreen);
+}
+
+.btn-simpan-harga {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+
+  background: var(--darkgreen);
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-simpan-harga:hover {
+  background: var(--lightgreen);
 }

@@ -1,20 +1,38 @@
-import { useState } from "react";
-import { hargaSampah } from "../data/hargaSampah";
+import { useState, useEffect } from "react";
 import "./style/Transaksi.css";
 import Navbar from "../components/Navbar";
 import transaksiImg from "../assets/transaksi.png";
 
 function Transaksi() {
+  const [hargaSampah, setHargaSampah] = useState([]);
+
   const [kategori, setKategori] = useState("");
   const [keterangan, setKeterangan] = useState("");
   const [berat, setBerat] = useState("");
   const [lokasi, setLokasi] = useState("");
 
+  useEffect(() => {
+    fetch("http://localhost:5000/harga")
+      .then((res) => res.json())
+      .then((data) => {
+        setHargaSampah(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const dataKategori = hargaSampah.find((item) => item.kategori === kategori);
 
-  const harga100gr = dataKategori ? dataKategori.harga100gr : 0;
+  const harga100gr = dataKategori ? Number(dataKategori.harga) : 0;
 
-  const totalharga = berat && harga100gr ? (berat / 100) * harga100gr : 0;
+  const hargaPerKg = harga100gr * 10;
+
+  const beratKg = Number(berat) || 0;
+  const beratGram = beratKg * 1000;
+
+  const totalharga =
+    beratGram > 0 && harga100gr > 0 ? (beratGram / 100) * harga100gr : 0;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +44,13 @@ function Transaksi() {
       return;
     }
 
-    if (!berat || berat <= 0) {
+    if (!berat || beratKg <= 0) {
       alert("Masukkan berat yang valid");
+      return;
+    }
+
+    if (!lokasi) {
+      alert("Masukkan lokasi penjemputan");
       return;
     }
 
@@ -35,7 +58,7 @@ function Transaksi() {
       user_id: user.id,
       kategori,
       keterangan,
-      berat,
+      berat: beratGram,
       lokasi,
       harga100gr,
       totalharga,
@@ -45,14 +68,15 @@ function Transaksi() {
       const response = await fetch("http://localhost:5000/transaksi", {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(transaksiBaru),
       });
+
       const data = await response.json();
 
-      console.log(data);
-      alert("Transaksi berhasil dikirim");
+      alert(data.message);
+
       setKategori("");
       setKeterangan("");
       setBerat("");
@@ -101,11 +125,13 @@ function Transaksi() {
                 onChange={(e) => setKeterangan(e.target.value)}
               />
 
-              <label>Berat (Gram)</label>
+              <label>Berat (Kilogram)</label>
 
               <input
                 type="number"
-                placeholder="Masukkan berat"
+                step="0.1"
+                min="0"
+                placeholder="Contoh : 5.7"
                 value={berat}
                 onChange={(e) => setBerat(e.target.value)}
               />
@@ -121,18 +147,21 @@ function Transaksi() {
 
               <div className="hasil">
                 <p>
-                  Harga / 100 gram :
-                  <strong>Rp {harga100gr.toLocaleString()}</strong>
+                  Harga / Kg :<strong> Rp {hargaPerKg.toLocaleString()}</strong>
+                </p>
+
+                <p>
+                  Berat :<strong> {beratKg} Kg</strong>
+                </p>
+
+                <p>
+                  Konversi :<strong> {beratGram.toLocaleString()} Gram</strong>
                 </p>
 
                 <h3>Total : Rp {totalharga.toLocaleString()}</h3>
               </div>
 
-              <button
-                className="btn-trans"
-                type="submit"
-                onClick={handleSubmit}
-              >
+              <button className="btn-trans" type="submit">
                 Kirim Transaksi
               </button>
             </form>

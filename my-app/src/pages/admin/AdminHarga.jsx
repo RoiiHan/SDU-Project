@@ -1,22 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminSidebar from "./components/AdminSidebars";
-import { hargaSampah } from "../../data/hargaSampah";
 import "./style/AdminHarga.css";
 
 function AdminHarga() {
-  const [harga, setHarga] = useState(hargaSampah);
+  const [harga, setHarga] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/admin/harga")
+      .then((res) => res.json())
+      .then((data) => {
+        setHarga(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleHargaChange = (id, value) => {
-    const updateHarga = harga.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            harga100gr: Number(value),
-          }
-        : item
+    setHarga((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              harga: value,
+            }
+          : item,
+      ),
     );
+  };
 
-    setHarga(updateHarga);
+  const simpanHarga = async (id, hargaBaru) => {
+    try {
+      const response = await fetch(`http://localhost:5000/admin/harga/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          harga: hargaBaru,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+    } catch (error) {
+      console.log(error);
+
+      alert("Gagal update harga");
+    }
   };
 
   return (
@@ -28,31 +60,25 @@ function AdminHarga() {
 
         <div className="harga-grid">
           {harga.map((item) => (
-            <div
-              key={item.id}
-              className="harga-card"
-            >
+            <div key={item.id} className="harga-card">
               <h3>{item.kategori}</h3>
 
-              <label>
-                Harga / 100 gram
-              </label>
+              <label>Harga / 100 gram</label>
 
               <input
                 type="number"
-                value={item.harga100gr}
-                onChange={(e) =>
-                  handleHargaChange(
-                    item.id,
-                    e.target.value
-                  )
-                }
+                value={item.harga}
+                onChange={(e) => handleHargaChange(item.id, e.target.value)}
               />
 
-              <p>
-                Rp{" "}
-                {item.harga100gr.toLocaleString()}
-              </p>
+              <p>Rp {Number(item.harga).toLocaleString()}</p>
+
+              <button
+                className="btn-simpan-harga"
+                onClick={() => simpanHarga(item.id, item.harga)}
+              >
+                Simpan
+              </button>
             </div>
           ))}
         </div>

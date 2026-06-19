@@ -345,6 +345,80 @@ app.get("/admin/grafik-kategori", (req, res) => {
   });
 });
 
+app.get("/harga", (req, res) => {
+  const sql = "SELECT * FROM harga_sampah";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "gagal mengambil data harga",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.put("/harga/:id", (req, res) => {
+  const { id } = req.params;
+  const { harga } = req.body;
+
+  const sql = "UPDATE harga_sampah SET harga100gr = ? WHERE id = ?";
+
+  db.query(sql, [harga100gr, id], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengupdate harga",
+      });
+    }
+
+    res.json({
+      message: "Harga berhasil di perbarui",
+    });
+  });
+});
+
+app.get("/admin/harga", (req, res) => {
+  const sql = "SELECT * FROM harga_sampah ORDER BY id ASC";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data harga",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.put("/admin/harga/:id", (req, res) => {
+  const { id } = req.params;
+  const { harga } = req.body;
+
+  const sql = "UPDATE harga SET harga = ? WHERE id= ? ";
+
+  db.query(sql, [harga, id], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengupdate harga",
+      });
+    }
+
+    res.json({
+      message: "Harga berhasil di update",
+    });
+  });
+});
+
 app.listen(5000, () => {
   console.log("Server Berjalan di port 5000");
 });
