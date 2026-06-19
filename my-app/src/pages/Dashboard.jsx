@@ -1,6 +1,7 @@
 import "./style/Dashboard.css";
 import TestApi from "./TestApi";
 import { useState, useEffect } from "react";
+import CardsDashboard from "./components/CardsDashboard";
 
 function Dashboard() {
   const [dashboardData, setDashboardData] = useState({
@@ -36,22 +37,7 @@ function Dashboard() {
     <div className="dashboard">
       <h1>Dashboard</h1>
 
-      <div className="cards">
-        <div className="card">
-          <h3>Total Transaksi</h3>
-          <p>{dashboardData.totalTransaksi}</p>
-        </div>
-
-        <div className="card">
-          <h3>Total Berat</h3>
-          <p>{dashboardData.totalBerat || 0} gr</p>
-        </div>
-
-        <div className="card">
-          <h3>Total Pendapatan</h3>
-          <p>Rp {(dashboardData.totalPendapatan || 0).toLocaleString()}</p>
-        </div>
-      </div>
+      <CardsDashboard dashboardData={dashboardData} />
 
       <div className="riwayat-terbaru">
         <h2>Transaksi Terbaru</h2>
