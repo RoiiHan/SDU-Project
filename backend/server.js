@@ -69,11 +69,13 @@ app.post("/transaksi", (req, res) => {
     keterangan,
     berat,
     lokasi,
+    latitude,
+    longitude,
     harga100gr,
     totalharga,
   } = req.body;
 
-  const sql = `INSERT INTO transaksi (user_id,kategori,keterangan,berat,lokasi,harga100gr,totalharga,status) VALUES (?,?,?,?,?,?,?,?)`;
+  const sql = `INSERT INTO transaksi (user_id,kategori,keterangan,berat,lokasi,latitude,longitude,harga100gr,totalharga,status) VALUES (?,?,?,?,?,?,?,?,?,?)`;
 
   db.query(
     sql,
@@ -83,6 +85,8 @@ app.post("/transaksi", (req, res) => {
       keterangan,
       berat,
       lokasi,
+      latitude,
+      longitude,
       harga100gr,
       totalharga,
       status,

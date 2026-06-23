@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./style/Transaksi.css";
 import Navbar from "../components/Navbar";
 import transaksiImg from "../assets/transaksi.png";
+import MapPicker from "../components/MapPicker";
 
 function Transaksi() {
   const [hargaSampah, setHargaSampah] = useState([]);
@@ -10,6 +11,8 @@ function Transaksi() {
   const [keterangan, setKeterangan] = useState("");
   const [berat, setBerat] = useState("");
   const [lokasi, setLokasi] = useState("");
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/harga")
@@ -54,12 +57,19 @@ function Transaksi() {
       return;
     }
 
+    if (!latitude || !longitude) {
+      alert("silahkan pilih lokasi pada peta");
+      return;
+    }
+
     const transaksiBaru = {
       user_id: user.id,
       kategori,
       keterangan,
       berat: beratGram,
       lokasi,
+      latitude,
+      longitude,
       harga100gr,
       totalharga,
     };
@@ -137,6 +147,13 @@ function Transaksi() {
               />
 
               <label>Lokasi Penjemputan</label>
+              <MapPicker
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+              />
+              <p>
+                Latitude: {latitude} Longitude: {longitude}
+              </p>
 
               <input
                 type="text"
@@ -160,7 +177,6 @@ function Transaksi() {
 
                 <h3>Total : Rp {totalharga.toLocaleString()}</h3>
               </div>
-
               <button className="btn-trans" type="submit">
                 Kirim Transaksi
               </button>

@@ -172,6 +172,17 @@ function AdminTransaksi() {
                     <p>
                       <strong>Lokasi:</strong> {item.lokasi}
                     </p>
+                    <button
+                      className="btn-lokasi-lat"
+                      onClick={() =>
+                        window.open(
+                          `https://www.google.com/maps?q=${item.latitude},${item.longitude}`,
+                          "_blank",
+                        )
+                      }
+                    >
+                      📍 Lihat Lokasi
+                    </button>
 
                     <p>
                       <strong>Tanggal:</strong>{" "}
