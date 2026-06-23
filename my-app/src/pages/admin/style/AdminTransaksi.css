@@ -6,7 +6,9 @@
   --putihcard: #f5f5f5;
 }
 
-/* LAYOUT */
+/* =======================
+   LAYOUT
+======================= */
 
 .admin-layout {
   display: flex;
@@ -25,19 +27,19 @@
   font-weight: 600;
 }
 
-/* FILTER */
-
-/* SEARCH + FILTER */
+/* =======================
+   FILTER & SEARCH
+======================= */
 
 .filter-search-container {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .filter-search-container input {
   flex: 1;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid #ddd;
   background: white;
@@ -51,7 +53,7 @@
 
 .filter-search-container select {
   width: 180px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   border: 1px solid #ddd;
   background: white;
@@ -64,118 +66,69 @@
   border-color: var(--lightgreen);
 }
 
-/* GRID → 2 CARD PER BARIS */
+/* =======================
+   GRID
+======================= */
 
 .admin-transaksi-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
 }
 
-/* USER CARD (MINIMALIS) */
+/* =======================
+   CARD
+======================= */
 
-.admin-transaksi-user-card {
-  background: var(--putihcard);
+.admin-transaksi-card {
+  background: white;
   border-radius: 14px;
   padding: 18px;
   border: 1px solid #ddd;
   box-shadow: 0px 2px 8px var(--darkgreen);
   transition: 0.2s ease;
-
-  width: 92%;
-  justify-self: center;
-
-  height: fit-content;
 }
 
-.admin-transaksi-user-card:hover {
+.admin-transaksi-card:hover {
   transform: translateY(-3px);
 }
 
-/* HEADER USER */
-
-.admin-transaksi-user-header h2 {
-  margin: 0;
-  font-size: 18px;
-  color: var(--darkgreen);
-}
-
-.admin-transaksi-user-header p {
-  margin: 4px 0 10px;
-  font-size: 13px;
-  color: #666;
-}
-
-/* SUMMARY (lebih ringkas) */
-
-.admin-transaksi-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 10px 0 15px;
-}
-
-.summary-box {
-  background: var(--cream);
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-}
-
-.summary-box span {
-  display: block;
-  font-size: 11px;
-  color: #666;
-}
-
-.summary-box strong {
-  color: var(--darkgreen);
-  font-size: 14px;
-}
-
-/* LIST TRANSAKSI */
-
-.admin-transaksi-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* ITEM TRANSAKSI MINIMALIS */
-
-.admin-transaksi-item {
-  background: white;
-  border-radius: 10px;
-  padding: 12px;
-  border: 1px solid #eee;
-}
-
-.admin-transaksi-item-header {
+.admin-transaksi-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
+  align-items: flex-start;
+  margin-bottom: 15px;
 }
 
-.admin-transaksi-item-header h4 {
+.admin-transaksi-card-header h3 {
   margin: 0;
-  font-size: 14px;
   color: var(--darkgreen);
+  font-size: 18px;
 }
 
-.admin-transaksi-item p {
-  margin: 4px 0;
-  font-size: 12px;
+.admin-transaksi-card-header p {
+  margin: 4px 0 0;
+  color: #666;
+}
+
+.admin-transaksi-card p {
+  margin: 8px 0;
   color: #555;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
-/* STATUS */
+/* =======================
+   STATUS
+======================= */
 
 .status {
-  padding: 4px 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 10px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -199,27 +152,30 @@
   color: #1e7e34;
 }
 
-.status {
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-select.status {
-  padding: 5px 10px;
-}
+/* =======================
+   BUTTON
+======================= */
 
 .btn-lokasi-lat {
+  margin: 12px 0;
   padding: 10px;
-  border-radius: 8px;
-  background-color: var(--putihcard);
-  color: var(--darkgreen);
   border: none;
-  box-shadow: 0 2px 2px var(--darkgreen);
-  margin: 5px 0 5px 0;
+  border-radius: 8px;
+  background: var(--putihcard);
+  color: var(--darkgreen);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0px 2px 8px var(--darkgreen);
 }
 
-/* RESPONSIVE */
+.btn-lokasi-lat:hover {
+  opacity: 0.9;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
 
 @media (max-width: 992px) {
   .admin-transaksi-grid {

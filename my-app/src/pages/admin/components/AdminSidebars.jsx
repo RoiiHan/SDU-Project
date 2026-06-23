@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style/AdminSidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,6 +8,7 @@ import {
   faTag,
   faArrowDown,
   faUser,
+  faUsers,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import Ellipse from "../../../assets/Ellipse 395.png";
@@ -17,6 +18,8 @@ function AdminSidebar() {
   const toogleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("user");
     // kalau ada token terpisah, hapus juga:
@@ -38,6 +41,12 @@ function AdminSidebar() {
         <li>
           <Link to="/admin/transaksi">
             <FontAwesomeIcon icon={faCashRegister} /> Transaksi
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/admin/user">
+            <FontAwesomeIcon icon={faUsers} /> User
           </Link>
         </li>
 

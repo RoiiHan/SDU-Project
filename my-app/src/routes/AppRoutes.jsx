@@ -13,6 +13,8 @@ import AdminTransaksi from "../pages/admin/AdminTransaksi";
 import AdminHarga from "../pages/admin/AdminHarga";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AdminRoute from "../components/AdminRoute";
+import AdminUser from "../pages/admin/AdminUser";
+import AdminUserDetail from "../pages/admin/AdminUserDetail";
 
 function AppRoutes() {
   return (
@@ -61,6 +63,22 @@ function AppRoutes() {
         element={
           <AdminRoute>
             <AdminTransaksi />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/user"
+        element={
+          <AdminRoute>
+            <AdminUser />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/user/:id"
+        element={
+          <AdminRoute>
+            <AdminUserDetail />
           </AdminRoute>
         }
       />

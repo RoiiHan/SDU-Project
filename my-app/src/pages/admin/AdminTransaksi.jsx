@@ -52,22 +52,6 @@ function AdminTransaksi() {
     return cocokStatus && cocokSearch;
   });
 
-  const groupedTransaksi = filteredTransaksi.reduce((acc, item) => {
-    const userId = item.user_id;
-
-    if (!acc[userId]) {
-      acc[userId] = {
-        nama: item.nama,
-        no_hp: item.no_hp,
-        transaksi: [],
-      };
-    }
-
-    acc[userId].transaksi.push(item);
-
-    return acc;
-  }, {});
-
   return (
     <div className="admin-layout">
       <AdminSidebar />
@@ -96,105 +80,66 @@ function AdminTransaksi() {
         </div>
 
         <div className="admin-transaksi-grid">
-          {Object.values(groupedTransaksi).map((user, index) => (
-            <div key={index} className="admin-transaksi-user-card">
-              <div className="admin-transaksi-user-header">
-                <h2>{user.nama}</h2>
-
-                <p>{user.no_hp}</p>
-              </div>
-
-              <div className="admin-transaksi-summary">
-                <div className="summary-box">
-                  <span>Total Transaksi</span>
-
-                  <strong>{user.transaksi.length}</strong>
+          {filteredTransaksi.map((item) => (
+            <div key={item.id} className="admin-transaksi-card">
+              <div className="admin-transaksi-card-header">
+                <div>
+                  <h3>{item.nama}</h3>
+                  <p>{item.no_hp}</p>
                 </div>
 
-                <div className="summary-box">
-                  <span>Total Berat</span>
-
-                  <strong>
-                    {user.transaksi.reduce(
-                      (total, item) => total + Number(item.berat),
-                      0,
-                    )}{" "}
-                    gr
-                  </strong>
-                </div>
-
-                <div className="summary-box">
-                  <span>Total Pendapatan</span>
-
-                  <strong>
-                    Rp{" "}
-                    {user.transaksi
-                      .reduce(
-                        (total, item) => total + Number(item.totalharga),
-                        0,
-                      )
-                      .toLocaleString()}
-                  </strong>
-                </div>
+                <select
+                  className={`status ${item.status.toLowerCase()}`}
+                  value={item.status}
+                  onChange={(e) => updateStatus(item.id, e.target.value)}
+                >
+                  <option value="Menunggu">Menunggu</option>
+                  <option value="Diproses">Diproses</option>
+                  <option value="Dijemput">Dijemput</option>
+                  <option value="Selesai">Selesai</option>
+                </select>
               </div>
 
-              <div className="admin-transaksi-list">
-                {user.transaksi.map((item) => (
-                  <div key={item.id} className="admin-transaksi-item">
-                    <div className="admin-transaksi-item-header">
-                      <h4>{item.kategori}</h4>
+              <p>
+                <strong>Kategori:</strong> {item.kategori}
+              </p>
 
-                      <select
-                        className={`status ${item.status.toLowerCase()}`}
-                        value={item.status}
-                        onChange={(e) => updateStatus(item.id, e.target.value)}
-                      >
-                        <option value="Menunggu">Menunggu</option>
-                        <option value="Diproses">Diproses</option>
-                        <option value="Dijemput">Dijemput</option>
-                        <option value="Selesai">Selesai</option>
-                      </select>
-                    </div>
+              <p>
+                <strong>Keterangan:</strong> {item.keterangan}
+              </p>
 
-                    <p>
-                      <strong>Keterangan:</strong> {item.keterangan}
-                    </p>
+              <p>
+                <strong>Berat:</strong> {(item.berat / 1000).toFixed(1)} Kg
+              </p>
 
-                    <p>
-                      <strong>Berat:</strong> {item.berat} gr
-                    </p>
+              <p>
+                <strong>Harga:</strong> Rp {item.totalharga.toLocaleString()}
+              </p>
 
-                    <p>
-                      <strong>Harga:</strong> Rp{" "}
-                      {item.totalharga.toLocaleString()}
-                    </p>
+              <p>
+                <strong>Lokasi:</strong> {item.lokasi}
+              </p>
 
-                    <p>
-                      <strong>Lokasi:</strong> {item.lokasi}
-                    </p>
-                    <button
-                      className="btn-lokasi-lat"
-                      onClick={() =>
-                        window.open(
-                          `https://www.google.com/maps?q=${item.latitude},${item.longitude}`,
-                          "_blank",
-                        )
-                      }
-                    >
-                      📍 Lihat Lokasi
-                    </button>
+              <button
+                className="btn-lokasi-lat"
+                onClick={() =>
+                  window.open(
+                    `https://www.google.com/maps?q=${item.latitude},${item.longitude}`,
+                    "_blank",
+                  )
+                }
+              >
+                📍 Lihat Lokasi
+              </button>
 
-                    <p>
-                      <strong>Tanggal:</strong>{" "}
-                      {new Date(item.created_at).toLocaleDateString("id-ID", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <p>
+                <strong>Tanggal:</strong>{" "}
+                {new Date(item.created_at).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
             </div>
           ))}
         </div>

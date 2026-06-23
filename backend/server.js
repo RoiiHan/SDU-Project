@@ -423,6 +423,85 @@ app.put("/admin/harga/:id", (req, res) => {
   });
 });
 
+app.get("/admin/user", (req, res) => {
+  const sql = `
+    SELECT
+      user.id,
+      user.nama,
+      user.no_hp,
+      COUNT(transaksi.id) AS totalTransaksi,
+      COALESCE(SUM(transaksi.berat), 0) AS totalBerat,
+      COALESCE(SUM(transaksi.totalharga), 0) AS totalPendapatan
+    FROM user
+    LEFT JOIN transaksi ON user.id = transaksi.user_id
+    WHERE user.role = 'user'
+    GROUP BY user.id
+    ORDER BY user.nama ASC
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil data user",
+      });
+    }
+
+    res.json(result);
+  });
+});
+
+app.get("/admin/user/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sqlUser = `
+    SELECT
+      user.id,
+      user.nama,
+      user.no_hp,
+      COUNT(transaksi.id) AS totalTransaksi,
+      COALESCE(SUM(transaksi.berat),0) AS totalBerat,
+      COALESCE(SUM(transaksi.totalharga),0) AS totalPendapatan
+    FROM user
+    LEFT JOIN transaksi
+      ON user.id = transaksi.user_id
+    WHERE user.id = ?
+    GROUP BY user.id
+  `;
+
+  const sqlTransaksi = `
+    SELECT *
+    FROM transaksi
+    WHERE user_id = ?
+    ORDER BY created_at DESC
+  `;
+
+  db.query(sqlUser, [id], (err, userResult) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: "Gagal mengambil data user",
+      });
+    }
+
+    db.query(sqlTransaksi, [id], (err, transaksiResult) => {
+      if (err) {
+        console.log(err);
+
+        return res.status(500).json({
+          message: "Gagal mengambil transaksi user",
+        });
+      }
+
+      res.json({
+        user: userResult[0],
+        transaksi: transaksiResult,
+      });
+    });
+  });
+});
+
 app.listen(5000, () => {
   console.log("Server Berjalan di port 5000");
 });
