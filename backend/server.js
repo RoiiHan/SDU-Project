@@ -402,7 +402,7 @@ app.put("/admin/harga/:id", (req, res) => {
   const { id } = req.params;
   const { harga } = req.body;
 
-  const sql = "UPDATE harga SET harga = ? WHERE id= ? ";
+  const sql = "UPDATE harga_sampah SET harga = ? WHERE id= ? ";
 
   db.query(sql, [harga, id], (err, result) => {
     if (err) {

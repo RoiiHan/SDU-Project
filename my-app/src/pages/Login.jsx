@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style/Login.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
+    }
+  }, [navigate]);
 
   const [no_hp, setNoHp] = useState("");
   const [password, setPassword] = useState("");
