@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./style/Login.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -83,6 +84,9 @@ function Login() {
         </div>
 
         <button type="submit">Masuk</button>
+        <p className="link-regis">
+          Belum Punya Akun ? <Link to="/register">Registrasi</Link>
+        </p>
       </form>
     </div>
   );

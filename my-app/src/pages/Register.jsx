@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style/Register.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,8 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
+
+  const Navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -43,6 +45,7 @@ function Register() {
       const data = await response.json();
 
       alert(data.message);
+      Navigate("/login");
 
       setFormData({
         nama: "",

@@ -11,7 +11,12 @@
 .dashboard {
   padding: 20px;
   background: var(--putih);
+
   min-height: 100vh;
+}
+
+.dashboard h1 {
+  color: var(--darkgreen);
 }
 
 /* ===== SUMMARY CARDS ===== */
@@ -19,6 +24,7 @@
 /* ===== RECENT TRANSACTIONS ===== */
 .riwayat-terbaru {
   margin-top: 40px;
+  color: var(--darkgreen);
 }
 
 .riwayat-transaksi {
@@ -31,7 +37,7 @@
 /* ===== TRANSACTION ITEM CARD ===== */
 .transaksi-item {
   border-radius: 10px;
-  background: #f5f5f5;
+  background: #fff;
   box-shadow: 0 2px 10px var(--darkgreen);
   overflow: hidden;
 }

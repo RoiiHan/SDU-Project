@@ -1,10 +1,10 @@
 :root {
-  --lightgreen: #859F3D;
-  --darkgreen: #31511E;
-  --cream: #F6FCDF;
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
   --putih: #efefef;
-  --putihcard : #f5f5f5;
-  --boxshadow : 0 2px 10px #31511e;
+  --putihcard: #f5f5f5;
+  --boxshadow: 0 2px 10px #31511e;
 }
 
 .login-container {
@@ -53,4 +53,9 @@
   color: white;
   cursor: pointer;
   font-size: 16px;
+}
+
+.link-regis a {
+  color: #305a37;
+  text-decoration: none;
 }

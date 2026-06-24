@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
   const toogleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -57,13 +58,17 @@ function Navbar() {
       </ul>
 
       <div className="profil">
-        <img src={Ellipse} alt="fotoProfil" />
-        <button className="toogle" onClick={toogleMenu}>
-          <FontAwesomeIcon
-            icon={faArrowDown}
-            style={{ color: "rgb(255, 255, 255)" }}
-          />
-        </button>
+        <span className="profil-nama">{user?.nama}</span>
+        <img
+          src={
+            user?.foto_profil
+              ? `http://localhost:5000/uploads/profil/${user.foto_profil}`
+              : Ellipse
+          }
+          alt="fotoProfil"
+          className="toogle"
+          onClick={toogleMenu}
+        />
 
         {menuOpen && (
           <div className="menu">

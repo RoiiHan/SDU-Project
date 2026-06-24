@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./style/Profil.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Profil() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -10,6 +11,7 @@ function Profil() {
   const [alamat, setAlamat] = useState("");
   const [fotoProfil, setFotoProfil] = useState("");
   const [fotoFile, setFotoFile] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:5000/user/${user.id}`)
@@ -72,6 +74,7 @@ function Profil() {
       );
 
       alert(data.message);
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       alert("Gagal menyimpan profil");

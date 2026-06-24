@@ -1,3 +1,11 @@
+:root {
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+  --putihcard: #f5f5f5;
+}
+
 .cards {
   display: flex;
   gap: 20px;
@@ -6,7 +14,7 @@
 
 .card {
   flex: 1;
-  background: var(--putihcard);
+  background: #fff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 10px var(--darkgreen);

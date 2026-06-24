@@ -1,11 +1,13 @@
 import React from "react";
 import "./style/CardsDashboard.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faReceipt } from "@fortawesome/free-solid-svg-icons";
 
 function cardsDashboard({ dashboardData }) {
   return (
     <div className="cards">
       <div className="card">
-        <h3>Total Transaksi</h3>
+        <h3> Total Transaksi</h3>
         <p>{dashboardData.totalTransaksi}</p>
       </div>
 

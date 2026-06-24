@@ -3,6 +3,7 @@ import "./style/Transaksi.css";
 import Navbar from "../components/Navbar";
 import transaksiImg from "../assets/transaksi.png";
 import MapPicker from "../components/MapPicker";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Transaksi() {
   const [hargaSampah, setHargaSampah] = useState([]);
@@ -14,6 +15,7 @@ function Transaksi() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [foto, setFoto] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/harga")
@@ -123,6 +125,7 @@ function Transaksi() {
       const data = await response.json();
 
       alert(data.message);
+      navigate("/dashboard");
 
       setKategori("");
       setKeterangan("");
