@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 
 const app = express();
 const mysql = require("mysql2");
@@ -23,8 +25,39 @@ db.connect((err) => {
 app.use(cors());
 app.use(express.json());
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/transaksi");
+  },
+
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
+
+    cb(null, uniqueName + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage,
+});
+
+app.use("/uploads", express.static("uploads"));
+
 app.get("/", (req, res) => {
   res.send("Backend SDU Berjalan");
+});
+
+app.post("/upload-foto", upload.single("foto"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      message: "foto tidak ditemukan",
+    });
+  }
+
+  res.json({
+    message: "upload foto berhasil",
+    filename: req.file.filename,
+  });
 });
 
 app.get("/transaksi", (req, res) => {
@@ -73,9 +106,10 @@ app.post("/transaksi", (req, res) => {
     longitude,
     harga100gr,
     totalharga,
+    foto,
   } = req.body;
 
-  const sql = `INSERT INTO transaksi (user_id,kategori,keterangan,berat,lokasi,latitude,longitude,harga100gr,totalharga,status) VALUES (?,?,?,?,?,?,?,?,?,?)`;
+  const sql = `INSERT INTO transaksi (user_id,kategori,keterangan,berat,lokasi,latitude,longitude,harga100gr,totalharga,status,foto) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
 
   db.query(
     sql,
@@ -90,6 +124,7 @@ app.post("/transaksi", (req, res) => {
       harga100gr,
       totalharga,
       status,
+      foto,
     ],
     (err, result) => {
       if (err) {

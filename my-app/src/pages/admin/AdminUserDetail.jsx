@@ -84,6 +84,14 @@ function AdminUserDetail() {
                 <strong>Lokasi:</strong> {item.lokasi}
               </p>
 
+              <p>
+                <strong>Tanggal:</strong>{" "}
+                {new Date(item.created_at).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
               <button
                 className="btn-lokasi-detail"
                 onClick={() =>
@@ -95,15 +103,17 @@ function AdminUserDetail() {
               >
                 📍 Lihat Lokasi
               </button>
-
-              <p>
-                <strong>Tanggal:</strong>{" "}
-                {new Date(item.created_at).toLocaleDateString("id-ID", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
+              <button
+                className="btn-wa"
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/62${item.no_hp.replace(/^0/, "")}`,
+                    "_blank",
+                  )
+                }
+              >
+                💬 WhatsApp
+              </button>
             </div>
           ))}
         </div>

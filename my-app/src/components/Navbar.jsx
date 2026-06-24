@@ -11,9 +11,11 @@ import {
 import { Link } from "react-router-dom";
 import "./style/navbar.css";
 import Logo from "../assets/Logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
   const toogleMenu = () => {
     setMenuOpen(!menuOpen);
   };

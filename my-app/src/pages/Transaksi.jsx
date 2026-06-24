@@ -13,6 +13,7 @@ function Transaksi() {
   const [lokasi, setLokasi] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [foto, setFoto] = useState([null]);
 
   useEffect(() => {
     fetch("http://localhost:5000/harga")
@@ -62,6 +63,26 @@ function Transaksi() {
       return;
     }
 
+    if (!foto) {
+      alert("Masukkan Foto Sampah ");
+      return;
+    }
+
+    let namaFileFoto = "";
+
+    const formData = new FormData();
+
+    formData.append("foto", foto);
+
+    const uploadResponse = await fetch("http://localhost:5000/upload-foto", {
+      method: "POST",
+      body: formData,
+    });
+
+    const uploadData = await uploadResponse.json();
+
+    namaFileFoto = uploadData.filename;
+
     const transaksiBaru = {
       user_id: user.id,
       kategori,
@@ -72,6 +93,7 @@ function Transaksi() {
       longitude,
       harga100gr,
       totalharga,
+      foto: namaFileFoto,
     };
 
     try {
@@ -150,6 +172,12 @@ function Transaksi() {
               <MapPicker
                 setLatitude={setLatitude}
                 setLongitude={setLongitude}
+              />
+              <label>Foto Sampah</label>
+              <input
+                type="file"
+                accept="image/"
+                onChange={(e) => setFoto(e.target.files[0])}
               />
               <p>
                 Latitude: {latitude} Longitude: {longitude}

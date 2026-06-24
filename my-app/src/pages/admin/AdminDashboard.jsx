@@ -2,6 +2,7 @@ import "./style/AdminDashboard.css";
 import AdminSidebar from "../admin/components/AdminSidebars";
 import { useState } from "react";
 import { useEffect } from "react";
+import StatusDataComponent from "./components/StatusDataComponent";
 
 import {
   Chart as ChartJS,
@@ -34,13 +35,6 @@ function AdminDashboard() {
     totalTransaksi: 0,
     totalBerat: 0,
     totalPendapatan: 0,
-  });
-
-  const [statusData, setStatusData] = useState({
-    Menunggu: 0,
-    Diproses: 0,
-    Dijemput: 0,
-    Selesai: 0,
   });
 
   const [transaksiTerbaru, setTransaksiTerbaru] = useState([]);
@@ -195,31 +189,7 @@ function AdminDashboard() {
         </div>
 
         {/* Status */}
-        <div className="status-section">
-          <h2>Status Transaksi</h2>
-
-          <div className="status-grid">
-            <div className="status-card menunggu">
-              <h3>Menunggu</h3>
-              <p>{statusData.Menunggu}</p>
-            </div>
-
-            <div className="status-card diproses">
-              <h3>Diproses</h3>
-              <p>{statusData.Diproses}</p>
-            </div>
-
-            <div className="status-card dijemput">
-              <h3>Dijemput</h3>
-              <p>{statusData.Dijemput}</p>
-            </div>
-
-            <div className="status-card selesai">
-              <h3>Selesai</h3>
-              <p>{statusData.Selesai}</p>
-            </div>
-          </div>
-        </div>
+        <StatusDataComponent />
 
         {/* Bagian bawah */}
         <div className="dashboard-bottom">

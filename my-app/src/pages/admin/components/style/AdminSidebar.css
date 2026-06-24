@@ -1,7 +1,7 @@
 :root {
-    --lightgreen: #859F3D;
-    --darkgreen: #31511E;
-    --cream: #F6FCDF;
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
 }
 
 .admin-sidebar {
@@ -9,7 +9,7 @@
   min-height: 100vh;
   background-color: var(--darkgreen);
   padding: 20px;
-  border-radius: 0 20px 0 20px;
+  border-radius: 20px 0 0 20px;
   display: flex;
   flex-direction: column;
 }
@@ -26,14 +26,14 @@
 
 .admin-sidebar li {
   margin-bottom: 15px;
-  background-color : var(--cream);
+  background-color: var(--cream);
   padding: 10px 40px 10px 10px;
   border-radius: 8px;
 }
 
 .admin-sidebar a {
   text-decoration: none;
-  color : var(--darkgreen);
+  color: var(--darkgreen);
   font-size: 16px;
 }
 
@@ -42,63 +42,62 @@
   transform: translateY(-4px);
 }
 
-
 .profil-admin {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    margin-left: 0;
-    margin-right: 20px;
-    margin-top: auto;
-    position: relative; 
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0;
+  margin-right: 20px;
+  margin-top: auto;
+  position: relative;
+  align-items: center;
 }
 
 .profil-admin img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-.toogle-admin{
-    margin: 0;
-    margin-top: 0;
-    border: none;
-    background-color: var(--cream);
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 8px;
+.toogle-admin {
+  margin: 0;
+  margin-top: 0;
+  border: none;
+  background-color: var(--cream);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
 .toogle-admin:hover {
-    transform: translateY(-4px);
-    border: 1px solid black;
+  transform: translateY(-4px);
+  border: 1px solid black;
 }
 
 .profil-admin i {
-    margin : 15px 10px 10px 15px;
-    color: var(--cream);
+  margin: 15px 10px 10px 15px;
+  color: var(--cream);
 }
 
-.menu-admin  {
-    position: absolute; 
-    top: -100px;          
-    right: 0;
-    left : 200px; 
-    z-index: 1000;
-    background-color: var(--cream);
-    border: 1px solid var(--darkgreen);
-    border-radius: 8px;
-    min-width: 200px;
+.menu-admin {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  left: 200px;
+  z-index: 1000;
+  background-color: var(--cream);
+  border: 1px solid var(--darkgreen);
+  border-radius: 8px;
+  min-width: 200px;
 }
 
 .menu-admin ul {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    margin: 0px;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 0px;
+  gap: 10px;
 }
 
 .menu-admin ul li {

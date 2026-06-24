@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AdminSidebar from "./components/AdminSidebars";
 import "./style/AdminTransaksi.css";
+import StatusDataComponent from "./components/StatusDataComponent";
 
 function AdminTransaksi() {
   const [transaksi, setTransaksi] = useState([]);
@@ -58,7 +59,7 @@ function AdminTransaksi() {
 
       <div className="admin-content">
         <h1 className="admin-transaksi-title">Kelola Transaksi</h1>
-
+        <StatusDataComponent />
         <div className="filter-search-container">
           <input
             type="text"
@@ -120,6 +121,21 @@ function AdminTransaksi() {
                 <strong>Lokasi:</strong> {item.lokasi}
               </p>
 
+              <p>
+                <strong>Tanggal:</strong>{" "}
+                {new Date(item.created_at).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              {item.foto && (
+                <img
+                  src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
+                  alt="Foto Sampah"
+                  className="foto-sampah"
+                />
+              )}
               <button
                 className="btn-lokasi-lat"
                 onClick={() =>
@@ -131,15 +147,17 @@ function AdminTransaksi() {
               >
                 📍 Lihat Lokasi
               </button>
-
-              <p>
-                <strong>Tanggal:</strong>{" "}
-                {new Date(item.created_at).toLocaleDateString("id-ID", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
+              <button
+                className="btn-wa"
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/62${item.no_hp.replace(/^0/, "")}`,
+                    "_blank",
+                  )
+                }
+              >
+                💬 WhatsApp
+              </button>
             </div>
           ))}
         </div>
