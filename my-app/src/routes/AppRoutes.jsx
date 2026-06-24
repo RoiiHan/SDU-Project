@@ -15,6 +15,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import AdminRoute from "../components/AdminRoute";
 import AdminUser from "../pages/admin/AdminUser";
 import AdminUserDetail from "../pages/admin/AdminUserDetail";
+import Profil from "../pages/Profil";
 
 function AppRoutes() {
   return (
@@ -46,6 +47,14 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Riwayat />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profil"
+        element={
+          <ProtectedRoute>
+            <Profil />
           </ProtectedRoute>
         }
       />

@@ -8,6 +8,7 @@ function Register() {
   const [formData, setFormData] = useState({
     nama: "",
     no_hp: "",
+    alamat: "",
     password: "",
     confirmPassword: "",
   });
@@ -35,6 +36,7 @@ function Register() {
         body: JSON.stringify({
           nama: formData.nama,
           no_hp: formData.no_hp,
+          alamat: formData.alamat,
           password: formData.password,
         }),
       });
@@ -45,6 +47,7 @@ function Register() {
       setFormData({
         nama: "",
         no_hp: "",
+        alamat: "",
         password: "",
         confirmPassword: "",
       });
@@ -77,6 +80,13 @@ function Register() {
           placeholder="nomor telepon"
           value={formData.no_hp}
           onChange={handleChange}
+        />
+        <textarea
+          name="alamat"
+          placeholder="Alamat Lengkap"
+          value={formData.alamat}
+          onChange={handleChange}
+          rows="3"
         />
 
         <div className="password-input">

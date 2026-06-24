@@ -17,46 +17,95 @@
   margin-bottom: 20px;
 }
 
+/* =========================
+   PROFILE CARD
+========================= */
+
 .user-detail-card {
   background: white;
-  padding: 20px;
-  border-radius: 14px;
+  padding: 24px;
+  border-radius: 16px;
   margin-bottom: 25px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.user-detail-card h2 {
-  margin: 0;
+.user-profile-section {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.user-profile-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--lightgreen);
+}
+
+.user-profile-placeholder {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--cream);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 52px;
+}
+
+.user-profile-info {
+  flex: 1;
+}
+
+.user-profile-info h2 {
+  margin-bottom: 10px;
   color: var(--darkgreen);
 }
 
-.user-detail-card p {
-  color: #666;
+.user-profile-info p {
+  margin: 8px 0;
+  color: #555;
 }
 
+/* =========================
+   SUMMARY
+========================= */
+
 .user-summary {
-  margin-top: 15px;
+  margin-top: 25px;
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
   gap: 15px;
 }
 
 .summary-item {
   background: var(--cream);
-  padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
 }
 
 .summary-item span {
   display: block;
-  font-size: 12px;
   color: #666;
+  font-size: 13px;
 }
 
 .summary-item strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
   color: var(--darkgreen);
-  font-size: 16px;
 }
+
+/* =========================
+   RIWAYAT
+========================= */
 
 .riwayat-title {
   margin-bottom: 15px;
@@ -65,16 +114,16 @@
 
 .riwayat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   gap: 20px;
 }
 
 .riwayat-card {
   background: white;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 18px;
   border: 1px solid #ddd;
-  box-shadow: 0px 2px 8px var(--darkgreen);
+  box-shadow: 0px 2px 8px rgba(49, 81, 30, 0.2);
 }
 
 .riwayat-card h3 {
@@ -87,39 +136,77 @@
   color: #555;
 }
 
-.btn-lokasi-detail {
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0px 2px 8px var(--darkgreen);
-  background: var(--cream);
-  color: var(--darkgreen);
-  cursor: pointer;
+.detail-foto-sampah {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
   font-weight: 600;
 }
 
-.btn-lokasi-detail:hover {
-  opacity: 0.9;
+.status-badge.menunggu {
+  background: #fff3cd;
+  color: #856404;
 }
 
+.status-badge.diproses {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.dijemput {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.selesai {
+  background: #c8f7c5;
+  color: #1e7e34;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-lokasi-detail,
 .btn-wa {
-  margin: 5px 12px;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: var(--cream);
-  color: var(--darkgreen);
-  font-weight: bold;
+  margin-top: 10px;
+  padding: 10px 14px;
   border: none;
-  box-shadow: 0px 2px 8px var(--darkgreen);
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  background: var(--cream);
+  color: var(--darkgreen);
+  box-shadow: 0px 2px 6px rgba(49, 81, 30, 0.2);
 }
 
+.btn-lokasi-detail:hover,
 .btn-wa:hover {
   opacity: 0.9;
 }
 
-@media (max-width: 992px) {
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .user-profile-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .user-summary {
     grid-template-columns: 1fr;
   }

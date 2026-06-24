@@ -13,7 +13,7 @@ function Transaksi() {
   const [lokasi, setLokasi] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [foto, setFoto] = useState([null]);
+  const [foto, setFoto] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:5000/harga")
@@ -24,6 +24,21 @@ function Transaksi() {
       .catch((err) => {
         console.log(err);
       });
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      fetch(`http://localhost:5000/user/${user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.alamat) {
+            setLokasi(data.alamat);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   const dataKategori = hargaSampah.find((item) => item.kategori === kategori);
@@ -112,7 +127,7 @@ function Transaksi() {
       setKategori("");
       setKeterangan("");
       setBerat("");
-      setLokasi("");
+      setFoto(null);
     } catch (error) {
       console.error(error);
       alert("Gagal mengirim transaksi");
@@ -185,7 +200,7 @@ function Transaksi() {
 
               <input
                 type="text"
-                placeholder="Contoh : Padang Barat"
+                placeholder="Alamat diambil dari profil, bisa diubah"
                 value={lokasi}
                 onChange={(e) => setLokasi(e.target.value)}
               />

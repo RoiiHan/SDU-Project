@@ -37,6 +37,22 @@ const storage = multer.diskStorage({
   },
 });
 
+const storageProfil = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/profil");
+  },
+
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
+
+    cb(null, uniqueName + path.extname(file.originalname));
+  },
+});
+
+const uploadProfil = multer({
+  storage: storageProfil,
+});
+
 const upload = multer({
   storage,
 });
@@ -174,21 +190,33 @@ app.get("/dashboard/user/:userId", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  const { nama, no_hp, password } = req.body;
+  const { nama, no_hp, alamat, password } = req.body;
+
   const role = "user";
 
-  const sql = "INSERT INTO user (nama,no_hp, password,role) VALUES (?,?,?,?)";
+  const sql = `
+    INSERT INTO user
+    (
+      nama,
+      no_hp,
+      alamat,
+      password,
+      role
+    )
+    VALUES (?,?,?,?,?)
+  `;
 
-  db.query(sql, [nama, no_hp, password, role], (err, result) => {
+  db.query(sql, [nama, no_hp, alamat, password, role], (err) => {
     if (err) {
       console.log(err);
+
       return res.status(500).json({
         message: "Gagal membuat akun",
       });
     }
 
     res.json({
-      message: "Registrasi Berhasil ",
+      message: "Registrasi berhasil",
     });
   });
 });
@@ -491,19 +519,21 @@ app.get("/admin/user/:id", (req, res) => {
   const { id } = req.params;
 
   const sqlUser = `
-    SELECT
-      user.id,
-      user.nama,
-      user.no_hp,
-      COUNT(transaksi.id) AS totalTransaksi,
-      COALESCE(SUM(transaksi.berat),0) AS totalBerat,
-      COALESCE(SUM(transaksi.totalharga),0) AS totalPendapatan
-    FROM user
-    LEFT JOIN transaksi
-      ON user.id = transaksi.user_id
-    WHERE user.id = ?
-    GROUP BY user.id
-  `;
+  SELECT
+    user.id,
+    user.nama,
+    user.no_hp,
+    user.alamat,
+    user.foto_profil,
+    COUNT(transaksi.id) AS totalTransaksi,
+    COALESCE(SUM(transaksi.berat),0) AS totalBerat,
+    COALESCE(SUM(transaksi.totalharga),0) AS totalPendapatan
+  FROM user
+  LEFT JOIN transaksi
+    ON user.id = transaksi.user_id
+  WHERE user.id = ?
+  GROUP BY user.id
+`;
 
   const sqlTransaksi = `
     SELECT *
@@ -534,6 +564,75 @@ app.get("/admin/user/:id", (req, res) => {
         transaksi: transaksiResult,
       });
     });
+  });
+});
+
+app.get("/user/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = `
+    SELECT
+      id,
+      nama,
+      no_hp,
+      alamat,
+      foto_profil
+    FROM user
+    WHERE id = ?
+  `;
+
+  db.query(sql, [id], (err, result) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal mengambil profil",
+      });
+    }
+
+    res.json(result[0]);
+  });
+});
+
+app.put("/user/:id", (req, res) => {
+  const { id } = req.params;
+
+  const { nama, no_hp, alamat, foto_profil } = req.body;
+
+  const sql = `
+    UPDATE user
+    SET
+      nama = ?,
+      no_hp = ?,
+      alamat = ?,
+      foto_profil = ?
+    WHERE id = ?
+  `;
+
+  db.query(sql, [nama, no_hp, alamat, foto_profil, id], (err) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Gagal update profil",
+      });
+    }
+
+    res.json({
+      message: "Profil berhasil diperbarui",
+    });
+  });
+});
+
+app.post("/upload-profil", uploadProfil.single("foto"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      message: "Foto tidak ditemukan",
+    });
+  }
+
+  res.json({
+    filename: req.file.filename,
   });
 });
 

@@ -1,21 +1,62 @@
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import { useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  useMap,
+} from "react-leaflet";
+import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
+
+function ChangeView({ center }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (center) {
+      map.setView(center, 18);
+    }
+  }, [center, map]);
+
+  return null;
+}
 
 function LocationMarker({ setLatitude, setLongitude }) {
   const [position, setPosition] = useState(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        setPosition([lat, lng]);
+
+        setLatitude(lat);
+        setLongitude(lng);
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  }, [setLatitude, setLongitude]);
 
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
 
       setPosition([lat, lng]);
+
       setLatitude(lat);
       setLongitude(lng);
     },
   });
 
-  return position ? <Marker position={position} /> : null;
+  return (
+    <>
+      {position && <ChangeView center={position} />}
+      {position && <Marker position={position} />}
+    </>
+  );
 }
 
 function MapPicker({ setLatitude, setLongitude }) {

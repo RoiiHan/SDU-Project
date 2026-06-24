@@ -22,7 +22,14 @@ function AdminUserDetail() {
   }, [id]);
 
   if (!user) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className="admin-layout">
+        <AdminSidebar />
+        <div className="admin-user-detail-content">
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -33,8 +40,41 @@ function AdminUserDetail() {
         <h1>Detail User</h1>
 
         <div className="user-detail-card">
-          <h2>{user.nama}</h2>
-          <p>{user.no_hp}</p>
+          <div className="user-profile-section">
+            {user.foto_profil ? (
+              <img
+                src={`http://localhost:5000/uploads/profil/${user.foto_profil}`}
+                alt="Foto Profil"
+                className="user-profile-img"
+              />
+            ) : (
+              <div className="user-profile-placeholder">👤</div>
+            )}
+
+            <div className="user-profile-info">
+              <h2>{user.nama}</h2>
+
+              <p>
+                <strong>No HP:</strong> {user.no_hp}
+              </p>
+
+              <p>
+                <strong>Alamat:</strong> {user.alamat || "Belum mengisi alamat"}
+              </p>
+
+              <button
+                className="btn-wa"
+                onClick={() =>
+                  window.open(
+                    `https://wa.me/62${user.no_hp.replace(/^0/, "")}`,
+                    "_blank",
+                  )
+                }
+              >
+                💬 Hubungi WhatsApp
+              </button>
+            </div>
+          </div>
 
           <div className="user-summary">
             <div className="summary-item">
@@ -56,11 +96,21 @@ function AdminUserDetail() {
           </div>
         </div>
 
-        <h2 className="riwayat-title">Riwayat Transaksi</h2>
+        <h2 className="riwayat-title">
+          Riwayat Transaksi ({transaksi.length})
+        </h2>
 
         <div className="riwayat-grid">
           {transaksi.map((item) => (
             <div key={item.id} className="riwayat-card">
+              {item.foto && (
+                <img
+                  src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
+                  alt="Foto Sampah"
+                  className="detail-foto-sampah"
+                />
+              )}
+
               <h3>{item.kategori}</h3>
 
               <p>
@@ -77,7 +127,10 @@ function AdminUserDetail() {
               </p>
 
               <p>
-                <strong>Status:</strong> {item.status}
+                <strong>Status:</strong>{" "}
+                <span className={`status-badge ${item.status.toLowerCase()}`}>
+                  {item.status}
+                </span>
               </p>
 
               <p>
@@ -92,6 +145,7 @@ function AdminUserDetail() {
                   year: "numeric",
                 })}
               </p>
+
               <button
                 className="btn-lokasi-detail"
                 onClick={() =>
@@ -102,17 +156,6 @@ function AdminUserDetail() {
                 }
               >
                 📍 Lihat Lokasi
-              </button>
-              <button
-                className="btn-wa"
-                onClick={() =>
-                  window.open(
-                    `https://wa.me/62${item.no_hp.replace(/^0/, "")}`,
-                    "_blank",
-                  )
-                }
-              >
-                💬 WhatsApp
               </button>
             </div>
           ))}
