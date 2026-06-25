@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style/Register.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { getRegisAuth } from "../services/authService";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -24,25 +25,24 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !formData.nama.trim() ||
+      !formData.no_hp.trim() ||
+      !formData.alamat.trim() ||
+      !formData.password.trim() ||
+      !formData.confirmPassword.trim()
+    ) {
+      alert("Semua kolom wajib diisi");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert("Password tidak cocok");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nama: formData.nama,
-          no_hp: formData.no_hp,
-          alamat: formData.alamat,
-          password: formData.password,
-        }),
-      });
-      const data = await response.json();
+      const data = await getRegisAuth(formData);
 
       alert(data.message);
       Navigate("/login");
@@ -73,6 +73,7 @@ function Register() {
           type="text"
           name="nama"
           placeholder="Nama Lengkap"
+          required
           value={formData.nama}
           onChange={handleChange}
         />
@@ -81,12 +82,14 @@ function Register() {
           type="text"
           name="no_hp"
           placeholder="nomor telepon"
+          required
           value={formData.no_hp}
           onChange={handleChange}
         />
         <textarea
           name="alamat"
           placeholder="Alamat Lengkap"
+          required
           value={formData.alamat}
           onChange={handleChange}
           rows="3"
@@ -97,6 +100,7 @@ function Register() {
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
+            required
             value={formData.password}
             onChange={handleChange}
           />

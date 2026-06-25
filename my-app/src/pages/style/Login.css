@@ -38,13 +38,51 @@
   margin-bottom: 8px;
 }
 
-.input-group input {
+/* WRAPPER untuk input + eye button */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 45px; /* beri ruang untuk eye button */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* input NoHP (bukan di dalam wrapper) */
+.input-group > input {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
 }
 
-.login-form button {
+/* EYE BUTTON di dalam input */
+.eye-btn-login {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: auto !important; /* override .login-form button width: 100% */
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-btn-login:hover {
+  color: var(--darkgreen);
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
   width: 100%;
   padding: 12px;
   border: none;
@@ -53,6 +91,11 @@
   color: white;
   cursor: pointer;
   font-size: 16px;
+}
+
+.link-regis {
+  text-align: center;
+  margin-top: 15px;
 }
 
 .link-regis a {

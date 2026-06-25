@@ -35,9 +35,7 @@ function Profil() {
 
         formData.append("foto", fotoFile);
 
-        const uploadResponse = await uploadProfilUser(formData);
-
-        const uploadData = await uploadResponse.json();
+        const uploadData = await uploadProfilUser(formData);
 
         namaFileFoto = uploadData.filename;
       }

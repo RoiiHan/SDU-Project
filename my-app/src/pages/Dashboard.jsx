@@ -3,6 +3,7 @@ import TestApi from "./TestApi";
 import { useState, useEffect } from "react";
 import CardsDashboard from "./components/CardsDashboard";
 import TransaksiTerbaru from "./components/TransaksiTerbaru";
+import { getDashboardUser } from "../services/transaksiService";
 
 function Dashboard() {
   const [dashboardData, setDashboardData] = useState({
@@ -17,11 +18,12 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/dashboard/user/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setDashboardData(data);
-      });
+    const loadData = async () => {
+      const data = await getDashboardUser(user.id);
+      setDashboardData(data);
+    };
+
+    loadData();
   }, [user.id]);
 
   return (

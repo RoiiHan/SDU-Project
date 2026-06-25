@@ -191,6 +191,11 @@ app.get("/dashboard/user/:userId", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { nama, no_hp, alamat, password } = req.body;
+  if (!nama || !no_hp || !alamat || !password) {
+    return res.status(400).json({
+      message: "Semua data wajib diisi",
+    });
+  }
 
   const role = "user";
 

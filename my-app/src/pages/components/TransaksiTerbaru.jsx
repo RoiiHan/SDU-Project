@@ -1,16 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { getTransaksiDahboard } from "../../services/transaksiService";
 
 function TransaksiTerbaru() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [transaksi, SetTransaksi] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/transaksi/user/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        SetTransaksi(data);
-      });
+    const loadData = async () => {
+      const data = await getTransaksiDahboard(user.id);
+      SetTransaksi(data);
+    };
+
+    loadData();
   }, [user.id]);
 
   return (

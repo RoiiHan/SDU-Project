@@ -72,3 +72,26 @@ export async function getRiwayatTransaksiUser(id) {
 
   return response.json();
 }
+
+// =====================
+// Dashboard.jsx
+
+export async function getDashboardUser(id) {
+  const response = await fetch(`${API_URL}dashboard/user/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getTransaksiDahboard(id) {
+  const response = await fetch(`${API_URL}transaksi/user/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
