@@ -1,0 +1,33 @@
+/* =======================
+   STATUS
+======================= */
+
+.status {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.menunggu {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.diproses {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status.dijemput {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.selesai {
+  background: #c8f7c5;
+  color: #1e7e34;
+}

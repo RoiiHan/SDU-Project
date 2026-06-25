@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import AdminSidebar from "./components/AdminSidebars";
 import "./style/AdminTransaksi.css";
 import StatusDataComponent from "./components/StatusDataComponent";
+import TransactionCard from "./components/TransactionCard";
+import SearchBar from "./components/SearchBar";
 
 function AdminTransaksi() {
   const [transaksi, setTransaksi] = useState([]);
@@ -60,105 +62,19 @@ function AdminTransaksi() {
       <div className="admin-content">
         <h1 className="admin-transaksi-title">Kelola Transaksi</h1>
         <StatusDataComponent />
-        <div className="filter-search-container">
-          <input
-            type="text"
-            placeholder="Cari nama, no HP, atau kategori..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-          >
-            <option value="Semua">Semua</option>
-            <option value="Menunggu">Menunggu</option>
-            <option value="Diproses">Diproses</option>
-            <option value="Dijemput">Dijemput</option>
-            <option value="Selesai">Selesai</option>
-          </select>
-        </div>
-
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
+        />
         <div className="admin-transaksi-grid">
           {filteredTransaksi.map((item) => (
-            <div key={item.id} className="admin-transaksi-card">
-              <div className="admin-transaksi-card-header">
-                <div>
-                  <h3>{item.nama}</h3>
-                  <p>{item.no_hp}</p>
-                </div>
-
-                <select
-                  className={`status ${item.status.toLowerCase()}`}
-                  value={item.status}
-                  onChange={(e) => updateStatus(item.id, e.target.value)}
-                >
-                  <option value="Menunggu">Menunggu</option>
-                  <option value="Diproses">Diproses</option>
-                  <option value="Dijemput">Dijemput</option>
-                  <option value="Selesai">Selesai</option>
-                </select>
-              </div>
-
-              <p>
-                <strong>Kategori:</strong> {item.kategori}
-              </p>
-
-              <p>
-                <strong>Keterangan:</strong> {item.keterangan}
-              </p>
-
-              <p>
-                <strong>Berat:</strong> {(item.berat / 1000).toFixed(1)} Kg
-              </p>
-
-              <p>
-                <strong>Harga:</strong> Rp {item.totalharga.toLocaleString()}
-              </p>
-
-              <p>
-                <strong>Lokasi:</strong> {item.lokasi}
-              </p>
-
-              <p>
-                <strong>Tanggal:</strong>{" "}
-                {new Date(item.created_at).toLocaleDateString("id-ID", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
-              {item.foto && (
-                <img
-                  src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
-                  alt="Foto Sampah"
-                  className="foto-sampah"
-                />
-              )}
-              <button
-                className="btn-lokasi-lat"
-                onClick={() =>
-                  window.open(
-                    `https://www.google.com/maps/dir/?api=1&destination=${item.latitude},${item.longitude}`,
-                    "_blank",
-                  )
-                }
-              >
-                📍 Lihat Lokasi
-              </button>
-              <button
-                className="btn-wa"
-                onClick={() =>
-                  window.open(
-                    `https://wa.me/62${item.no_hp.replace(/^0/, "")}`,
-                    "_blank",
-                  )
-                }
-              >
-                💬 WhatsApp
-              </button>
-            </div>
+            <TransactionCard
+              key={item.id}
+              item={item}
+              updateStatus={updateStatus}
+            />
           ))}
         </div>
       </div>
