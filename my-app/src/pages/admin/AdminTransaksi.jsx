@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import {
+  getAllTransaksi,
+  updateStatusTransaksi,
+} from "../../services/transaksiService";
 import AdminSidebar from "./components/AdminSidebars";
 import "./style/AdminTransaksi.css";
 import StatusDataComponent from "./components/StatusDataComponent";
@@ -8,16 +12,22 @@ import SearchBar from "./components/SearchBar";
 function AdminTransaksi() {
   const [transaksi, setTransaksi] = useState([]);
 
+  useEffect(() => {
+    const loadTransaksi = async () => {
+      try {
+        const data = await getAllTransaksi();
+        setTransaksi(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadTransaksi();
+  }, []);
+
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`http://localhost:5000/admin/transaksi/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-
-        body: JSON.stringify({
-          status,
-        }),
-      });
+      await updateStatusTransaksi(id, status);
       setTransaksi((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, status: status } : item,
@@ -27,16 +37,6 @@ function AdminTransaksi() {
       console.log(error);
     }
   };
-  useEffect(() => {
-    fetch("http://localhost:5000/admin/transaksi")
-      .then((res) => res.json())
-      .then((data) => {
-        setTransaksi(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("Semua");

@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar";
 import transaksiImg from "../assets/transaksi.png";
 import MapPicker from "../components/MapPicker";
 import { Navigate, useNavigate } from "react-router-dom";
+import { createTransaksi, uploadFoto } from "../services/transaksiService";
+import { getHargaSampah } from "../services/hargaServices";
+import { getAlamatUser } from "../services/userService";
 
 function Transaksi() {
   const [hargaSampah, setHargaSampah] = useState([]);
@@ -16,44 +19,29 @@ function Transaksi() {
   const [longitude, setLongitude] = useState(null);
   const [foto, setFoto] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch("http://localhost:5000/harga")
-      .then((res) => res.json())
-      .then((data) => {
-        setHargaSampah(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user) {
-      fetch(`http://localhost:5000/user/${user.id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.alamat) {
-            setLokasi(data.alamat);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, []);
-
   const dataKategori = hargaSampah.find((item) => item.kategori === kategori);
-
   const harga100gr = dataKategori ? Number(dataKategori.harga) : 0;
-
   const hargaPerKg = harga100gr * 10;
-
   const beratKg = Number(berat) || 0;
   const beratGram = beratKg * 1000;
-
   const totalharga =
     beratGram > 0 && harga100gr > 0 ? (beratGram / 100) * harga100gr : 0;
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getHargaSampah();
+      setHargaSampah(data);
+
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        const data = await getAlamatUser(user.id);
+        setLokasi(data.alamat);
+      }
+    };
+
+    loadData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,12 +79,7 @@ function Transaksi() {
 
     formData.append("foto", foto);
 
-    const uploadResponse = await fetch("http://localhost:5000/upload-foto", {
-      method: "POST",
-      body: formData,
-    });
-
-    const uploadData = await uploadResponse.json();
+    const uploadData = await uploadFoto(formData);
 
     namaFileFoto = uploadData.filename;
 
@@ -114,15 +97,7 @@ function Transaksi() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/transaksi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(transaksiBaru),
-      });
-
-      const data = await response.json();
+      const data = await createTransaksi(transaksiBaru);
 
       alert(data.message);
       navigate("/dashboard");
@@ -197,9 +172,6 @@ function Transaksi() {
                 accept="image/"
                 onChange={(e) => setFoto(e.target.files[0])}
               />
-              <p>
-                Latitude: {latitude} Longitude: {longitude}
-              </p>
 
               <input
                 type="text"

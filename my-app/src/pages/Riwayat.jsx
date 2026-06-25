@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import "./style/Riwayat.css";
 import Navbar from "../components/Navbar";
+import { getRiwayatTransaksiUser } from "../services/transaksiService";
 
 function Riwayat() {
   const [transaksi, setTransaksi] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    fetch(`http://localhost:5000/transaksi/user/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setTransaksi(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const loadData = async () => {
+      const data = await getRiwayatTransaksiUser(user.id);
+      setTransaksi(data);
+    };
+    loadData();
   }, []);
 
   return (

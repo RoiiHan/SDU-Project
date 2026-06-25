@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./style/Profil.css";
 import { Navigate, useNavigate } from "react-router-dom";
+import { getProfilUser, uploadProfilUser } from "../services/userService";
 
 function Profil() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -14,15 +15,15 @@ function Profil() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setNama(data.nama || "");
-        setNoHp(data.no_hp || "");
-        setAlamat(data.alamat || "");
-        setFotoProfil(data.foto_profil || "");
-      })
-      .catch((err) => console.log(err));
+    const loadData = async () => {
+      const data = await getProfilUser(user.id);
+      setNama(data.nama || "");
+      setNoHp(data.no_hp || "");
+      setAlamat(data.alamat || "");
+      setFotoProfil(data.foto_profil || "");
+    };
+
+    loadData();
   }, [user.id]);
 
   const handleSave = async () => {
@@ -34,13 +35,7 @@ function Profil() {
 
         formData.append("foto", fotoFile);
 
-        const uploadResponse = await fetch(
-          "http://localhost:5000/upload-profil",
-          {
-            method: "POST",
-            body: formData,
-          },
-        );
+        const uploadResponse = await uploadProfilUser(formData);
 
         const uploadData = await uploadResponse.json();
 
