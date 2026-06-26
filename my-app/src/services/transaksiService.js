@@ -30,6 +30,69 @@ export async function updateStatusTransaksi(id, status) {
   return response.json();
 }
 
+// ===============================
+// AdminDashboard.jsx
+
+export async function getTotalTransaksi(setDasboard) {
+  const response = await fetch(`${API_URL}admin/dashboard`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getStatusDataDashboard() {
+  const response = await fetch(`${API_URL}admin/status-transaksi`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getTransaksiTerbaru(SetTransaksiTerbaru) {
+  const response = await fetch(`${API_URL}admin/transaksi-terbaru`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getUserTerbaru(setUserTerbaru) {
+  const response = await fetch(`${API_URL}admin/user-terbaru`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getGrafikTransaksi(setGrafikData) {
+  const response = await fetch(`${API_URL}admin/grafik-transaksi`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getGrafikKategori(setKategoriData) {
+  const response = await fetch(`${API_URL}admin/grafik-kategori`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
 // ==========================
 // FETCH Transaksi.jsx
 export async function createTransaksi(transaksiBaru) {

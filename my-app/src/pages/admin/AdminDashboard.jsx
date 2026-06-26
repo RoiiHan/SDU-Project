@@ -3,6 +3,14 @@ import AdminSidebar from "../admin/components/AdminSidebars";
 import { useState } from "react";
 import { useEffect } from "react";
 import StatusDataComponent from "./components/StatusDataComponent";
+import {
+  getTotalTransaksi,
+  getStatusDataDashboard,
+  getTransaksiTerbaru,
+  getUserTerbaru,
+  getGrafikTransaksi,
+  getGrafikKategori,
+} from "../../services/transaksiService";
 
 import {
   Chart as ChartJS,
@@ -41,72 +49,41 @@ function AdminDashboard() {
   const [userTerbaru, setUserTerbaru] = useState([]);
   const [grafikData, setGrafikData] = useState([]);
   const [kategoriData, setKategoriData] = useState([]);
+  const [statusData, setStatusData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/admin/dashboard")
-      .then((res) => res.json())
-      .then((data) => {
-        setDashboard(data);
-      })
-      .catch((err) => {
-        console.log(err);
+    const loadData = async () => {
+      const dataDashboard = await getTotalTransaksi(setDashboard);
+      setDashboard(dataDashboard);
+
+      const dataStatus = await getStatusDataDashboard();
+
+      const statusResult = {
+        Menunggu: 0,
+        Diproses: 0,
+        Dijemput: 0,
+        Selesai: 0,
+      };
+
+      dataStatus.forEach((item) => {
+        statusResult[item.status] = item.total;
       });
+      setStatusData(statusResult);
 
-    fetch("http://localhost:5000/admin/status-transaksi")
-      .then((res) => res.json())
-      .then((data) => {
-        const statusResult = {
-          Menunggu: 0,
-          Diproses: 0,
-          Dijemput: 0,
-          Selesai: 0,
-        };
+      const dataTerbaru = await getTransaksiTerbaru(setTransaksiTerbaru);
+      setTransaksiTerbaru(dataTerbaru);
 
-        data.forEach((item) => {
-          statusResult[item.status] = item.total;
-        });
+      const userTerbaru = await getUserTerbaru(setUserTerbaru);
+      setUserTerbaru(userTerbaru);
 
-        setStatusData(statusResult);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      const grafikTransaksi = await getGrafikTransaksi(setGrafikData);
+      setGrafikData(grafikTransaksi);
 
-    fetch("http://localhost:5000/admin/transaksi-terbaru")
-      .then((res) => res.json())
-      .then((data) => {
-        setTransaksiTerbaru(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      const grafikKategori = await getGrafikKategori(setKategoriData);
+      setKategoriData(grafikKategori);
+    };
 
-    fetch("http://localhost:5000/admin/user-terbaru")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserTerbaru(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    fetch("http://localhost:5000/admin/grafik-transaksi")
-      .then((res) => res.json())
-      .then((data) => {
-        setGrafikData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    fetch("http://localhost:5000/admin/grafik-kategori")
-      .then((res) => res.json())
-      .then((data) => {
-        setKategoriData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    loadData();
   }, []);
 
   const namaBulan = [
@@ -133,7 +110,7 @@ function AdminDashboard() {
         label: "Jumlah Transaksi",
         data: grafikData.map((item) => item.total),
 
-        backgroundColor: "#859f3d",
+        backgroundColor: "#3B82F6",
         borderRadius: 8,
       },
     ],
@@ -147,12 +124,15 @@ function AdminDashboard() {
         data: kategoriData.map((item) => item.total),
 
         backgroundColor: [
-          "#859f3d",
-          "#31511e",
-          "#a3c957",
-          "#d4e09b",
-          "#6b8e23",
+          "#3B82F6",
+          "#10B981",
+          "#F59E0B",
+          "#EF4444",
+          "#8B5CF6",
         ],
+        borderColor: "#ffffff",
+        borderWidth: 2,
+        hoverOffset: 12,
       },
     ],
   };
