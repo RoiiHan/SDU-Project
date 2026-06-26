@@ -37,6 +37,22 @@ export async function uploadProfilUser(formData) {
   return response.json();
 }
 
+export async function ubahProfilUser(id, userData) {
+  const response = await fetch(`http://localhost:5000/user/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
 // =================
 // AdminUser.jsx
 

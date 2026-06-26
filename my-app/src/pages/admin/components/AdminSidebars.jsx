@@ -15,6 +15,7 @@ import Ellipse from "../../../assets/Ellipse 395.png";
 
 function AdminSidebar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const admin = JSON.parse(localStorage.getItem("user"));
   const toogleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -29,7 +30,19 @@ function AdminSidebar() {
   };
   return (
     <div className="admin-sidebar">
-      <h2>SDU Admin</h2>
+      <div className="sidebar-header">
+        <img
+          src={
+            admin?.foto_profil
+              ? `http://localhost:5000/uploads/profil/${admin.foto_profil}`
+              : Ellipse
+          }
+          alt="fotoProfil"
+          className="foto-profil"
+          onClick={toogleMenu}
+        />
+        <h2>Admin</h2>
+      </div>
 
       <ul>
         <li>
@@ -58,15 +71,10 @@ function AdminSidebar() {
       </ul>
 
       <div className="profil-admin">
-        <img src={Ellipse} alt="fotoProfil" />
-        <button className="toogle-admin" onClick={toogleMenu}>
-          <FontAwesomeIcon icon={faArrowDown} style={{ color: "#31511E" }} />
-        </button>
-
         {menuOpen && (
           <div className="menu-admin">
             <ul>
-              <Link to="/profil">
+              <Link to="/admin/profil">
                 <li>
                   <FontAwesomeIcon icon={faUser} style={{ color: "#31511E" }} />{" "}
                   Profil Saya

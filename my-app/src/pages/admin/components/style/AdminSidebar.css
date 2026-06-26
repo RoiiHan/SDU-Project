@@ -6,7 +6,7 @@
 }
 
 .admin-sidebar {
-  width: 150px;
+  width: auto;
   min-height: 100vh;
   background-color: var(--darkgreen);
   padding: 20px;
@@ -15,9 +15,24 @@
   flex-direction: column;
 }
 
-.admin-sidebar h2 {
+.sidebar-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+.sidebar-header h2 {
   color: white;
-  margin-bottom: 30px;
+  margin-top: 25px;
 }
 
 .admin-sidebar ul {
@@ -53,11 +68,12 @@
   align-items: center;
 }
 
-.profil-admin img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.foto-profil {
+  margin: 0;
+  margin-top: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .toogle-admin {
