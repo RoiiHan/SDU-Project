@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AdminSidebar from "./components/AdminSidebars";
 import "./style/AdminUser.css";
 import { useNavigate } from "react-router-dom";
+import { getUserAdmin } from "../../services/userService";
 
 function AdminUser() {
   const [users, setUsers] = useState([]);
@@ -9,14 +10,11 @@ function AdminUser() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/admin/user")
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const loadData = async () => {
+      const data = await getUserAdmin(setUsers);
+      setUsers(data);
+    };
+    loadData();
   }, []);
 
   const filteredUsers = users.filter((user) => {

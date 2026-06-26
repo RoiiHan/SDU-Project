@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import AdminSidebar from "./components/AdminSidebars";
 import "./style/AdminHarga.css";
+import { getHargaAdmin } from "../../services/hargaServices";
 
 function AdminHarga() {
   const [harga, setHarga] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/admin/harga")
-      .then((res) => res.json())
-      .then((data) => {
-        setHarga(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const loadData = async () => {
+      const data = await getHargaAdmin(setHarga);
+      setHarga(data);
+    };
+
+    loadData();
   }, []);
 
   const handleHargaChange = (id, value) => {

@@ -1,6 +1,9 @@
-/* =======================
-   FILTER & SEARCH
-======================= */
+:root {
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+}
 
 .filter-search-container {
   display: flex;
@@ -13,21 +16,21 @@
   flex: 1;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--darkgreen);
   background: white;
   font-size: 14px;
 }
 
 .filter-search-container input:focus {
   outline: none;
-  border-color: var(--lightgreen);
+  border-color: var(--darkgreen);
 }
 
 .filter-search-container select {
   width: 180px;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--darkgreen);
   background: white;
   color: var(--darkgreen);
   font-weight: 500;

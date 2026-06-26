@@ -1,9 +1,11 @@
-/* =======================
-   STATUS
-======================= */
+:root {
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+}
 
 .status {
-  border: none;
   outline: none;
   cursor: pointer;
   padding: 6px 10px;

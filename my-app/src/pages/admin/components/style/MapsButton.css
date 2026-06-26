@@ -1,6 +1,9 @@
-/* =======================
-   BUTTON
-======================= */
+:root {
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+}
 
 .btn-lokasi-lat {
   margin: 12px 0;

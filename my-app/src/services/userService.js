@@ -36,3 +36,16 @@ export async function uploadProfilUser(formData) {
 
   return response.json();
 }
+
+// =================
+// AdminUser.jsx
+
+export async function getUserAdmin(setUsers) {
+  const response = await fetch(`${API_URL}admin/user`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}

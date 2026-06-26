@@ -1,3 +1,10 @@
+:root {
+  --lightgreen: #859f3d;
+  --darkgreen: #31511e;
+  --cream: #f6fcdf;
+  --putih: #efefef;
+}
+
 .status-section {
   margin-top: 30px;
 }
