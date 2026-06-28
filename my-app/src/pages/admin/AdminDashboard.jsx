@@ -35,6 +35,8 @@ ChartJS.register(
   Legend,
 );
 
+import CardTotalTransaksi from "./components/CardTotalTransaksi";
+
 function AdminDashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -144,29 +146,8 @@ function AdminDashboard() {
       <div className="admin-content">
         <h1>Dashboard Admin</h1>
         <p>Selamat datang, {user.nama}</p>
-
         {/* Statistik */}
-        <div className="admin-cards">
-          <div className="admin-card">
-            <h3>Total Transaksi</h3>
-            <p>{dashboard.totalTransaksi}</p>
-          </div>
-
-          <div className="admin-card">
-            <h3>Total User</h3>
-            <p>{dashboard.totalUser}</p>
-          </div>
-
-          <div className="admin-card">
-            <h3>Total Berat</h3>
-            <p>{dashboard.totalBerat} gr</p>
-          </div>
-
-          <div className="admin-card">
-            <h3>Total Pendapatan</h3>
-            <p>Rp {Number(dashboard.totalPendapatan || 0).toLocaleString()}</p>
-          </div>
-        </div>
+        <CardTotalTransaksi dashboard={dashboard} />
 
         {/* Status */}
         <StatusDataComponent />
