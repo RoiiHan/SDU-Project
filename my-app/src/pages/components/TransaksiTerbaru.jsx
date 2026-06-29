@@ -40,8 +40,10 @@ function TransaksiTerbaru() {
                 </td>
                 <td>{item.berat} Gr</td>
                 <td>{item.totalharga.toLocaleString()}</td>
-                <td className={`status ${item.status.toLowerCase()}`}>
-                  {item.status || "Menunggu"}
+                <td>
+                  <span className={`status-tabel ${item.status.toLowerCase()}`}>
+                    {item.status || "Menunggu"}
+                  </span>
                 </td>
               </tr>
             ))}

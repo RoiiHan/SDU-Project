@@ -14,6 +14,7 @@
   box-shadow: 0 2px 8px var(--hijaubtn);
   border-radius: 30px;
   padding: 20px;
+  color: var(--textabu);
 }
 
 table {
@@ -25,8 +26,8 @@ table {
 }
 
 thead {
-  background-color: var(--hijaubtn);
-  color: white;
+  background-color: var(--body);
+  color: var(--textabu);
 }
 
 thead > tr > th {
@@ -41,37 +42,37 @@ td {
   border-bottom: 1px solid var(--textabu);
 }
 
-tbody tr:hover {
-  background-color: var(--lightgreen);
+/* tbody tr:hover {
+  background-color: var(--hijaubtn);
   color: white;
   cursor: pointer;
-}
+} */
 
 /* ===== STATUS BADGE ===== */
 
-.status {
-  padding: 4px 10px;
-  border-radius: 20px;
+.status-tabel {
+  padding: 20px 40px;
+  border-radius: 30px;
   font-size: 12px;
   font-weight: 600;
 }
 
-.status.menunggu {
+.status-tabel.menunggu {
   background: #fff3cd;
   color: #856404;
 }
 
-.status.diproses {
+.status-tabel.diproses {
   background: #d1ecf1;
   color: #0c5460;
 }
 
-.status.dijemput {
+.status-tabel.dijemput {
   background: #d4edda;
   color: #155724;
 }
 
-.status.selesai {
+.status-tabel.selesai {
   background: #c8f7c5;
   color: #1e7e34;
 }
