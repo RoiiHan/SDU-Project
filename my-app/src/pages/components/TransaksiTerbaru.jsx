@@ -18,31 +18,36 @@ function TransaksiTerbaru() {
 
   return (
     <div className="riwayat-transaksi">
-      {transaksi.map((item) => (
-        <div key={item.id} className="transaksi-item">
-          <div className="header-kategori">
-            <h4>{item.kategori}</h4>
-          </div>
-          <div className="header-keterangan">
-            <p>
-              <span>Keterangan :</span> {item.keterangan}
-            </p>
-          </div>
-          <div className="header-berat">
-            <p>
-              <span>Berat :</span> {item.berat} gr
-            </p>
-          </div>
-          <div className="header-totalharga">
-            <p>
-              <span>Harga :</span> Rp {item.totalharga.toLocaleString()}
-            </p>
-          </div>
-          <span className={`status ${item.status.toLowerCase()}`}>
-            {item.status || "Menunggu"}
-          </span>
-        </div>
-      ))}
+      <div>
+        <h3>TRANSAKSI TERBARU</h3>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>MATERIAL</th>
+              <th>TANGGAL</th>
+              <th>BERAT</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transaksi.map((item) => (
+              <tr key={item.id} className="">
+                <td>
+                  <p>{item.kategori}</p>
+                  <p>{item.keterangan}</p>
+                </td>
+                <td>{item.berat} Gr</td>
+                <td>{item.totalharga.toLocaleString()}</td>
+                <td className={`status ${item.status.toLowerCase()}`}>
+                  {item.status || "Menunggu"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
