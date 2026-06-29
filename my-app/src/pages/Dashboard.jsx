@@ -28,12 +28,9 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <h1>Dashboard</h1>
-
       <CardsDashboard dashboardData={dashboardData} />
 
       <div className="riwayat-terbaru">
-        <h2>Transaksi Terbaru</h2>
         <TransaksiTerbaru />
       </div>
     </div>

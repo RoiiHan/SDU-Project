@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getTransaksiDahboard } from "../../services/transaksiService";
+import "./style/TransaksiTerbaru.css";
 
 function TransaksiTerbaru() {
   const user = JSON.parse(localStorage.getItem("user"));
