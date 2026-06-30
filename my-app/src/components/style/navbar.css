@@ -164,3 +164,55 @@ nav {
   align-items: center;
   gap: 8px;
 }
+
+/* =================================== */
+/* HAMBURGER BOTTOM */
+
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 22px;
+  color: var(--hijaubtn);
+}
+
+@media (max-width: 576px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .navbar-kanan > div:first-child {
+    display: none;
+  }
+
+  .navbar-bottom {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .navbar-bottom.mobile-open {
+    max-height: 300px;
+    padding: 12px 8px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

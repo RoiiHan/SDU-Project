@@ -7,6 +7,8 @@ import {
   faStar,
   faArrowRightFromBracket,
   faPlusMinus,
+  faXmark,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./style/navbar.css";
@@ -15,10 +17,16 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+
   const toogleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const toogleMenuMobile = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const handleLogout = () => {
@@ -74,24 +82,39 @@ function Navbar() {
               </div>
             )}
           </div>
+          <button className="hamburger-btn" onClick={toogleMenuMobile}>
+            <FontAwesomeIcon icon={mobileMenuOpen ? faXmark : faBars} />
+          </button>
         </div>
       </div>
 
       {/* Baris Bawah: Menu Navigasi */}
-      <div className="navbar-bottom">
+      <div className={`navbar-bottom ${mobileMenuOpen ? "mobile-open" : ""}`}>
         <ul className="nav-links">
           <li>
-            <Link to="/dashboard" className="nav-link">
+            <Link
+              to="/dashboard"
+              className="nav-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Dashboard
             </Link>
           </li>
           <li>
-            <Link to="/transaksi" className="nav-link">
+            <Link
+              to="/transaksi"
+              className="nav-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Transaksi
             </Link>
           </li>
           <li>
-            <Link to="/riwayat" className="nav-link">
+            <Link
+              to="/riwayat"
+              className="nav-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Riwayat
             </Link>
           </li>
