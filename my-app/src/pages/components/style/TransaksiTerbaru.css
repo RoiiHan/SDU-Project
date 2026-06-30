@@ -76,3 +76,40 @@ td {
   background: #c8f7c5;
   color: #1e7e34;
 }
+
+@media (max-width: 576px) {
+  .riwayat-transaksi {
+    padding: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+  }
+
+  thead > tr > th {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th,
+  td {
+    padding: 12px 8px;
+    font-size: 8px;
+  }
+
+  /* ===== STATUS BADGE ===== */
+
+  .status-tabel {
+    padding: 10px 20px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 890px) {
+}
+
+@media screen and (min-width: 891px) and (max-width: 999px) {
+}

@@ -45,7 +45,7 @@ function Navbar() {
           </div>
           <div>
             <Link to="/">SDU</Link>
-            <p>Transaksi Sampah Daur Ulang Yang Mudah</p>
+            <p className="logo-desc">Transaksi Sampah Daur Ulang Yang Mudah</p>
           </div>
         </div>
 
@@ -68,11 +68,6 @@ function Navbar() {
             {menuOpen && (
               <div className="menu">
                 <ul>
-                  <Link to="/profil">
-                    <li>
-                      <FontAwesomeIcon icon={faUser} /> Profil Saya
-                    </li>
-                  </Link>
                   <Link to="/login">
                     <li onClick={handleLogout}>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} /> Keluar
@@ -116,6 +111,11 @@ function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Riwayat
+            </Link>
+          </li>
+          <li>
+            <Link to="/profil" className="nav-link">
+              Profil
             </Link>
           </li>
         </ul>

@@ -17,3 +17,28 @@
 .riwayat-terbaru {
   margin-top: 40px;
 }
+
+@media (max-width: 576px) {
+  .dashboard {
+    padding: 30px 10px;
+    background: var(--body);
+    min-height: 100vh;
+  }
+
+  .riwayat-terbaru {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 890px) {
+  .dashboard {
+    padding: 30px 10px;
+  }
+
+  .riwayat-terbaru {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (min-width: 891px) and (max-width: 999px) {
+}
