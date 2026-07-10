@@ -1,170 +1,551 @@
 :root {
-    --lightgreen: #859F3D;
-    --darkgreen: #31511E;
-    --cream: #F6FCDF;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
-.landing-page{
-    width: 100%;
+* {
+  box-sizing: border-box;
 }
 
-/* HERO */
-
-.hero{
-    width: 100%;
+.landing-page {
+  width: 100%;
+  background: var(--body);
+  font-family: "Segoe UI", "Poppins", sans-serif;
+  overflow-x: hidden;
 }
 
-.hero-image{
-    width: 100%;
-    display: block;
-    border-radius: 0 0 15px 15px;
+.section-eyebrow {
+  color: var(--hijau-mid);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin: 0 0 8px 0;
 }
 
-/* TENTANG */
-
-.tentang{
-    padding: 50px;
+.section-eyebrow.light {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.tentang-card{
-    display: flex;
-    gap: 30px;
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px var(--lightgreen);
+/* ================================= */
+/* HERO                               */
+/* ================================= */
+.hero {
+  width: 100%;
+  position: relative;
 }
 
-.tentang-kiri{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.hero-image {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  display: block;
 }
 
-.tentang-kiri img{
-    width: 250px;
-    height: auto;
-    border-radius: 10px;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(11, 61, 46, 0.92) 0%,
+    rgba(11, 61, 46, 0.55) 45%,
+    rgba(11, 61, 46, 0.15) 100%
+  );
+  display: flex;
+  align-items: center;
+  padding: 0 90px;
 }
 
-.tentang-kanan{
-    flex: 1;
+.hero-content {
+  max-width: 560px;
 }
 
-.tentang-kanan h2{
-    color: var(--darkgreen);
-    margin-bottom: 20px;
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #eafff2;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 0 18px 0;
+  backdrop-filter: blur(4px);
 }
 
-.tentang-kanan p{
-    margin-bottom: 15px;
-    line-height: 1.7;
-    color: var(--darkgreen);
+.hero-title {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0 0 18px 0;
 }
 
-/* CARA KERJA */
-
-.cara-kerja{
-    background-color: var(--lightgreen);
-    padding: 50px;
-    text-align: center;
-    border-radius: 15px;
+.hero-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 28px 0;
 }
 
-.cara-kerja h2{
-    color: white;
-    margin-bottom: 30px;
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #1c2b24;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(201, 164, 92, 0.4);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.cara-container{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 20px;
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(201, 164, 92, 0.5);
 }
 
-.cara-card{
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+/* ================================= */
+/* TENTANG                            */
+/* ================================= */
+.tentang {
+  padding: 70px 90px;
 }
 
-.cara-card h3{
-    color: var(--lightgreen);
+.tentang-card {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background: var(--putihCard);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lembut);
+}
+
+.tentang-kiri {
+  flex: 0 0 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--inshigt);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.tentang-kiri img {
+  width: 180px;
+  height: auto;
+}
+
+.tentang-kanan {
+  flex: 1;
+}
+
+.tentang-kanan h2 {
+  color: var(--hijaubtn);
+  margin: 0 0 18px 0;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.tentang-kanan p {
+  margin-bottom: 15px;
+  line-height: 1.8;
+  color: var(--textabu);
+  font-size: 15px;
+}
+
+/* ================================= */
+/* CARA KERJA                         */
+/* ================================= */
+.cara-kerja {
+  background: var(--gradasi-hijau);
+  padding: 70px 90px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cara-kerja::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cara-kerja h2 {
+  position: relative;
+  color: white;
+  margin: 0 0 36px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.cara-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cara-card {
+  background: var(--putihCard);
+  padding: 32px 22px;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.cara-card:hover {
+  transform: translateY(-6px);
+}
+
+.cara-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px auto;
+  border-radius: 14px;
+  background: var(--inshigt);
+  color: var(--hijau-mid);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cara-card h3 {
+  color: var(--gold);
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.cara-card p {
+  color: var(--hijaubtn);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ================================= */
+/* JENIS SAMPAH                       */
+/* ================================= */
+.jenis-sampah {
+  padding: 70px 90px;
+  text-align: center;
+}
+
+.jenis-sampah h2 {
+  color: var(--hijaubtn);
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.sampah-container {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.sampah-card {
+  background: var(--putihCard);
+  padding: 34px 20px;
+  border-radius: 18px;
+  font-size: 30px;
+  color: var(--hijau-mid);
+  box-shadow: var(--shadow-lembut);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sampah-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(11, 61, 46, 0.16);
+}
+
+.sampah-card p {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hijaubtn);
+}
+
+/* ================================= */
+/* STATISTIK                          */
+/* ================================= */
+.statistik {
+  padding: 70px 90px;
+  text-align: center;
+}
+
+.statistik h2 {
+  color: var(--hijaubtn);
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.statistik-container {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.stat-card {
+  background: var(--gradasi-hijau);
+  color: white;
+  padding: 34px 20px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lembut);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 14px auto;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.stat-card h3 {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ================================= */
+/* FOOTER                             */
+/* ================================= */
+.footer {
+  background: var(--gradasi-hijau);
+  color: white;
+  text-align: center;
+  padding: 50px 20px 24px 20px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.footer-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.footer h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.footer p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ================================= */
+/* RESPONSIVE                         */
+/* ================================= */
+@media (max-width: 992px) {
+  .hero-image {
+    height: 480px;
+  }
+
+  .hero-overlay {
+    padding: 0 40px;
+  }
+
+  .hero-title {
     font-size: 32px;
+  }
+
+  .tentang,
+  .cara-kerja,
+  .jenis-sampah,
+  .statistik {
+    padding: 50px 40px;
+  }
+
+  .cara-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sampah-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .statistik-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* JENIS SAMPAH */
+@media (max-width: 576px) {
+  .hero-image {
+    height: 420px;
+  }
 
-.jenis-sampah{
-    padding: 50px;
-    text-align: center;
-}
+  .hero-overlay {
+    padding: 0 20px;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 61, 46, 0.4) 0%,
+      rgba(11, 61, 46, 0.9) 100%
+    );
+    align-items: flex-end;
+    padding-bottom: 40px;
+  }
 
-.jenis-sampah h2{
-    color: var(--darkgreen);
-}
+  .hero-content {
+    max-width: 100%;
+  }
 
-.sampah-container{
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    gap: 20px;
-}
+  .hero-title {
+    font-size: 24px;
+  }
 
-.sampah-card{
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    font-size: 40px;
-    box-shadow: 0 2px 10px var(--lightgreen);
-}
+  .hero-desc {
+    font-size: 13px;
+  }
 
-.sampah-card p{
-    margin-top: 10px;
-    font-size: 16px;
-}
+  .hero-btn {
+    padding: 12px 22px;
+    font-size: 13px;
+  }
 
-/* STATISTIK */
+  .tentang,
+  .cara-kerja,
+  .jenis-sampah,
+  .statistik {
+    padding: 40px 20px;
+  }
 
-.statistik{
-    padding: 50px;
-    text-align: center;
-}
+  .tentang-card {
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+  }
 
-.statistik-container{
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 20px;
-}
+  .tentang-kiri {
+    flex: none;
+    width: 100%;
+    padding: 20px;
+  }
 
-.stat-card{
-    background: var(--lightgreen);
-    color: white;
-    padding: 30px;
-    border-radius: 15px;
-}
+  .tentang-kiri img {
+    width: 130px;
+  }
 
-.stat-card h3{
-    font-size: 32px;
-}
+  .tentang-kanan h2,
+  .cara-kerja h2,
+  .jenis-sampah h2,
+  .statistik h2 {
+    font-size: 22px;
+  }
 
-/* FOOTER */
+  .cara-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
 
-.footer{
-    background: #54473F;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 100px;
-}
+  .cara-card {
+    padding: 22px 14px;
+  }
 
-.footer h3{
-    margin-bottom: 10px;
-}
+  .sampah-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
 
-.footer p{
-    margin-top: 10px;
+  .sampah-card {
+    padding: 24px 14px;
+    font-size: 24px;
+  }
+
+  .statistik-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .stat-card {
+    padding: 22px 14px;
+  }
+
+  .stat-card h3 {
+    font-size: 22px;
+  }
+
+  .footer {
+    padding: 36px 16px 20px 16px;
+  }
 }

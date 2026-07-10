@@ -1,53 +1,134 @@
 :root {
-  --lightgreen: #859f3d;
-  --darkgreen: #31511e;
-  --cream: #f6fcdf;
-  --putih: #efefef;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 .admin-transaksi-card {
-  background: white;
-  border-radius: 14px;
-  padding: 18px;
-  border: 1px solid #ddd;
-  box-shadow: 0px 2px 8px var(--darkgreen);
-  transition: 0.2s ease;
+  background: var(--putihCard);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow-lembut);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-transaksi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #0b3d2e 0%, #1f7a52 55%, #2fa66d 100%);
 }
 
 .admin-transaksi-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(11, 61, 46, 0.16);
 }
 
 .admin-transaksi-card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e6f1ea;
 }
 
 .admin-transaksi-card-header h3 {
   margin: 0;
-  color: var(--darkgreen);
-  font-size: 18px;
+  color: var(--hijaubtn);
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .admin-transaksi-card-header p {
   margin: 4px 0 0;
-  color: #666;
+  color: var(--textabu);
+  font-size: 13px;
 }
 
-.admin-transaksi-card p {
-  margin: 8px 0;
-  color: #555;
-  font-size: 15px;
-  line-height: 1.4;
+.card-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.card-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.detail-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--textabu);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.detail-label svg {
+  color: var(--hijau-mid);
+  font-size: 12px;
+}
+
+.detail-value {
+  color: var(--hijaubtn);
+  font-weight: 600;
+  text-align: right;
+}
+
+.detail-total {
+  color: var(--hijau-mid);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .foto-sampah {
-  width: 80%;
-  height: 220px;
-  object-fit: contain;
-  border-radius: 10px;
-  margin: 10px 0;
-  border: 1px solid var(--darkgreen);
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 6px 0 14px 0;
+  border: 1px solid #e6f1ea;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.card-actions > * {
+  flex: 1;
+}
+
+@media (max-width: 576px) {
+  .admin-transaksi-card {
+    padding: 16px;
+  }
+
+  .card-detail-item {
+    font-size: 12px;
+  }
+
+  .foto-sampah {
+    height: 160px;
+  }
 }

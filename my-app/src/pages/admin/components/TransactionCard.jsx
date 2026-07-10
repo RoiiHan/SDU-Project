@@ -3,7 +3,15 @@ import "./style/TransactionCard.css";
 import StatusDropdown from "./StatusDropdown";
 import MapsButton from "./MapsButton";
 import WaButton from "./WaButton";
-import { replace } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTag,
+  faCommentDots,
+  faScaleBalanced,
+  faWallet,
+  faLocationDot,
+  faCalendarDays,
+} from "@fortawesome/free-solid-svg-icons";
 
 function TransactionCard({ item, updateStatus }) {
   return (
@@ -16,34 +24,60 @@ function TransactionCard({ item, updateStatus }) {
         <StatusDropdown item={item} updateStatus={updateStatus} />
       </div>
 
-      <p>
-        <strong>Kategori:</strong> {item.kategori}
-      </p>
+      <div className="card-detail-list">
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faTag} /> Kategori
+          </span>
+          <span className="detail-value">{item.kategori}</span>
+        </div>
 
-      <p>
-        <strong>Keterangan:</strong> {item.keterangan}
-      </p>
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faCommentDots} /> Keterangan
+          </span>
+          <span className="detail-value">{item.keterangan}</span>
+        </div>
 
-      <p>
-        <strong>Berat:</strong> {(item.berat / 1000).toFixed(1)} Kg
-      </p>
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faScaleBalanced} /> Berat
+          </span>
+          <span className="detail-value">
+            {(item.berat / 1000).toFixed(1)} Kg
+          </span>
+        </div>
 
-      <p>
-        <strong>Harga:</strong> Rp {item.totalharga.toLocaleString()}
-      </p>
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faWallet} /> Harga
+          </span>
+          <span className="detail-value detail-total">
+            Rp {item.totalharga.toLocaleString()}
+          </span>
+        </div>
 
-      <p>
-        <strong>Lokasi:</strong> {item.lokasi}
-      </p>
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faLocationDot} /> Lokasi
+          </span>
+          <span className="detail-value">{item.lokasi}</span>
+        </div>
 
-      <p>
-        <strong>Tanggal:</strong>{" "}
-        {new Date(item.created_at).toLocaleDateString("id-ID", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
-      </p>
+        <div className="card-detail-item">
+          <span className="detail-label">
+            <FontAwesomeIcon icon={faCalendarDays} /> Tanggal
+          </span>
+          <span className="detail-value">
+            {new Date(item.created_at).toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
+        </div>
+      </div>
+
       {item.foto && (
         <img
           src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
@@ -51,8 +85,11 @@ function TransactionCard({ item, updateStatus }) {
           className="foto-sampah"
         />
       )}
-      <MapsButton item={item} />
-      <WaButton item={item} replace={replace} />
+
+      <div className="card-actions">
+        <MapsButton item={item} />
+        <WaButton item={item} />
+      </div>
     </div>
   );
 }

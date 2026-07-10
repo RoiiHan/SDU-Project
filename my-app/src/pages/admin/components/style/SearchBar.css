@@ -1,42 +1,83 @@
 :root {
-  --lightgreen: #859f3d;
-  --darkgreen: #31511e;
-  --cream: #f6fcdf;
-  --putih: #efefef;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 .filter-search-container {
   display: flex;
   gap: 12px;
-  margin-bottom: 25px;
-  margin-top: 20px;
+  margin-bottom: 22px;
+  margin-top: 22px;
 }
 
-.filter-search-container input {
+.search-input-wrapper {
+  position: relative;
   flex: 1;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--darkgreen);
-  background: white;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--hijau-mid);
   font-size: 14px;
 }
 
-.filter-search-container input:focus {
+.search-input-wrapper input {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border-radius: 12px;
+  border: 1px solid #dcebe1;
+  background: var(--putihCard);
+  color: var(--hijaubtn);
+  font-size: 14px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.search-input-wrapper input:focus {
   outline: none;
-  border-color: var(--darkgreen);
+  border-color: var(--hijau-light);
+  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
 }
 
 .filter-search-container select {
-  width: 180px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--darkgreen);
-  background: white;
-  color: var(--darkgreen);
-  font-weight: 500;
+  width: 190px;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #dcebe1;
+  background: var(--putihCard);
+  color: var(--hijaubtn);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .filter-search-container select:focus {
   outline: none;
-  border-color: var(--lightgreen);
+  border-color: var(--hijau-light);
+  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
+}
+
+@media (max-width: 576px) {
+  .filter-search-container {
+    flex-direction: column;
+  }
+
+  .filter-search-container select {
+    width: 100%;
+  }
 }

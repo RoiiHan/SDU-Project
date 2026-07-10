@@ -1,9 +1,19 @@
 :root {
-  --lightgreen: #859f3d;
-  --darkgreen: #31511e;
-  --cream: #f6fcdf;
-  --putih: #efefef;
-  --putihcard: #f5f5f5;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 /* =======================
@@ -12,57 +22,89 @@
 
 .admin-layout {
   display: flex;
+  min-height: 100vh;
 }
 
 .admin-content {
   flex: 1;
-  padding: 25px;
-  background: var(--putih);
+  padding: 30px 34px 40px 34px;
+  background: var(--body);
   min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* =======================
+   HEADER
+======================= */
+
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--gradasi-hijau);
+  padding: 24px 28px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lembut);
+  margin-bottom: 26px;
+}
+
+.header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--gold);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .admin-transaksi-title {
-  margin: -25px -25px 0 -25px;
-  color: var(--darkgreen);
-  font-weight: 600;
-  background-color: #ffff;
-  padding: 30px;
-  box-shadow: 0 2px 2px var(--darkgreen);
-  border-radius: 0 0 10px 0;
-}
-
-/* ======================
-   STATISTIK
-====================== */
-
-.statistik-transaksi {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 25px;
-}
-
-.stat-card {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  text-align: center;
-
-  border: 1px solid #ddd;
-
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.stat-card h2 {
   margin: 0;
-  color: var(--darkgreen);
-  font-size: 30px;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 22px;
 }
 
-.stat-card p {
-  margin-top: 8px;
-  color: #666;
+.admin-page-subtitle {
+  margin: 4px 0 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
 }
+
+/* =======================
+   EMPTY STATE
+======================= */
+
+.transaksi-empty {
+  background: var(--putihCard);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lembut);
+  padding: 60px 30px;
+  text-align: center;
+  color: var(--textabu);
+}
+
+.empty-icon {
+  font-size: 38px;
+  color: var(--hijau-light);
+  margin-bottom: 14px;
+}
+
+.transaksi-empty h3 {
+  margin: 0 0 8px 0;
+  color: var(--hijaubtn);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.transaksi-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
 /* =======================
    GRID
 ======================= */
@@ -78,7 +120,27 @@
 ======================= */
 
 @media (max-width: 992px) {
+  .admin-content {
+    padding: 22px 18px 32px 18px;
+  }
+
+  .admin-page-header {
+    padding: 20px;
+  }
+
   .admin-transaksi-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .admin-transaksi-title {
+    font-size: 18px;
   }
 }

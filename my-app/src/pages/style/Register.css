@@ -1,61 +1,246 @@
 :root {
-  --lightgreen: #859f3d;
-  --darkgreen: #31511e;
-  --cream: #f6fcdf;
-  --putih: #efefef;
-  --putihcard: #f5f5f5;
-  --boxshadow: 0 2px 10px #31511e;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
-.register-container {
+* {
+  box-sizing: border-box;
+}
+
+.auth-page {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  background: var(--body);
+}
+
+/* ===== PANEL KIRI - BRANDING ===== */
+.auth-branding {
+  width: 45%;
+  background: var(--gradasi-hijau);
+  position: relative;
+  overflow: hidden;
+  display: flex;
   align-items: center;
-  background: var(--putih);
+  justify-content: center;
+  padding: 40px;
+}
+
+.branding-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.branding-blob-1 {
+  width: 280px;
+  height: 280px;
+  top: -100px;
+  right: -80px;
+}
+
+.branding-blob-2 {
+  width: 240px;
+  height: 240px;
+  bottom: -100px;
+  left: -80px;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 380px;
+}
+
+.branding-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  backdrop-filter: blur(4px);
+}
+
+.branding-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.branding-content h2 {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.branding-tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin: 0 0 40px 0;
+}
+
+.branding-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.quote-icon {
+  color: var(--gold);
+  font-size: 20px;
+}
+
+.branding-quote p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* ===== PANEL KANAN - FORM ===== */
+.auth-form-section {
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 40px 60px 40px;
+  overflow-y: auto;
 }
 
 .register-form {
-  width: 420px;
-  background: var(--putihcard);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: var(--boxshadow);
-
+  width: 100%;
+  max-width: 440px;
+  background: var(--putihCard);
+  padding: 36px 40px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lembut);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 4px;
 }
 
-.register-form input {
-  padding: 12px;
-  border: 1px solid var(--darkgreen);
-  border-radius: 8px;
+.form-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--inshigt);
+  color: var(--hijau-mid);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
 }
 
-.register-form > button {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #305a37;
-  color: white;
-  cursor: pointer;
+.register-form h1 {
+  margin: 0 0 6px 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--hijaubtn);
 }
 
-.btn-reg a {
-  text-decoration: none;
-  color: var(--darkgreen);
+.form-subtitle {
+  margin: 0 0 22px 0;
+  color: var(--textabu);
+  font-size: 13px;
 }
 
-.password-input {
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hijaubtn);
+}
+
+.input-group label svg {
+  color: var(--hijau-mid);
+  font-size: 12px;
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 12px 14px;
+  border: 1px solid #dcebe1;
+  border-radius: 10px;
+  background: var(--body);
+  color: var(--hijaubtn);
+  font-size: 14px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.input-group textarea {
+  resize: none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--hijau-light);
+  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
+}
+
+.input-wrapper {
   position: relative;
   width: 100%;
 }
 
-.password-input input {
+.input-wrapper input {
   width: 100%;
-  padding-right: 45px;
+  padding: 12px 45px 12px 14px;
+  border: 1px solid #dcebe1;
+  border-radius: 10px;
+  background: var(--body);
+  color: var(--hijaubtn);
+  font-size: 14px;
   box-sizing: border-box;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: var(--hijau-light);
+  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
 }
 
 .eye-btn {
@@ -66,27 +251,108 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #666;
+  color: var(--textabu);
+  font-size: 15px;
 }
 
-.password-input-confirm {
-  position: relative;
+.eye-btn:hover {
+  color: var(--hijau-mid);
+}
+
+.submit-btn,
+.register-form > button[type="submit"] {
   width: 100%;
-}
-
-.password-input-confirm input {
-  width: 100%;
-  padding-right: 45px;
-  box-sizing: border-box;
-}
-
-.eye-btn-confirm {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
+  padding: 14px;
   border: none;
-  background: transparent;
+  border-radius: 12px;
+  background: var(--gradasi-hijau);
+  color: white;
   cursor: pointer;
-  color: #666;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 8px;
+  box-shadow: 0 6px 16px rgba(11, 61, 46, 0.25);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.submit-btn:hover,
+.register-form > button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(11, 61, 46, 0.32);
+}
+
+.btn-reg {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--textabu);
+}
+
+.btn-reg a {
+  color: var(--hijau-mid);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-reg a:hover {
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .auth-page {
+    flex-direction: column;
+  }
+
+  .auth-branding {
+    width: 100%;
+    padding: 40px 24px;
+  }
+
+  .branding-content {
+    max-width: 100%;
+  }
+
+  .auth-form-section {
+    width: 100%;
+    padding: 30px 20px 50px 20px;
+  }
+
+  .register-form {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .branding-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .branding-content h2 {
+    font-size: 24px;
+  }
+
+  .branding-tagline {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .branding-quote {
+    padding: 16px;
+  }
+
+  .branding-quote p {
+    font-size: 13px;
+  }
+
+  .register-form {
+    padding: 24px 20px;
+  }
+
+  .register-form h1 {
+    font-size: 20px;
+  }
 }

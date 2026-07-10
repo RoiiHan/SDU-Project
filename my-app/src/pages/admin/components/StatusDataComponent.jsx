@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style/StatusDataComponent.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHourglassHalf,
+  faGears,
+  faTruck,
+  faCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
 
 function StatusDataComponent() {
   const [statusData, setStatusData] = useState({
@@ -31,7 +36,7 @@ function StatusDataComponent() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div className="status-section">
@@ -39,23 +44,43 @@ function StatusDataComponent() {
 
       <div className="status-grid">
         <div className="status-card menunggu">
-          <h3>Menunggu</h3>
-          <p>{statusData.Menunggu}</p>
+          <div className="status-icon">
+            <FontAwesomeIcon icon={faHourglassHalf} />
+          </div>
+          <div>
+            <p className="status-angka">{statusData.Menunggu}</p>
+            <h3>Menunggu</h3>
+          </div>
         </div>
 
         <div className="status-card diproses">
-          <h3>Diproses</h3>
-          <p>{statusData.Diproses}</p>
+          <div className="status-icon">
+            <FontAwesomeIcon icon={faGears} />
+          </div>
+          <div>
+            <p className="status-angka">{statusData.Diproses}</p>
+            <h3>Diproses</h3>
+          </div>
         </div>
 
         <div className="status-card dijemput">
-          <h3>Dijemput</h3>
-          <p>{statusData.Dijemput}</p>
+          <div className="status-icon">
+            <FontAwesomeIcon icon={faTruck} />
+          </div>
+          <div>
+            <p className="status-angka">{statusData.Dijemput}</p>
+            <h3>Dijemput</h3>
+          </div>
         </div>
 
         <div className="status-card selesai">
-          <h3>Selesai</h3>
-          <p>{statusData.Selesai}</p>
+          <div className="status-icon">
+            <FontAwesomeIcon icon={faCircleCheck} />
+          </div>
+          <div>
+            <p className="status-angka">{statusData.Selesai}</p>
+            <h3>Selesai</h3>
+          </div>
         </div>
       </div>
     </div>
