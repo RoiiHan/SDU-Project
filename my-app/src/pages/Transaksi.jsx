@@ -1,12 +1,47 @@
 import { useState, useEffect } from "react";
 import "./style/Transaksi.css";
 import Navbar from "../components/Navbar";
-import transaksiImg from "../assets/transaksi.png";
 import MapPicker from "../components/MapPicker";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createTransaksi, uploadFoto } from "../services/transaksiService";
 import { getHargaSampah } from "../services/hargaServices";
 import { getAlamatUser } from "../services/userService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faListCheck,
+  faWeightScale,
+  faClipboardCheck,
+  faPaperPlane,
+  faCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
+
+const steps = [
+  {
+    icon: faListCheck,
+    title: "Pilih Jenis Sampah",
+    desc: "Pilih kategori sampah yang akan kamu daur ulang.",
+  },
+  {
+    icon: faWeightScale,
+    title: "Masukkan Berat",
+    desc: "Timbang sampah dan masukkan berat dalam satuan kilogram.",
+  },
+  {
+    icon: faClipboardCheck,
+    title: "Lengkapi Data",
+    desc: "Isi informasi yang diperlukan dengan benar.",
+  },
+  {
+    icon: faPaperPlane,
+    title: "Ajukan Transaksi",
+    desc: "Periksa kembali data dan ajukan transaksi kamu.",
+  },
+  {
+    icon: faCircleCheck,
+    title: "Tunggu Konfirmasi",
+    desc: "Tunggu konfirmasi dari pengepul dan transaksi selesai.",
+  },
+];
 
 function Transaksi() {
   const [hargaSampah, setHargaSampah] = useState([]);
@@ -76,11 +111,9 @@ function Transaksi() {
     let namaFileFoto = "";
 
     const formData = new FormData();
-
     formData.append("foto", foto);
 
     const uploadData = await uploadFoto(formData);
-
     namaFileFoto = uploadData.filename;
 
     const transaksiBaru = {
@@ -117,10 +150,29 @@ function Transaksi() {
       <Navbar />
 
       <div className="transaksi-page">
-        <div className="transaksi-kiri">
-          <img src={transaksiImg} alt="Transaksi SDU" />
+        {/* ===== ATAS: PANDUAN STEP BY STEP (HORIZONTAL) ===== */}
+        <div className="panduan-box">
+          <h1 className="panduan-title">Tata Cara Mengisi Transaksi</h1>
+
+          <div className="panduan-steps">
+            {steps.map((step, index) => (
+              <div className="panduan-step" key={index}>
+                <div className="step-card">
+                  <div className="step-number">{index + 1}</div>
+                  <div className="step-icon">
+                    <FontAwesomeIcon icon={step.icon} />
+                  </div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </div>
+
+                {index < steps.length - 1 && <div className="step-connector" />}
+              </div>
+            ))}
+          </div>
         </div>
 
+        {/* ===== BAWAH: FORM TRANSAKSI ===== */}
         <div className="transaksi-kanan">
           <div className="transaksi-container">
             <h1>Input Transaksi</h1>
@@ -166,13 +218,15 @@ function Transaksi() {
                 setLatitude={setLatitude}
                 setLongitude={setLongitude}
               />
+
               <label>Foto Sampah</label>
               <input
                 type="file"
-                accept="image/"
+                accept="image/*"
                 onChange={(e) => setFoto(e.target.files[0])}
               />
 
+              <label>Alamat Penjemputan</label>
               <input
                 type="text"
                 placeholder="Alamat diambil dari profil, bisa diubah"
@@ -182,19 +236,17 @@ function Transaksi() {
 
               <div className="hasil">
                 <p>
-                  Harga / Kg :<strong> Rp {hargaPerKg.toLocaleString()}</strong>
+                  Harga / Kg <strong>Rp {hargaPerKg.toLocaleString()}</strong>
                 </p>
-
                 <p>
-                  Berat :<strong> {beratKg} Kg</strong>
+                  Berat <strong>{beratKg} Kg</strong>
                 </p>
-
                 <p>
-                  Konversi :<strong> {beratGram.toLocaleString()} Gram</strong>
+                  Konversi <strong>{beratGram.toLocaleString()} Gram</strong>
                 </p>
-
                 <h3>Total : Rp {totalharga.toLocaleString()}</h3>
               </div>
+
               <button className="btn-trans" type="submit">
                 Kirim Transaksi
               </button>

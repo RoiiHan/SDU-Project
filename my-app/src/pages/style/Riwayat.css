@@ -1,61 +1,113 @@
 :root {
-  --lightgreen: #859F3D;
-  --darkgreen: #31511E;
-  --cream: #F6FCDF;
-  --putih: #efefef;
-  --putihcard : #f5f5f5;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 .riwayat-page {
-  background: var(--putih);
+  background: var(--body);
   min-height: 100vh;
 }
 
 .riwayat-container {
-  padding: 30px;
+  padding: 40px 60px;
 }
 
-.riwayat-container h1 {
-  margin-bottom: 25px;
+/* ===== HEADER ===== */
+.riwayat-header {
+  margin-bottom: 30px;
 }
 
+.riwayat-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--hijau-mid);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  margin: 0 0 6px 0;
+}
+
+.riwayat-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--hijaubtn);
+}
+
+.riwayat-subtitle {
+  margin: 0;
+  color: var(--textabu);
+  font-size: 14px;
+}
+
+/* ===== GRID LIST ===== */
 .riwayat-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 22px;
 }
 
 .riwayat-card {
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 10px var(--darkgreen);
-  transition: all 0.3s ease;
-  color: var(--darkgreen);
+  background: var(--putihCard);
+  border-radius: 18px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-lembut);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.riwayat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradasi-hijau);
 }
 
 .riwayat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(11, 61, 46, 0.16);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 2px solid var(--lightgreen);
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e6f1ea;
 }
 
 .card-header h3 {
-  font-size: 18px;
-  color: var(--darkgreen);
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--hijaubtn);
 }
 
 .riwayat-card .keterangan {
-  font-size: 14px;
-  color: var(--darkgreen);
-  margin-bottom: 15px;
+  font-size: 13px;
+  color: var(--textabu);
+  margin: 0 0 16px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -64,15 +116,46 @@
 .detail {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.detail-label {
+  display: flex;
+  align-items: center;
   gap: 6px;
+  color: var(--textabu);
+  font-weight: 600;
+}
+
+.detail-label svg {
+  color: var(--hijau-mid);
+  font-size: 12px;
+}
+
+.detail-value {
+  color: var(--hijaubtn);
+  font-weight: 700;
+}
+
+.detail-total {
+  color: var(--hijau-mid);
   font-size: 14px;
 }
 
+/* ===== STATUS BADGE ===== */
 .status {
-  padding: 6px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .status.menunggu {
@@ -95,14 +178,76 @@
   color: #1e7e34;
 }
 
+/* ===== EMPTY STATE ===== */
+.riwayat-empty {
+  background: var(--putihCard);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lembut);
+  padding: 60px 30px;
+  text-align: center;
+  color: var(--textabu);
+}
+
+.empty-icon {
+  font-size: 40px;
+  color: var(--hijau-light);
+  margin-bottom: 16px;
+}
+
+.riwayat-empty h3 {
+  margin: 0 0 8px 0;
+  color: var(--hijaubtn);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.riwayat-empty p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
+  .riwayat-container {
+    padding: 32px 30px;
+  }
+
   .riwayat-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 576px) {
+  .riwayat-container {
+    padding: 24px 16px;
+  }
+
+  .riwayat-header h1 {
+    font-size: 22px;
+  }
+
+  .riwayat-subtitle {
+    font-size: 12px;
+  }
+
   .riwayat-list {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .riwayat-card {
+    padding: 16px 18px;
+  }
+
+  .card-header h3 {
+    font-size: 15px;
+  }
+
+  .empty-icon {
+    font-size: 32px;
+  }
+
+  .riwayat-empty {
+    padding: 40px 20px;
   }
 }

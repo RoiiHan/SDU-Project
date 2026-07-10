@@ -1,12 +1,19 @@
-import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getProfilUser,
   ubahProfilUser,
   uploadProfilUser,
 } from "../services/userService";
-import { useEffect, useState } from "react";
 import "./style/ProfilComponent.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCamera,
+  faUser,
+  faPhone,
+  faLocationDot,
+  faFloppyDisk,
+} from "@fortawesome/free-solid-svg-icons";
 
 function ProfilComponent({ redirecTo }) {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +23,9 @@ function ProfilComponent({ redirecTo }) {
   const [alamat, setAlamat] = useState("");
   const [fotoProfil, setFotoProfil] = useState("");
   const [fotoFile, setFotoFile] = useState(null);
+  const [previewFoto, setPreviewFoto] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,17 +40,24 @@ function ProfilComponent({ redirecTo }) {
     loadData();
   }, [user.id]);
 
+  const handleFotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFotoFile(file);
+      setPreviewFoto(URL.createObjectURL(file));
+    }
+  };
+
   const handleSave = async () => {
+    setLoading(true);
     try {
       let namaFileFoto = fotoProfil;
 
       if (fotoFile) {
         const formData = new FormData();
-
         formData.append("foto", fotoFile);
 
         const uploadData = await uploadProfilUser(formData);
-
         namaFileFoto = uploadData.filename;
       }
 
@@ -67,56 +84,97 @@ function ProfilComponent({ redirecTo }) {
     } catch (error) {
       console.log(error);
       alert("Gagal menyimpan profil");
+    } finally {
+      setLoading(false);
     }
   };
+
+  const fotoTampil = previewFoto
+    ? previewFoto
+    : fotoProfil
+      ? `http://localhost:5000/uploads/profil/${fotoProfil}`
+      : null;
 
   return (
     <div className="profil-page">
       <div className="profil-container">
-        <h1>Profil Saya</h1>
-
-        <div className="profil-foto-section">
-          {fotoProfil ? (
-            <img
-              src={`http://localhost:5000/uploads/profil/${fotoProfil}`}
-              alt="Profil"
-              className="profil-img"
-            />
-          ) : (
-            <div className="profil-placeholder">Tidak Ada Foto</div>
-          )}
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setFotoFile(e.target.files[0])}
-          />
+        {/* ===== COVER BANNER ===== */}
+        <div className="profil-cover">
+          <div className="cover-blob cover-blob-1" />
+          <div className="cover-blob cover-blob-2" />
         </div>
 
+        {/* ===== FOTO PROFIL (mengambang) ===== */}
+        <div className="profil-foto-section">
+          <div className="profil-foto-wrapper">
+            {fotoTampil ? (
+              <img src={fotoTampil} alt="Profil" className="profil-img" />
+            ) : (
+              <div className="profil-placeholder">
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+            )}
+
+            <button
+              type="button"
+              className="btn-camera"
+              onClick={() => fileInputRef.current.click()}
+            >
+              <FontAwesomeIcon icon={faCamera} />
+            </button>
+
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFotoChange}
+            />
+          </div>
+
+          <h2 className="profil-nama-display">{nama || "Nama Pengguna"}</h2>
+          <p className="profil-role-display">Warga Sawahlunto</p>
+        </div>
+
+        {/* ===== FORM ===== */}
         <div className="profil-form">
-          <label>Nama Lengkap</label>
+          <label>
+            <FontAwesomeIcon icon={faUser} /> Nama Lengkap
+          </label>
           <input
             type="text"
+            placeholder="Masukkan nama lengkap"
             value={nama}
             onChange={(e) => setNama(e.target.value)}
           />
 
-          <label>Nomor HP</label>
+          <label>
+            <FontAwesomeIcon icon={faPhone} /> Nomor HP
+          </label>
           <input
             type="text"
+            placeholder="Masukkan nomor HP aktif"
             value={noHp}
             onChange={(e) => setNoHp(e.target.value)}
           />
 
-          <label>Alamat</label>
+          <label>
+            <FontAwesomeIcon icon={faLocationDot} /> Alamat
+          </label>
           <textarea
             rows="4"
+            placeholder="Masukkan alamat lengkap"
             value={alamat}
             onChange={(e) => setAlamat(e.target.value)}
           />
 
-          <button className="btn-simpan-profil" onClick={handleSave}>
-            Simpan Perubahan
+          <button
+            className="btn-simpan-profil"
+            onClick={handleSave}
+            disabled={loading}
+          >
+            <FontAwesomeIcon icon={faFloppyDisk} />
+            {loading ? "Menyimpan..." : "Simpan Perubahan"}
           </button>
         </div>
       </div>

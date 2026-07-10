@@ -1,159 +1,344 @@
 :root {
-  --lightgreen: #859F3D;
-  --darkgreen: #31511E;
-  --cream: #F6FCDF;
-  --putih: #efefef;
-  --putihcard : #f5f5f5;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
-.transaksi-page{
-  display: flex;
+.transaksi-page {
   width: 100%;
-  height: calc(100vh - 60px);
-  overflow: hidden;  
-}
-
-/* KIRI */
-.transaksi-kiri{
-  width: 50%;
-  height: 100%;
-  background: var(--putih);
-}
-
-.transaksi-kiri img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: bottom;
-  border-radius: 0 20px 20px 0;
-}
-
-/* KANAN */
-.transaksi-kanan{
-  width: 50%;
-  height: 100%;
-  background: var(--putih) ;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  min-height: calc(100vh - 96px);
+  background: var(--body);
+  padding-bottom: 40px;
   box-sizing: border-box;
+}
+
+/* ================================= */
+/* ATAS - PANDUAN STEP BY STEP        */
+/* ================================= */
+.panduan-box {
+  width: 100%;
+  background: var(--gradasi-hijau);
+  padding: 40px 60px;
+  box-sizing: border-box;
+  position: relative;
   overflow: hidden;
 }
 
-.transaksi-container{
-  width: 100%;
-  max-width: 500px;
-  max-height: 100%;
-  background: var(--putihcard);
-
-  padding: 20px 25px;
-
-  border-radius: 15px;
-
-  box-shadow: 0 2px 10px var(--darkgreen);
-
-  overflow-y: auto;
+.panduan-box::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
 }
 
-.transaksi-container h1{
+.panduan-title {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
   text-align: center;
-  margin-bottom: 15px;
-  color: var(--darkgreen);
-  font-size: 22px;
+  margin: 0 0 28px 0;
+  letter-spacing: 0.3px;
 }
 
-.transaksi-container form{
+.panduan-steps {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.panduan-step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.step-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 18px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  position: relative;
+  min-height: 150px;
+}
+
+.step-number {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1c2b24;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.step-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--inshigt);
+  color: var(--hijau-mid);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.step-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hijaubtn);
+}
+
+.step-card p {
+  margin: 0;
+  font-size: 11px;
+  color: var(--textabu);
+  line-height: 1.4;
+}
+
+.step-connector {
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  margin: 0 4px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 32px;
+}
+
+/* ================================= */
+/* BAWAH - FORM TRANSAKSI             */
+/* ================================= */
+.transaksi-kanan {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 36px 24px 0 24px;
+  box-sizing: border-box;
+}
+
+.transaksi-container {
+  width: 100%;
+  max-width: 560px;
+  background: var(--putihCard);
+  padding: 30px 34px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lembut);
+}
+
+.transaksi-container h1 {
+  text-align: center;
+  margin-bottom: 18px;
+  color: var(--hijaubtn);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.transaksi-container form {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.transaksi-container label{
+.transaksi-container label {
   font-weight: 600;
-  color: var(--darkgreen);
-  font-size: 14px;
+  color: var(--hijaubtn);
+  font-size: 13px;
+  margin-top: 4px;
 }
 
 .transaksi-container input,
 .transaksi-container select,
-.transaksi-container textarea{
+.transaksi-container textarea {
   width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-
+  padding: 10px 12px;
+  border: 1px solid #dcebe1;
+  border-radius: 10px;
   font-size: 14px;
-
   box-sizing: border-box;
+  color: var(--hijaubtn);
+  background: var(--body);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
-.transaksi-container textarea{
+.transaksi-container input:focus,
+.transaksi-container select:focus,
+.transaksi-container textarea:focus {
+  outline: none;
+  border-color: var(--hijau-light);
+  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
+}
+
+.transaksi-container textarea {
   resize: none;
 }
 
-.hasil{
-  background: #f5f5f5;
-
-  padding: 10px 15px;
-
-  border-radius: 10px;
-
-  margin-top: 5px;
+.hasil {
+  background: var(--inshigt);
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-top: 6px;
 }
 
-.hasil p{
-  font-size: 14px;
+.hasil p {
+  font-size: 13px;
   margin: 5px 0;
+  color: var(--textabu);
+  display: flex;
+  justify-content: space-between;
 }
 
-.hasil h3{
-  color: var(--lightgreen);
-  font-size: 16px;
-  margin: 5px 0;
+.hasil p strong {
+  color: var(--hijaubtn);
 }
 
-.btn-trans{
+.hasil h3 {
+  color: var(--hijaubtn);
+  font-size: 17px;
+  font-weight: 800;
+  margin: 10px 0 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(11, 61, 46, 0.2);
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-trans {
   width: 100%;
-
-  padding: 10px;
-
+  padding: 13px;
   border: none;
-
-  border-radius: 8px;
-
-  background: var(--lightgreen);
-
-  color: white;
-
+  border-radius: 12px;
+  background: var(--gradasi-hijau);
+  color: #ffffff;
   cursor: pointer;
-
   font-size: 15px;
+  font-weight: 700;
+  margin-top: 6px;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  box-shadow: 0 6px 16px rgba(11, 61, 46, 0.25);
 }
 
-.btn-trans:hover{
-  background: var(--darkgreen);
+.btn-trans:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(11, 61, 46, 0.32);
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px){
-  .transaksi-page{
+/* ================================= */
+/* RESPONSIVE                         */
+/* ================================= */
+@media (max-width: 992px) {
+  .panduan-box {
+    padding: 32px 30px;
+  }
+
+  .panduan-steps {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .panduan-step {
+    flex: 1 1 calc(33.333% - 16px);
+    min-width: 150px;
+  }
+
+  .step-connector {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .panduan-box {
+    padding: 24px 18px;
+  }
+
+  .panduan-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .panduan-steps {
     flex-direction: column;
-    height: calc(100vh - 60px);
+    gap: 14px;
   }
 
-  .transaksi-kiri{
+  .panduan-step {
     width: 100%;
-    height: 35%;
+    flex: 1 1 100%;
   }
 
-  .transaksi-kanan{
-    width: 100%;
-    height: 65%;
-    padding: 10px;
+  .step-card {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    gap: 12px;
+    min-height: auto;
+    padding: 14px 16px;
   }
 
-  .transaksi-container{
-    padding: 15px;
+  .step-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .step-number {
+    top: -8px;
+    left: -8px;
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .transaksi-kanan {
+    padding: 24px 16px 0 16px;
+  }
+
+  .transaksi-container {
+    padding: 20px;
   }
 }
