@@ -1,66 +1,132 @@
 :root {
-  --body: #f8f3ec;
-  --putihCard: #fefdf9;
-  --textabu: #5e6f69;
-  --hijaubtn: #173a33;
-  --inshigt: #dbe8e1;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 .container-dashboard {
   display: flex;
-  gap: 100px;
+  gap: 32px;
   margin-top: 20px;
-  padding: 20px;
-  background-color: var(--putihCard);
-  border-radius: 20px;
-  box-shadow: 0 2px 8px var(--hijaubtn);
+  padding: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lembut);
 }
 
+/* ===== PANEL KIRI (GRADASI) ===== */
 .container-dashboard-kiri {
-  width: 50%;
+  width: 55%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px;
+  background: var(--gradasi-hijau);
+  color: #ffffff;
+  position: relative;
+}
+
+.container-dashboard-kiri::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .inshigt {
-  padding: 10px;
-  width: 40%;
-  border-radius: 20px;
-  background-color: var(--inshigt);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  width: fit-content;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #eafff2;
+  backdrop-filter: blur(4px);
 }
 
 .title-kiri {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 10px;
+  font-size: 28px;
+  font-weight: 800;
+  margin-top: 16px;
+  line-height: 1.35;
+  color: #ffffff;
 }
 
 .text-kiri {
-  color: var(--textabu);
-  width: 120%;
+  color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
 .btn-kiri {
-  padding: 15px;
-  background-color: var(--hijaubtn);
-  color: var(--putihCard);
-  font-weight: bold;
+  padding: 15px 26px;
+  background: var(--gold);
+  color: #1c2b24;
+  font-weight: 700;
   border-radius: 30px;
   border: none;
+  cursor: pointer;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 6px 16px rgba(201, 164, 92, 0.4);
 }
 
+.btn-kiri:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(201, 164, 92, 0.5);
+}
+
+/* ===== PANEL KANAN (CARDS) ===== */
 .container-dashboard-kanan {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  width: 50%;
+  width: 45%;
+  padding: 30px;
+  background: var(--putihCard);
 }
 
 .card {
   background: var(--body);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid #e2efe6;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(11, 61, 46, 0.1);
 }
 
 .card-text {
@@ -68,107 +134,84 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-text svg {
+  color: var(--hijau-mid);
 }
 
 .container-kanan-data {
-  color: black;
-  margin-bottom: 10px;
+  color: var(--hijaubtn);
+  margin: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 576px) {
   .container-dashboard {
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
     margin-top: 10px;
-    padding: 10px 20px;
+    border-radius: 20px;
   }
 
   .container-dashboard-kiri {
     width: 100%;
-    gap: 5px;
+    padding: 24px;
+    gap: 14px;
   }
 
   .inshigt {
-    width: 70%;
-    font-size: 14px;
+    font-size: 11px;
+    padding: 6px 14px;
   }
 
   .title-kiri {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .text-kiri {
-    margin-top: -10px;
-    width: 100%;
     font-size: 12px;
   }
 
   .btn-kiri {
-    padding: 10px;
-    font-weight: bold;
-    font-size: 12px;
+    padding: 12px 18px;
+    font-size: 13px;
   }
 
   .container-dashboard-kanan {
     grid-template-columns: repeat(1, 1fr);
-    gap: 16px;
+    gap: 12px;
     width: 100%;
-    padding-bottom: 10px;
+    padding: 20px;
   }
 }
 
 @media screen and (min-width: 576px) and (max-width: 890px) {
   .container-dashboard {
-    gap: 20px;
-    margin-top: 10px;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .container-dashboard-kiri,
+  .container-dashboard-kanan {
+    width: 100%;
   }
 
   .container-dashboard-kiri {
-    width: 60%;
-    gap: 0px;
-  }
-
-  .inshigt {
-    padding: 10px;
-    font-size: 14px;
+    padding: 30px;
   }
 
   .title-kiri {
-    font-size: 26px;
-  }
-
-  .text-kiri {
-    width: 100%;
-    margin-top: -20px;
-  }
-
-  .btn-kiri {
-    padding: 14px 12px;
-    font-size: 14px;
+    font-size: 24px;
   }
 
   .container-dashboard-kanan {
-    gap: 10px;
-    width: 40%;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 24px;
   }
-
-  .card {
-    padding: 15px;
-    border-radius: 12px;
-  }
-
-  .card-text {
-    font-size: 12px;
-  }
-
-  .container-kanan-data {
-    margin-bottom: 0px;
-    margin-top: 5px;
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 891px) and (max-width: 999px) {
 }

@@ -2,18 +2,13 @@ import React from "react";
 import Ellipse from "../assets/Ellipse 395.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowDown,
-  faUser,
-  faStar,
   faArrowRightFromBracket,
-  faPlusMinus,
   faXmark,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./style/navbar.css";
 import Logo from "../assets/Logo.png";
-import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -31,13 +26,13 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    // localStorage.removeItem("token");
     setMenuOpen(false);
     navigate("/login");
   };
+
   return (
     <nav>
-      {/* Baris Atas: Logo Profil */}
+      {/* Baris Atas: Logo & Profil */}
       <div className="navbar-top">
         <div className="navbar-kiri">
           <div className="logo-img">
@@ -52,7 +47,7 @@ function Navbar() {
         <div className="navbar-kanan">
           <div>
             <span className="profil-nama">{user?.nama}</span>
-            <span>Warga sawahlunto</span>
+            <span>Warga Sawahlunto</span>
           </div>
           <div className="profil">
             <img
@@ -87,36 +82,48 @@ function Navbar() {
       <div className={`navbar-bottom ${mobileMenuOpen ? "mobile-open" : ""}`}>
         <ul className="nav-links">
           <li>
-            <Link
+            <NavLink
               to="/dashboard"
-              className="nav-link"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
               onClick={() => setMobileMenuOpen(false)}
             >
               Dashboard
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/transaksi"
-              className="nav-link"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
               onClick={() => setMobileMenuOpen(false)}
             >
               Transaksi
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/riwayat"
-              className="nav-link"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
               onClick={() => setMobileMenuOpen(false)}
             >
               Riwayat
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/profil" className="nav-link">
+            <NavLink
+              to="/profil"
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Profil
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

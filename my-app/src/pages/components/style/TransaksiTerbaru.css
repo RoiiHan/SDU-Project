@@ -1,60 +1,128 @@
 :root {
-  --body: #f8f3ec;
-  --putihCard: #fefdf9;
-  --textabu: #5e6f69;
-  --hijaubtn: #173a33;
-  --inshigt: #dbe8e1;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 .riwayat-transaksi {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: var(--putihCard);
-  box-shadow: 0 2px 8px var(--hijaubtn);
-  border-radius: 30px;
-  padding: 20px;
+  box-shadow: var(--shadow-lembut);
+  border-radius: 24px;
+  padding: 30px;
   color: var(--textabu);
+}
+
+.riwayat-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.riwayat-header h3 {
+  margin: 0;
+  color: var(--hijaubtn);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.riwayat-sub {
+  font-size: 12px;
+  color: var(--textabu);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 16px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: var(--body);
-  border-radius: 15px;
-  overflow: hidden;
+  min-width: 600px;
 }
 
 thead {
-  background-color: var(--body);
-  color: var(--textabu);
+  background: var(--gradasi-hijau);
+  color: #ffffff;
 }
 
 thead > tr > th {
-  padding: 20px;
+  padding: 16px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+thead > tr > th:first-child {
+  border-radius: 12px 0 0 0;
+}
+thead > tr > th:last-child {
+  border-radius: 0 12px 0 0;
 }
 
 th,
 td {
-  padding: 12px 16px;
+  padding: 14px 20px;
   text-align: left;
   font-size: 14px;
-  border-bottom: 1px solid var(--textabu);
 }
 
-/* tbody tr:hover {
-  background-color: var(--hijaubtn);
-  color: white;
-  cursor: pointer;
-} */
+tbody tr {
+  border-bottom: 1px solid #e2efe6;
+  transition: background 0.15s ease;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: var(--inshigt);
+}
+
+.material-utama {
+  margin: 0;
+  font-weight: 700;
+  color: var(--hijaubtn);
+}
+
+.material-sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--textabu);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--textabu);
+  font-style: italic;
+}
 
 /* ===== STATUS BADGE ===== */
-
 .status-tabel {
-  padding: 20px 40px;
+  padding: 6px 16px;
   border-radius: 30px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-block;
 }
 
 .status-tabel.menunggu {
@@ -79,37 +147,24 @@ td {
 
 @media (max-width: 576px) {
   .riwayat-transaksi {
-    padding: 10px;
+    padding: 16px;
+    border-radius: 20px;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-  }
-
-  thead > tr > th {
-    padding: 12px;
-    text-align: center;
+  .riwayat-header {
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px;
   }
 
   th,
   td {
-    padding: 12px 8px;
-    font-size: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
   }
-
-  /* ===== STATUS BADGE ===== */
 
   .status-tabel {
-    padding: 10px 20px;
+    padding: 5px 12px;
     font-size: 10px;
-    font-weight: 600;
   }
-}
-
-@media screen and (min-width: 576px) and (max-width: 890px) {
-}
-
-@media screen and (min-width: 891px) and (max-width: 999px) {
 }

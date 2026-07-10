@@ -1,17 +1,51 @@
 /* ===== GLOBAL VARIABLES ===== */
 :root {
-  --body: #f8f3ec;
-  --putihCard: #fefdf9;
-  --textabu: #5e6f69;
-  --hijaubtn: #173a33;
-  --inshigt: #dbe8e1;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
 /* ===== LAYOUT ===== */
+body {
+  background: var(--body);
+}
+
 .dashboard {
   padding: 50px 150px;
   background: var(--body);
   min-height: 100vh;
+  font-family: "Segoe UI", "Poppins", sans-serif;
+}
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-eyebrow {
+  color: var(--hijau-mid);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--hijaubtn);
+  margin: 0;
 }
 
 .riwayat-terbaru {
@@ -20,9 +54,13 @@
 
 @media (max-width: 576px) {
   .dashboard {
-    padding: 30px 10px;
+    padding: 30px 16px;
     background: var(--body);
     min-height: 100vh;
+  }
+
+  .dashboard-title {
+    font-size: 22px;
   }
 
   .riwayat-terbaru {
@@ -32,13 +70,14 @@
 
 @media screen and (min-width: 576px) and (max-width: 890px) {
   .dashboard {
-    padding: 30px 10px;
+    padding: 30px 24px;
+  }
+
+  .dashboard-title {
+    font-size: 26px;
   }
 
   .riwayat-terbaru {
     margin-top: 30px;
   }
-}
-
-@media screen and (min-width: 891px) and (max-width: 999px) {
 }

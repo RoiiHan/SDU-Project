@@ -1,5 +1,4 @@
 import "./style/Dashboard.css";
-import TestApi from "./TestApi";
 import { useState, useEffect } from "react";
 import CardsDashboard from "./components/CardsDashboard";
 import TransaksiTerbaru from "./components/TransaksiTerbaru";
@@ -14,7 +13,7 @@ function Dashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
-    return <h2> Silahkan Login Terlebih dahulu</h2>;
+    return <h2>Silahkan Login Terlebih dahulu</h2>;
   }
 
   useEffect(() => {
@@ -28,6 +27,11 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <div className="dashboard-header">
+        <p className="dashboard-eyebrow">Halo, {user.nama || "Warga"} 👋</p>
+        <h1 className="dashboard-title">Dashboard Warga</h1>
+      </div>
+
       <CardsDashboard dashboardData={dashboardData} />
 
       <div className="riwayat-terbaru">

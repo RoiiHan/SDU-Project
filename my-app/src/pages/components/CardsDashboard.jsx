@@ -7,30 +7,29 @@ import {
   faScaleBalanced,
   faTree,
   faWallet,
-  faWandSparkles,
+  faLeaf,
 } from "@fortawesome/free-solid-svg-icons";
 
-function cardsDashboard({ dashboardData }) {
+function CardsDashboard({ dashboardData }) {
   return (
     <div className="container-dashboard">
       <div className="container-dashboard-kiri">
         <div>
           <p className="inshigt">
-            <FontAwesomeIcon icon={faWandSparkles} /> INSIGHT HARI INI
+            <FontAwesomeIcon icon={faLeaf} /> INSIGHT HARI INI
           </p>
           <p className="title-kiri">
-            Setor Sampah lebih terukur, hasil lebih jelas, dan dampak ligkungan
+            Setor sampah lebih terukur, hasil lebih jelas, dan dampak lingkungan
             terasa nyata setiap minggu.
           </p>
           <p className="text-kiri">
             Untuk hasil yang lebih optimal dan mempercepat proses verifikasi,
             pastikan sampah Anda sudah dipilah berdasarkan kategorinya sebelum
-            diserahkan kepada petugas pickup
+            diserahkan kepada petugas pickup.
           </p>
         </div>
         <div>
           <button className="btn-kiri">
-            {" "}
             Buat Transaksi Baru <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
@@ -46,11 +45,10 @@ function cardsDashboard({ dashboardData }) {
 
         <div className="card">
           <p className="card-text">
-            Total Berat
-            <FontAwesomeIcon icon={faScaleBalanced} />
+            Total Berat <FontAwesomeIcon icon={faScaleBalanced} />
           </p>
           <p className="container-kanan-data">
-            {dashboardData.totalBerat || 0}Gr{" "}
+            {dashboardData.totalBerat || 0} Gr
           </p>
         </div>
 
@@ -62,15 +60,16 @@ function cardsDashboard({ dashboardData }) {
             Rp {(dashboardData.totalPendapatan || 0).toLocaleString()}
           </p>
         </div>
+
         <div className="card">
           <p className="card-text">
             Usia Akun <FontAwesomeIcon icon={faTree} />
           </p>
-          <p className="container-kanan-data">8 bulan / 240 hari </p>
+          <p className="container-kanan-data">8 bulan / 240 hari</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default cardsDashboard;
+export default CardsDashboard;

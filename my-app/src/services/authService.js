@@ -1,6 +1,5 @@
 const API_URL = "http://localhost:5000/";
 
-// Halaman Transaksi.jsx
 export async function getLoginAuth(no_hp, password) {
   const response = await fetch(`${API_URL}login`, {
     method: "POST",
