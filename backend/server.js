@@ -7,10 +7,11 @@ const app = express();
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "sdu_db",
+  host: "db.hizkqanomlmnudciwjiq.supabase.co",
+  port: 5432,
+  user: "postgres",
+  password: "sduportofolio123",
+  database: "postgres",
 });
 
 db.connect((err) => {
