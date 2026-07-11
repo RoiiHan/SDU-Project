@@ -1,7 +1,90 @@
 :root {
-  --lightgreen: #859f3d;
-  --darkgreen: #31511e;
-  --cream: #f6fcdf;
-  --putih: #efefef;
-  --putihcard: #f5f5f5;
+  --body: #eef6f0;
+  --putihCard: #ffffff;
+  --textabu: #55665f;
+  --hijaubtn: #0b3d2e;
+  --hijau-mid: #1f7a52;
+  --hijau-light: #2fa66d;
+  --gradasi-hijau: linear-gradient(
+    135deg,
+    #0b3d2e 0%,
+    #1f7a52 55%,
+    #2fa66d 100%
+  );
+  --inshigt: #d9f0e3;
+  --gold: #c9a45c;
+  --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 30px 34px 40px 34px;
+  background: var(--body);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===== HEADER ===== */
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--gradasi-hijau);
+  padding: 24px 28px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lembut);
+  margin-bottom: 26px;
+}
+
+.header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--gold);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-page-title {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.admin-page-subtitle {
+  margin: 4px 0 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+@media (max-width: 992px) {
+  .admin-content {
+    padding: 22px 18px 32px 18px;
+  }
+
+  .admin-page-header {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .admin-page-title {
+    font-size: 18px;
+  }
 }

@@ -16,6 +16,7 @@
   --shadow-lembut: 0 8px 24px rgba(11, 61, 46, 0.12);
 }
 
+/* ===== LAYOUT DASAR (dipakai semua halaman admin) ===== */
 .admin-layout {
   display: flex;
   min-height: 100vh;
@@ -27,9 +28,10 @@
   background: var(--body);
   min-height: 100vh;
   box-sizing: border-box;
+  min-width: 0; /* mencegah konten (misal tabel/grid) mendorong lebar sidebar */
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER BANNER (dipakai semua halaman admin) ===== */
 .admin-page-header {
   display: flex;
   align-items: center;
@@ -67,76 +69,6 @@
   font-size: 13px;
 }
 
-/* ===== SEARCH ===== */
-.admin-user-search {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 16px;
-  transform: translateY(-50%);
-  color: var(--hijau-mid);
-  font-size: 14px;
-}
-
-.admin-user-search input {
-  width: 100%;
-  padding: 13px 14px 13px 42px;
-  border-radius: 12px;
-  border: 1px solid #dcebe1;
-  background: var(--putihCard);
-  color: var(--hijaubtn);
-  font-size: 14px;
-  box-sizing: border-box;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-
-.admin-user-search input:focus {
-  outline: none;
-  border-color: var(--hijau-light);
-  box-shadow: 0 0 0 3px rgba(47, 166, 109, 0.15);
-}
-
-/* ===== GRID ===== */
-.admin-user-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-/* ===== EMPTY STATE ===== */
-.user-empty {
-  background: var(--putihCard);
-  border-radius: 20px;
-  box-shadow: var(--shadow-lembut);
-  padding: 60px 30px;
-  text-align: center;
-  color: var(--textabu);
-}
-
-.empty-icon {
-  font-size: 38px;
-  color: var(--hijau-light);
-  margin-bottom: 14px;
-}
-
-.user-empty h3 {
-  margin: 0 0 8px 0;
-  color: var(--hijaubtn);
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.user-empty p {
-  margin: 0;
-  font-size: 13px;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
   .admin-content {
@@ -146,9 +78,15 @@
   .admin-page-header {
     padding: 20px;
   }
+}
 
-  .admin-user-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    width: 100%;
   }
 }
 

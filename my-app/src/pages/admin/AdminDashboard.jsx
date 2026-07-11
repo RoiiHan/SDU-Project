@@ -1,7 +1,6 @@
 import "./style/AdminDashboard.css";
-import AdminSidebar from "../admin/components/AdminSidebars";
-import { useState } from "react";
-import { useEffect } from "react";
+import AdminLayout from "../../layouts/AdminLayout";
+import { useState, useEffect } from "react";
 import StatusDataComponent from "./components/StatusDataComponent";
 import {
   getTotalTransaksi,
@@ -12,6 +11,9 @@ import {
 
 import CardTotalTransaksi from "./components/CardTotalTransaksi";
 import CardGrafik from "./components/CardGrafik";
+import { faGaugeHigh } from "@fortawesome/free-solid-svg-icons";
+import { faReceipt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AdminDashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -49,71 +51,74 @@ function AdminDashboard() {
       const dataTerbaru = await getTransaksiTerbaru(setTransaksiTerbaru);
       setTransaksiTerbaru(dataTerbaru);
 
-      const userTerbaru = await getUserTerbaru(setUserTerbaru);
-      setUserTerbaru(userTerbaru);
+      const dataUserTerbaru = await getUserTerbaru(setUserTerbaru);
+      setUserTerbaru(dataUserTerbaru);
     };
 
     loadData();
   }, []);
 
   return (
-    <div className="admin-layout">
-      <AdminSidebar />
+    <AdminLayout
+      icon={faGaugeHigh}
+      title="Dashboard Admin"
+      subtitle={`Selamat datang, ${user.nama} 👋`}
+    >
+      <CardTotalTransaksi dashboard={dashboard} />
+      <StatusDataComponent />
 
-      <div className="admin-content">
-        <h1>Dashboard Admin</h1>
-        <p>Selamat datang, {user.nama}</p>
-        {/* Statistik */}
-        <CardTotalTransaksi dashboard={dashboard} />
-
-        {/* Status */}
-        <StatusDataComponent />
-
-        {/* Bagian bawah */}
-        <div className="dashboard-bottom">
-          {/* Transaksi Terbaru */}
-          <div className="transaksi-terbaru">
+      <div className="dashboard-bottom">
+        <div className="transaksi-terbaru">
+          <div className="section-title">
+            <FontAwesomeIcon icon={faReceipt} />
             <h2>Transaksi Terbaru</h2>
+          </div>
 
-            {transaksiTerbaru.map((item) => (
+          {transaksiTerbaru.length === 0 ? (
+            <p className="empty-text">Belum ada transaksi.</p>
+          ) : (
+            transaksiTerbaru.map((item) => (
               <div className="transaksi-row" key={item.id}>
                 <div>
                   <strong>{item.nama}</strong>
-
                   <p>
                     {item.kategori} - {item.berat} gr
                   </p>
                 </div>
-
                 <span className={`status-badge ${item.status.toLowerCase()}`}>
                   {item.status}
                 </span>
               </div>
-            ))}
+            ))
+          )}
+        </div>
+
+        <div className="user-terbaru">
+          <div className="section-title">
+            <FontAwesomeIcon icon={faUserPlus} />
+            <h2>User Terbaru</h2>
           </div>
 
-          {/* User Terbaru */}
-          <div className="user-terbaru">
-            <h2>User Terbaru</h2>
-
-            {userTerbaru.map((user) => (
-              <div className="user-item" key={user.id}>
+          {userTerbaru.length === 0 ? (
+            <p className="empty-text">Belum ada user baru.</p>
+          ) : (
+            userTerbaru.map((u) => (
+              <div className="user-item" key={u.id}>
                 <div>
-                  <h4>{user.nama}</h4>
-                  <p>{user.no_hp}</p>
+                  <h4>{u.nama}</h4>
+                  <p>{u.no_hp}</p>
                 </div>
-
                 <span>
-                  {new Date(user.created_at).toLocaleDateString("id-ID")}
+                  {new Date(u.created_at).toLocaleDateString("id-ID")}
                 </span>
               </div>
-            ))}
-          </div>
-
-          <CardGrafik />
+            ))
+          )}
         </div>
       </div>
-    </div>
+
+      <CardGrafik />
+    </AdminLayout>
   );
 }
 

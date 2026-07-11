@@ -20,9 +20,21 @@
   width: 260px;
   min-height: 100vh;
   background: var(--gradasi-hijau);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ===== TOP BAR MOBILE (default: disembunyikan di desktop) ===== */
+.sidebar-topbar-mobile {
+  display: none;
+}
+
+/* ===== PANEL UTAMA ===== */
+.sidebar-panel {
   padding: 26px 18px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   box-sizing: border-box;
 }
 
@@ -31,6 +43,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.sidebar-brand-desktop {
   padding: 0 8px 22px 8px;
   margin-bottom: 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -63,7 +78,7 @@
   margin: 2px 0 0 0;
 }
 
-/* ===== PROFIL (DI BAWAH BRAND) ===== */
+/* ===== PROFIL ===== */
 .sidebar-profil {
   position: relative;
   margin-bottom: 22px;
@@ -214,11 +229,10 @@
   box-shadow: 0 6px 14px rgba(201, 164, 92, 0.35);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 992px) {
+/* ===== RESPONSIVE (992px - tablet, sidebar tetap vertikal tapi lebih ramping) ===== */
+@media (max-width: 992px) and (min-width: 769px) {
   .admin-sidebar {
     width: 220px;
-    padding: 20px 14px;
   }
 
   .sidebar-brand h2 {
@@ -231,51 +245,91 @@
   }
 }
 
+/* ===== RESPONSIVE (768px ke bawah - HAMBURGER MODE) ===== */
 @media (max-width: 768px) {
   .admin-sidebar {
     width: 100%;
     min-height: auto;
     border-radius: 0 0 20px 20px;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 16px;
   }
 
-  .sidebar-brand {
-    border-bottom: none;
+  /* Tampilkan topbar mobile */
+  .sidebar-topbar-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+  }
+
+  .sidebar-brand-mobile {
     padding: 0;
     margin: 0;
+    border-bottom: none;
+  }
+
+  .hamburger-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Sembunyikan brand desktop, panel collapsible */
+  .sidebar-brand-desktop {
+    display: none;
+  }
+
+  .sidebar-panel {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 18px;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
+  }
+
+  .sidebar-panel.mobile-open {
+    max-height: 600px;
+    padding: 4px 18px 20px 18px;
   }
 
   .sidebar-profil {
-    margin-bottom: 0;
-  }
-
-  .profil-info {
-    display: none;
-  }
-
-  .profil-chevron {
-    display: none;
+    margin-bottom: 16px;
   }
 
   .menu-admin {
-    left: auto;
-    right: 0;
-    width: 200px;
+    position: static;
+    margin-top: 8px;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .menu-admin li {
+    color: #ffffff;
+  }
+
+  .menu-admin li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-admin li svg {
+    color: var(--gold);
   }
 
   .sidebar-menu {
-    flex-direction: row;
-    flex: 1 1 100%;
-    overflow-x: auto;
     gap: 6px;
   }
 
   .sidebar-menu a {
-    white-space: nowrap;
-    padding: 8px 14px;
+    padding: 12px 14px;
   }
 }

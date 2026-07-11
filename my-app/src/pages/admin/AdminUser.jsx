@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import AdminSidebar from "./components/AdminSidebars";
+import AdminLayout from "../../layouts/AdminLayout";
 import "./style/AdminUser.css";
 import ManageUser from "./components/CardManageUser";
 import { getUserAdmin } from "../../services/userService";
+import {
+  faUsers,
+  faMagnifyingGlass,
+  faUserSlash,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AdminUser() {
   const [search, setSearch] = useState("");
@@ -10,7 +16,7 @@ function AdminUser() {
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await getUserAdmin(setUsers);
+      const data = await getUserAdmin();
       setUsers(data);
     };
     loadData();
@@ -25,27 +31,35 @@ function AdminUser() {
   });
 
   return (
-    <div className="admin-layout">
-      <AdminSidebar />
+    <AdminLayout
+      icon={faUsers}
+      title="Kelola User"
+      subtitle="Lihat dan kelola seluruh data warga terdaftar di SDU."
+    >
+      <div className="admin-user-search">
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+        <input
+          type="text"
+          placeholder="Cari nama atau nomor HP..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-      <div className="admin-user-content">
-        <h1>Kelola User</h1>
-
-        <div className="admin-user-search">
-          <input
-            type="text"
-            placeholder="Cari nama atau nomor HP..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+      {filteredUsers.length === 0 ? (
+        <div className="user-empty">
+          <FontAwesomeIcon icon={faUserSlash} className="empty-icon" />
+          <h3>Tidak Ada User</h3>
+          <p>Belum ada user yang cocok dengan pencarian ini.</p>
         </div>
+      ) : (
         <div className="admin-user-grid">
           {filteredUsers.map((user) => (
             <ManageUser key={user.id} user={user} />
           ))}
         </div>
-      </div>
-    </div>
+      )}
+    </AdminLayout>
   );
 }
 
