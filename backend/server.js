@@ -8,11 +8,6 @@ const fs = require("fs");
 const app = express();
 const mysql = require("mysql2");
 
-console.log("DEBUG DB_HOST:", process.env.DB_HOST);
-console.log("DEBUG DB_PORT:", process.env.DB_PORT);
-console.log("DEBUG DB_USER:", process.env.DB_USER);
-console.log("DEBUG DB_NAME:", process.env.DB_NAME);
-
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
