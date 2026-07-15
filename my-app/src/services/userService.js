@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/";
+const API_URL = "http://sdu-project.web.id/api/";
 
 // Halaman Transaksi.jsx
 export async function getAlamatUser(id) {
@@ -38,7 +38,7 @@ export async function uploadProfilUser(formData) {
 }
 
 export async function ubahProfilUser(id, userData) {
-  const response = await fetch(`http://localhost:5000/user/${id}`, {
+  const response = await fetch(`${API_URL}user/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

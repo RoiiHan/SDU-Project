@@ -80,7 +80,7 @@ function TransactionCard({ item, updateStatus }) {
 
       {item.foto && (
         <img
-          src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
+          src={`http://sdu-project.web.id/api/uploads/transaksi/${item.foto}`}
           alt="Foto Sampah"
           className="foto-sampah"
         />

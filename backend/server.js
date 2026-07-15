@@ -1,32 +1,25 @@
-require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
 
 const app = express();
 const mysql = require("mysql2");
 
-const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  ssl: {
-    ca: fs.readFileSync(path.join(__dirname, "ca.pem")),
-  },
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "sdu_db",
 });
 
-db.getConnection((err, connection) => {
+db.connect((err) => {
   if (err) {
     console.log("koneksi gagal");
     console.log(err);
     return;
   }
   console.log("Database berhasil terhubung");
-  connection.release();
 });
 
 app.use(cors());
@@ -648,8 +641,6 @@ app.post("/upload-profil", uploadProfil.single("foto"), (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server Berjalan di port ${PORT}`);
+app.listen(5000, () => {
+  console.log("Server Berjalan di port 5000");
 });

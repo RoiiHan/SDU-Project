@@ -54,15 +54,18 @@ function CardHarga() {
   const simpanHarga = async (id, hargaBaru) => {
     setSavingId(id);
     try {
-      const response = await fetch(`http://localhost:5000/admin/harga/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://sdu-project.web.id/api/admin/harga/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            harga: hargaBaru,
+          }),
         },
-        body: JSON.stringify({
-          harga: hargaBaru,
-        }),
-      });
+      );
 
       const data = await response.json();
 

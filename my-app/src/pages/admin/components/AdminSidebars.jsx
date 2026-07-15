@@ -76,7 +76,7 @@ function AdminSidebar() {
             <img
               src={
                 admin?.foto_profil
-                  ? `http://localhost:5000/uploads/profil/${admin.foto_profil}`
+                  ? `http://sdu-project.web.id/api/uploads/profil/${admin.foto_profil}`
                   : Ellipse
               }
               alt="fotoProfil"

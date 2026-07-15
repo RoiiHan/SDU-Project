@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/";
+const API_URL = "http://sdu-project.web.id/api/";
 
 export async function getLoginAuth(no_hp, password) {
   const response = await fetch(`${API_URL}login`, {

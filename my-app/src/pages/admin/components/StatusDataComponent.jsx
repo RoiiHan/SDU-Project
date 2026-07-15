@@ -17,7 +17,7 @@ function StatusDataComponent() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/admin/status-transaksi")
+    fetch("http://sdu-project.web.id/api/admin/status-transaksi")
       .then((res) => res.json())
       .then((data) => {
         const statusResult = {
