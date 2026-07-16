@@ -36,7 +36,9 @@ function CardTotalTransaksi({ dashboard }) {
           <FontAwesomeIcon icon={faScaleBalanced} />
         </div>
         <div>
-          <p className="admin-card-value">{dashboard.totalBerat} gr</p>
+          <p className="admin-card-value">
+            {(dashboard.totalBerat / 1000).toLocaleString("id-ID")} KG
+          </p>
           <h3>Total Berat</h3>
         </div>
       </div>

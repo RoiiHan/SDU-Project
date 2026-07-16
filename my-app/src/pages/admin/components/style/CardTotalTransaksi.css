@@ -82,6 +82,10 @@
   }
 
   .admin-card-value {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .admin-card h3 {
+    font-size: 10px;
   }
 }
