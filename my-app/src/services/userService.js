@@ -1,4 +1,4 @@
-const API_URL = "http://sdu-project.web.id/api/";
+const API_URL = "https://sdu-project.web.id/api/";
 
 // Halaman Transaksi.jsx
 export async function getAlamatUser(id) {
