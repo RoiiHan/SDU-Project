@@ -53,7 +53,7 @@ function Navbar() {
             <img
               src={
                 user?.foto_profil
-                  ? `http://sdu-project.web.id/api/uploads/profil/${user.foto_profil}`
+                  ? `https://sdu-project.web.id/api/uploads/profil/${user.foto_profil}`
                   : Ellipse
               }
               alt="fotoProfil"

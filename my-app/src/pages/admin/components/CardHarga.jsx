@@ -55,7 +55,7 @@ function CardHarga() {
     setSavingId(id);
     try {
       const response = await fetch(
-        `http://sdu-project.web.id/api/admin/harga/${id}`,
+        `https://sdu-project.web.id/api/admin/harga/${id}`,
         {
           method: "PUT",
           headers: {
