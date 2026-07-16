@@ -42,14 +42,14 @@ function TransaksiTerbaru() {
                 </td>
               </tr>
             ) : (
-              transaksi.map((item) => (
+              transaksi.slice(0, 5).map((item) => (
                 <tr key={item.id}>
                   <td>
                     <p className="material-utama">{item.kategori}</p>
                     <p className="material-sub">{item.keterangan}</p>
                   </td>
-                  <td>{item.created_at}</td>
-                  <td>{item.berat} Gr</td>
+                  <td>{new Date(item.created_at).toLocaleString("id-ID")}</td>
+                  <td>{(item.berat / 1000).toLocaleString("id-ID")} Kg</td>
                   <td>Rp {item.totalharga.toLocaleString()}</td>
                   <td>
                     <span

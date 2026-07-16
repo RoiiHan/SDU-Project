@@ -77,10 +77,11 @@
 
 @media (max-width: 576px) {
   .admin-card {
-    padding: 16px;
+    gap: 12px;
+    padding: 8px;
   }
 
   .admin-card-value {
-    font-size: 17px;
+    font-size: 14px;
   }
 }

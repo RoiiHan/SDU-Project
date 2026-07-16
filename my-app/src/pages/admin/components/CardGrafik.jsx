@@ -14,6 +14,7 @@ import {
   getGrafikTransaksi,
   getGrafikKategori,
 } from "../../../services/transaksiService";
+import "./style/CardGrafik.css";
 
 ChartJS.register(
   CategoryScale,

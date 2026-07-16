@@ -9,8 +9,31 @@ import {
   faWallet,
   faLeaf,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function CardsDashboard({ dashboardData }) {
+  // 1. Mengambil data user dari localStorage untuk mengecek tanggal pembuatan akun
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+
+  // 2. Fungsi untuk menghitung selisih hari dan bulan dari created_at sampai hari ini
+  const hitungUsiaAkun = (tanggalDibuat) => {
+    if (!tanggalDibuat) return "0 bulan / 0 hari"; // Fallback jika data belum ada
+
+    const tanggalAwal = new Date(tanggalDibuat);
+    const tanggalSekarang = new Date();
+
+    // Menghitung selisih waktu dalam milidetik
+    const selisihWaktu = Math.abs(tanggalSekarang - tanggalAwal);
+
+    // Mengubah milidetik menjadi total hari
+    const selisihHari = Math.floor(selisihWaktu / (1000 * 60 * 60 * 24));
+
+    // Mengubah hari menjadi estimasi bulan
+    const selisihBulan = Math.floor(selisihHari / 30);
+
+    return `${selisihBulan} bulan / ${selisihHari} hari`;
+  };
+
   return (
     <div className="container-dashboard">
       <div className="container-dashboard-kiri">
@@ -29,9 +52,11 @@ function CardsDashboard({ dashboardData }) {
           </p>
         </div>
         <div>
-          <button className="btn-kiri">
-            Buat Transaksi Baru <FontAwesomeIcon icon={faArrowRight} />
-          </button>
+          <Link to="/transaksi">
+            <button className="btn-kiri">
+              Buat Transaksi Baru <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -40,7 +65,9 @@ function CardsDashboard({ dashboardData }) {
           <p className="card-text">
             Total Transaksi <FontAwesomeIcon icon={faFileInvoiceDollar} />
           </p>
-          <p className="container-kanan-data">{dashboardData.totalTransaksi}</p>
+          <p className="container-kanan-data">
+            {Number(dashboardData.totalTransaksi || 0).toLocaleString("en-US")}
+          </p>
         </div>
 
         <div className="card">
@@ -48,7 +75,11 @@ function CardsDashboard({ dashboardData }) {
             Total Berat <FontAwesomeIcon icon={faScaleBalanced} />
           </p>
           <p className="container-kanan-data">
-            {dashboardData.totalBerat || 0} Gr
+            {/* Dibagi 1000 untuk jadi Kg, lalu diformat dengan koma */}
+            {((dashboardData.totalBerat || 0) / 1000).toLocaleString(
+              "id-ID",
+            )}{" "}
+            Kg
           </p>
         </div>
 
@@ -57,7 +88,11 @@ function CardsDashboard({ dashboardData }) {
             Total Pendapatan <FontAwesomeIcon icon={faWallet} />
           </p>
           <p className="container-kanan-data">
-            Rp {(dashboardData.totalPendapatan || 0).toLocaleString()}
+            {/* Diformat dengan titik sebagai pemisah ribuan */}
+            Rp{" "}
+            {(Number(dashboardData.totalPendapatan) || 0).toLocaleString(
+              "id-ID",
+            )}
           </p>
         </div>
 
@@ -65,7 +100,10 @@ function CardsDashboard({ dashboardData }) {
           <p className="card-text">
             Usia Akun <FontAwesomeIcon icon={faTree} />
           </p>
-          <p className="container-kanan-data">8 bulan / 240 hari</p>
+          <p className="container-kanan-data">
+            {/* Memanggil fungsi hitung usia berdasarkan data akun user */}
+            {hitungUsiaAkun(user.created_at)}
+          </p>
         </div>
       </div>
     </div>

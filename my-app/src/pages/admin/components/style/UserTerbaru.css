@@ -1,0 +1,41 @@
+/* ======================
+   USER TERBARU
+====================== */
+
+.user-terbaru {
+  background: var(--putihCard);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow-lembut);
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 4px;
+  border-bottom: 1px solid #e6f1ea;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-item h4 {
+  margin: 0;
+  color: var(--hijaubtn);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.user-item p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--textabu);
+}
+
+.user-item span {
+  font-size: 11px;
+  color: var(--textabu);
+  white-space: nowrap;
+}

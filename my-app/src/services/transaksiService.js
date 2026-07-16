@@ -1,4 +1,5 @@
 const API_URL = "https://sdu-project.web.id/api/";
+const API_URL_local = "http://localhost:5000/";
 
 // ==========================
 // AdminTransaksi.jsx
@@ -154,6 +155,16 @@ export async function getTransaksiDahboard(id) {
 
   if (!response.ok) {
     throw new Error("Gagal mengambil data transaksi");
+  }
+
+  return response.json();
+}
+
+export async function getStatistikLandingPage() {
+  const response = await fetch(`${API_URL}statistik-landing-page`);
+
+  if (!response.ok) {
+    throw new Error("Gagal mengambil data statistik landing page");
   }
 
   return response.json();

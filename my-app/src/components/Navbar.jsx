@@ -5,6 +5,7 @@ import {
   faArrowRightFromBracket,
   faXmark,
   faBars,
+  faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./style/navbar.css";
@@ -14,6 +15,8 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const navigate = useNavigate();
+
+  // Mengambil data user
   const user = JSON.parse(localStorage.getItem("user"));
 
   const toogleMenu = () => {
@@ -46,8 +49,9 @@ function Navbar() {
 
         <div className="navbar-kanan">
           <div>
-            <span className="profil-nama">{user?.nama}</span>
-            <span>Warga Sawahlunto</span>
+            {/* Tambahan kecil: Tampilkan 'Tamu' jika belum login */}
+            <span className="profil-nama">{user?.nama || "Tamu"}</span>
+            <span>{user ? user.alamat : "Silakan Login"}</span>
           </div>
           <div className="profil">
             <img
@@ -63,11 +67,21 @@ function Navbar() {
             {menuOpen && (
               <div className="menu">
                 <ul>
-                  <Link to="/login">
-                    <li onClick={handleLogout}>
+                  {user ? (
+                    <li onClick={handleLogout} style={{ cursor: "pointer" }}>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} /> Keluar
                     </li>
-                  </Link>
+                  ) : (
+                    <Link
+                      to="/login"
+                      onClick={() => setMenuOpen(false)}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <li>
+                        <FontAwesomeIcon icon={faArrowRightToBracket} /> Login
+                      </li>
+                    </Link>
+                  )}
                 </ul>
               </div>
             )}

@@ -1,0 +1,79 @@
+/* =========================
+   TRANSAKSI TERBARU
+========================= */
+
+.transaksi-terbaru {
+  background: var(--putihCard);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow-lembut);
+}
+
+.transaksi-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 4px;
+  border-bottom: 1px solid #e6f1ea;
+  transition: background 0.15s ease;
+}
+
+.transaksi-row:last-child {
+  border-bottom: none;
+}
+
+.transaksi-row:hover {
+  background: var(--body);
+}
+
+.transaksi-row strong {
+  color: var(--hijaubtn);
+  font-size: 14px;
+}
+
+.transaksi-row p {
+  margin: 3px 0 0 0;
+  color: var(--textabu);
+  font-size: 12px;
+}
+
+/* STATUS BADGE */
+.status-badge {
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-badge.menunggu {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.diproses {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-badge.dijemput {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.selesai {
+  background: #c8f7c5;
+  color: #1e7e34;
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 576px) {
+  .transaksi-terbaru,
+  .user-terbaru,
+  .grafik-card {
+    padding: 16px;
+  }
+}

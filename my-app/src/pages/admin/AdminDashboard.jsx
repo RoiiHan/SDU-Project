@@ -11,6 +11,8 @@ import {
 
 import CardTotalTransaksi from "./components/CardTotalTransaksi";
 import CardGrafik from "./components/CardGrafik";
+import TransaksiTerbaru from "./components/TransaksiTerbaru";
+import UserTerbaru from "./components/UserTerbaru";
 import { faGaugeHigh } from "@fortawesome/free-solid-svg-icons";
 import { faReceipt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -68,53 +70,8 @@ function AdminDashboard() {
       <StatusDataComponent />
 
       <div className="dashboard-bottom">
-        <div className="transaksi-terbaru">
-          <div className="section-title">
-            <FontAwesomeIcon icon={faReceipt} />
-            <h2>Transaksi Terbaru</h2>
-          </div>
-
-          {transaksiTerbaru.length === 0 ? (
-            <p className="empty-text">Belum ada transaksi.</p>
-          ) : (
-            transaksiTerbaru.map((item) => (
-              <div className="transaksi-row" key={item.id}>
-                <div>
-                  <strong>{item.nama}</strong>
-                  <p>
-                    {item.kategori} - {item.berat} gr
-                  </p>
-                </div>
-                <span className={`status-badge ${item.status.toLowerCase()}`}>
-                  {item.status}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
-
-        <div className="user-terbaru">
-          <div className="section-title">
-            <FontAwesomeIcon icon={faUserPlus} />
-            <h2>User Terbaru</h2>
-          </div>
-
-          {userTerbaru.length === 0 ? (
-            <p className="empty-text">Belum ada user baru.</p>
-          ) : (
-            userTerbaru.map((u) => (
-              <div className="user-item" key={u.id}>
-                <div>
-                  <h4>{u.nama}</h4>
-                  <p>{u.no_hp}</p>
-                </div>
-                <span>
-                  {new Date(u.created_at).toLocaleDateString("id-ID")}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
+        <TransaksiTerbaru transactions={transaksiTerbaru} />
+        <UserTerbaru userTerbaru={userTerbaru} />
       </div>
 
       <CardGrafik />
