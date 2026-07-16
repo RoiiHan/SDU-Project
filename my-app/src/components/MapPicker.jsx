@@ -7,6 +7,18 @@ import {
 } from "react-leaflet";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 function ChangeView({ center }) {
   const map = useMap();
@@ -64,6 +76,7 @@ function MapPicker({ setLatitude, setLongitude }) {
     <MapContainer
       center={[-0.947083, 100.417181]}
       zoom={13}
+      attributionControl={false}
       style={{
         height: "300px",
         width: "100%",
