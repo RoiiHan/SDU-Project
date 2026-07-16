@@ -92,7 +92,7 @@ function ProfilComponent({ redirecTo }) {
   const fotoTampil = previewFoto
     ? previewFoto
     : fotoProfil
-      ? `http://localhost:5000/uploads/profil/${fotoProfil}`
+      ? `http://sdu-project.web.id/api/uploads/profil/${fotoProfil}`
       : null;
 
   return (

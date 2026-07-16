@@ -10,7 +10,7 @@ function AdminUserDetail() {
   const [transaksi, setTransaksi] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/admin/user/${id}`)
+    fetch(`http://sdu-project.web.id/api/admin/user/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setUser(data.user);
@@ -43,7 +43,7 @@ function AdminUserDetail() {
           <div className="user-profile-section">
             {user.foto_profil ? (
               <img
-                src={`http://localhost:5000/uploads/profil/${user.foto_profil}`}
+                src={`http://sdu-project.web.id/api/uploads/profil/${user.foto_profil}`}
                 alt="Foto Profil"
                 className="user-profile-img"
               />
@@ -105,7 +105,7 @@ function AdminUserDetail() {
             <div key={item.id} className="riwayat-card">
               {item.foto && (
                 <img
-                  src={`http://localhost:5000/uploads/transaksi/${item.foto}`}
+                  src={`http://sdu-project.web.id/api/uploads/transaksi/${item.foto}`}
                   alt="Foto Sampah"
                   className="detail-foto-sampah"
                 />
